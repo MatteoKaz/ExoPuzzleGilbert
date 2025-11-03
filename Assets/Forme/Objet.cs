@@ -19,7 +19,11 @@ public class Objet : MonoBehaviour
         bool grosWing = Manager.GetComponent<PuzzleManager>().isVictory;
         if (grosWing)
         {
-            transform.localScale = Vector3.Lerp(Base, Grow, Time.deltaTime * 4);
+            if (ObjectType == 1)
+            {
+                transform.localScale = Vector3.Lerp(Base, Grow, Time.deltaTime * 4);
+            }
+           
         }
     }
 
