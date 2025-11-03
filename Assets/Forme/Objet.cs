@@ -5,8 +5,8 @@ public class Objet : MonoBehaviour
 {
     [SerializeField] public int ObjectType = 1;
     [SerializeField] public GameObject Manager;
-    private Vector3 Grow= new Vector3(2,2,3);
-    private Vector3 Base = new Vector3(1, 1, 1);
+    private Vector3 Grow= new Vector3(25,25,25);
+    private Vector3 Base = new Vector3(15, 15, 15);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Lerper()
     {
