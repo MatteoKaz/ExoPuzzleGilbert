@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using UnityEngine;
+
 public class PuzzleManager : MonoBehaviour
 {
     public bool Puzzle1 = false;
@@ -7,7 +9,9 @@ public class PuzzleManager : MonoBehaviour
     public bool Puzzle3 = false;
     public bool isVictory = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Door Settings")]
+    public SlidingDoor door;
+
     void Start()
     {
         
@@ -23,7 +27,6 @@ public class PuzzleManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -33,7 +36,7 @@ public class PuzzleManager : MonoBehaviour
     {
         if (arg == 1) 
         {
-        Puzzle1 =  true;
+            Puzzle1 = true;
         }
 
         if (arg == 2)
@@ -46,12 +49,15 @@ public class PuzzleManager : MonoBehaviour
             Puzzle3 = true; 
         }
 
-        if (Puzzle1 && Puzzle2 & Puzzle3 == true)
-
+        if (Puzzle1 && Puzzle2 && Puzzle3 == true)
         {
             isVictory = true;
-            Debug.Log("hOURRA");
+            Debug.Log("HOURRA - Énigme résolue !");
+            
+            if (door != null)
+            {
+                door.OpenDoor();
+            }
         }
-
     }
 }

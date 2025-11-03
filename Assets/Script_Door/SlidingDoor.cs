@@ -9,6 +9,7 @@ public class SlidingDoor : MonoBehaviour
     
     [Header("Player Tag")]
     public string playerTag = "Player";
+    public bool autoOpenWithTrigger = true;
     
     private Vector3 closedPosition;
     private Vector3 openPosition;
@@ -40,7 +41,7 @@ public class SlidingDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(playerTag))
+        if (autoOpenWithTrigger && other.CompareTag(playerTag))
         {
             isOpen = true;
             isMoving = true;
@@ -49,11 +50,22 @@ public class SlidingDoor : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(playerTag))
+        if (autoOpenWithTrigger && other.CompareTag(playerTag))
         {
             isOpen = false;
             isMoving = true;
         }
     }
-}
 
+    public void OpenDoor()
+    {
+        isOpen = true;
+        isMoving = true;
+    }
+
+    public void CloseDoor()
+    {
+        isOpen = false;
+        isMoving = true;
+    }
+}
