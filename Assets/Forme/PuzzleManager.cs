@@ -5,6 +5,7 @@ public class PuzzleManager : MonoBehaviour
     public bool Puzzle1 = false;
     public bool Puzzle2 = false;
     public bool Puzzle3 = false;
+    public bool isVictory = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +49,7 @@ public class PuzzleManager : MonoBehaviour
         if (Puzzle1 && Puzzle2 & Puzzle3 == true)
 
         {
+            isVictory = true;
             Debug.Log("hOURRA");
         }
 
