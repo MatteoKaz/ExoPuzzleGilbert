@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+         speed = 0f;
+
     }
 
     // Update is called once per frame
@@ -18,7 +19,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb != null)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x , rb.linearVelocity.y, speed) ;
+            
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
+            
+           
         }
 
 

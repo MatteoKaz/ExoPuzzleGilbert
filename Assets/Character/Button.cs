@@ -3,7 +3,7 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
     private PlayerMovement _MovementRef;
-    private bool _Pressed = false;  
+    private bool _Pressed = true;  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,20 +16,24 @@ public class Button : MonoBehaviour
         
     }
 
-    public void OnClick()
+    public void OnStartPush()
     {
-        if (_Pressed = !false)
+        if (_Pressed == true)
         {
-            _Pressed = false;
-            _MovementRef.speed = 0f;
-           
-        }
-        else
-        {
-            _Pressed = true;
-            _MovementRef.speed = -0.5f;
             
+            _MovementRef.speed = -0.5f;
+            _Pressed = false;
+
         }
+        else 
+        {
+            _MovementRef.speed = 0f;
+            _Pressed = true;
+            Debug.Log("off");
+        }
+
+            
+        
     }
 
      
