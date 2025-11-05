@@ -621,7 +621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &348581939
 Light:
   m_ObjectHideFlags: 0
@@ -1290,7 +1290,7 @@ MonoBehaviour:
   player: {fileID: 1023995073}
   detectionRange: 1
   runSpeed: 3
-  destroyDelay: 1
+  destroyAfterSeconds: 5
 --- !u!95 &1193595376
 Animator:
   serializedVersion: 7
