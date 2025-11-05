@@ -7,8 +7,10 @@ public class Death : MonoBehaviour
 {
     private Vector3 RespawnLoc;
     [SerializeField] private GameObject Character;
-    private float _deathTimer = 0.8f;
+    private float _deathTimer = 0.5f;
     private SpriteRenderer _sprite;
+    private Animator _animator;
+    private PlayerMovement _PM;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +28,7 @@ public class Death : MonoBehaviour
     {
         if (other.gameObject.GetComponent<PlayerMovement>() != null)
         {
+            _PM = other.gameObject.GetComponent<PlayerMovement>(); 
             Dead();
         }
     }
@@ -33,15 +36,22 @@ public class Death : MonoBehaviour
     public void Dead()
     {
         StartCoroutine(ShadowTimerControl());
-        Character.transform.position = RespawnLoc;  
+
     }
+        
 
     private IEnumerator ShadowTimerControl()
     {
+        _PM._isdead = true;
         _sprite = Character.gameObject.GetComponent<SpriteRenderer>();
+        _PM.speed = 0;
+        yield return new WaitForSeconds(0.25f);
+        _PM._isdead = false;
+        yield return new WaitForSeconds(1f);
         _sprite.enabled = false;
         Character.gameObject.GetComponent<PlayerMovement>().speed = 0f;
         yield return new WaitForSeconds(_deathTimer);
+        _PM._isdead = false;
         Character.transform.position = RespawnLoc;
         _sprite.enabled = true;
     }

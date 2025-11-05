@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 0f;
     private Vector3 Direction;
     private Animator _animator;
+    public bool _isdead;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,8 +21,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb != null)
         {
-            _animator.SetFloat("Speed", -speed);
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
+            _animator.SetFloat("Speed",-speed);
+            _animator.SetBool("Dead", _isdead);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
             
            
         }
@@ -29,4 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+   
+
+    
 }
