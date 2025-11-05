@@ -7,6 +7,9 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float detectionRange = 5f;
     [SerializeField] private float runSpeed = 3f;
 
+    [Header("Destruction Settings")]
+    [SerializeField] private float destroyDelay = 2f;
+
     [Header("Animation")]
     private Animator animator;
     
@@ -43,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
         if (!isRunning)
         {
             isRunning = true;
-            animator.Play("Enemy_RunAttack");
+            animator.Play("Enemy_Walk");
         }
 
         Vector3 directionAwayFromPlayer = (transform.position - player.position).normalized;
@@ -64,7 +67,15 @@ public class EnemyMovement : MonoBehaviour
         if (isRunning)
         {
             isRunning = false;
-            animator.Play("Enemy_Idle");
+            animator.Play("Enemy_IDLE");
+        }
+    }
+
+    void OnBecameInvisible()
+    {
+        if (isRunning)
+        {
+            Destroy(gameObject, destroyDelay);
         }
     }
 
