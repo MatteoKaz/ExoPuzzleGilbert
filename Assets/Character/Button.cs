@@ -18,7 +18,7 @@ public class Button : MonoBehaviour
 
     public void OnStartPush()
     {
-        if (_Pressed == true)
+        if (_MovementRef.speed == 0)
         {
             
             _MovementRef.speed = -0.5f;
