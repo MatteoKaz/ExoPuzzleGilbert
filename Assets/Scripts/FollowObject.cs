@@ -6,11 +6,11 @@ public class FollowObject : MonoBehaviour
     private Vector3 dir;
     void Start()
     {
-        dir = transform.forward * 2;
+        dir = transform.forward;
     }
 
     void Update()
     {
-        transform.position = toFollow.transform.position + dir;
+        transform.position = toFollow.transform.position;
     }
 }

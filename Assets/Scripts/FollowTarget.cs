@@ -35,8 +35,6 @@ public class FollowTarget : MonoBehaviour
         euler.z = currentZ;
         transform.eulerAngles = euler;
 
-        
-        Debug.Log(fixedPosition);
     }
 
     //Faire plutôt raycast
