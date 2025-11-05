@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 Direction;
     private Animator _animator;
     public bool _isdead;
+    public bool _isRevive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetFloat("Speed",-speed);
             _animator.SetBool("Dead", _isdead);
+            _animator.SetBool("Revive", _isRevive);
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
             
            
