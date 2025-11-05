@@ -45,16 +45,17 @@ public class Death : MonoBehaviour
         _PM._isdead = true;
         _sprite = Character.gameObject.GetComponent<SpriteRenderer>();
         _PM.speed = 0;
-        yield return new WaitForSeconds(0.25f);
-        _PM._isdead = false;
         
-        yield return new WaitForSeconds(1f);
+        
+        
+        yield return new WaitForSeconds(1.25f);
         _sprite.enabled = false;
-       
-        Character.gameObject.GetComponent<PlayerMovement>().speed = 0f;
-        yield return new WaitForSeconds(_deathTimer);
         _PM._isdead = false;
         _PM._isRevive = true;
+        Character.gameObject.GetComponent<PlayerMovement>().speed = 0f;
+        yield return new WaitForSeconds(0.25f);
+        
+       
         Character.transform.position = RespawnLoc;
         _sprite.enabled = true;
         yield return new WaitForSeconds(1f);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8781660740352268301}
   - component: {fileID: 8919866740369270714}
   - component: {fileID: 8869225152561614487}
-  - component: {fileID: 4941479149038833203}
+  - component: {fileID: 1828415329026822604}
   m_Layer: 3
   m_Name: Character
   m_TagString: Untagged
@@ -110,8 +110,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.65, y: 0.59, z: 0.31}
+  m_Center: {x: 0.09, y: 0.01, z: -0.11}
 --- !u!54 &8919866740369270714
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,7 +153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: -0.5
   _isdead: 0
---- !u!95 &4941479149038833203
+  _isRevive: 0
+--- !u!95 &1828415329026822604
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
