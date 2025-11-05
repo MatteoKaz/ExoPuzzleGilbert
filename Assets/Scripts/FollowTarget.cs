@@ -16,20 +16,11 @@ public class FollowTarget : MonoBehaviour
 
     void Update()
     {
-        if (target == null) 
-        { 
-            return; 
-        }
-
-        //   transform.position = fixedPosition;
-        //    transform.forward = target.forward;
-
         float currentZ = transform.eulerAngles.z;
 
         
 
         fixedPosition = fixedPoint.transform.position;
-     //   direction = (fixedPosition - target.position).normalized;
         transform.LookAt(fixedPosition);
         Vector3 euler = transform.eulerAngles;
         euler.z = currentZ;
@@ -37,5 +28,4 @@ public class FollowTarget : MonoBehaviour
 
     }
 
-    //Faire plutôt raycast
 }
