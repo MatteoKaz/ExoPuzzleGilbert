@@ -10,11 +10,12 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Destruction Settings")]
     [SerializeField] private float destroyAfterSeconds = 5f;
+    [SerializeField] private float destroyPositionX = 25f;
 
     [Header("Animation")]
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    
+
     private bool isRunning = false;
     private float runningTime = 0f;
 
@@ -22,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
         if (player == null)
         {
             GameObject playerObj = GameObject.Find("Idle_0");
@@ -34,6 +35,12 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         if (player == null) return;
+
+        if (transform.position.x >= destroyPositionX)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -49,7 +56,7 @@ public class EnemyMovement : MonoBehaviour
         if (isRunning)
         {
             runningTime += Time.deltaTime;
-            
+
             if (runningTime >= destroyAfterSeconds)
             {
                 Destroy(gameObject);
@@ -68,7 +75,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         float directionX = transform.position.x - player.position.x;
-        
+
         if (directionX < 0)
         {
             transform.Translate(Vector3.left * runSpeed * Time.deltaTime);
@@ -93,5 +100,8 @@ public class EnemyMovement : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(new Vector3(destroyPositionX, -100, 0), new Vector3(destroyPositionX, 100, 0));
     }
 }
