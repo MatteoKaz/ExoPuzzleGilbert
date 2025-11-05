@@ -9,21 +9,25 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 3f;
 
     [Header("Destruction Settings")]
-    [SerializeField] private float destroyDelay = 5f;
+    [SerializeField] private float destroyAfterSeconds = 5f;
 
     [Header("Animation")]
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
     
     private bool isRunning = false;
-    private bool isDestroying = false;
+    private float runningTime = 0f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         
         if (player == null)
         {
-            player = GameObject.Find("Idle_0")?.transform;
+            GameObject playerObj = GameObject.Find("Idle_0");
+            if (playerObj == null) playerObj = GameObject.Find("Character");
+            if (playerObj != null) player = playerObj.transform;
         }
     }
 
@@ -41,6 +45,16 @@ public class EnemyMovement : MonoBehaviour
         {
             StopRunning();
         }
+
+        if (isRunning)
+        {
+            runningTime += Time.deltaTime;
+            
+            if (runningTime >= destroyAfterSeconds)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     void RunAway()
@@ -48,7 +62,9 @@ public class EnemyMovement : MonoBehaviour
         if (!isRunning)
         {
             isRunning = true;
+            runningTime = 0f;
             animator.Play("Enemy_Walk");
+            spriteRenderer.flipX = false;
         }
 
         float directionX = transform.position.x - player.position.x;
@@ -68,23 +84,9 @@ public class EnemyMovement : MonoBehaviour
         if (isRunning)
         {
             isRunning = false;
+            runningTime = 0f;
             animator.Play("Enemy_IDLE");
         }
-    }
-
-    void OnBecameInvisible()
-    {
-        if (!isDestroying && isRunning)
-        {
-            StartCoroutine(DestroyAfterDelay());
-        }
-    }
-
-    IEnumerator DestroyAfterDelay()
-    {
-        isDestroying = true;
-        yield return new WaitForSeconds(destroyDelay);
-        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()
