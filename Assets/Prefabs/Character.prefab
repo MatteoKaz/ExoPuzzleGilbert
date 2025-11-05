@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8919866740369270714}
   - component: {fileID: 8869225152561614487}
   - component: {fileID: 1828415329026822604}
+  - component: {fileID: 7716116992965790234}
   m_Layer: 3
   m_Name: Character
   m_TagString: Untagged
@@ -110,8 +111,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.65, y: 0.59, z: 0.31}
-  m_Center: {x: 0.09, y: 0.01, z: -0.11}
+  m_Size: {x: 0.8, y: 0.73, z: 0.31}
+  m_Center: {x: 0.01, y: 0.01, z: -0.11}
 --- !u!54 &8919866740369270714
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -176,3 +177,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7716116992965790234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4076572528148626261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b1f16110086845a2812d9427e3e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
+  _Attack: 0
+  HasAttack: 0
