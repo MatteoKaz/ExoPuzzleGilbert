@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -8,12 +9,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 3f;
 
     [Header("Destruction Settings")]
-    [SerializeField] private float destroyDelay = 2f;
+    [SerializeField] private float destroyDelay = 5f;
 
     [Header("Animation")]
     private Animator animator;
     
     private bool isRunning = false;
+    private bool isDestroying = false;
 
     void Start()
     {
@@ -49,16 +51,15 @@ public class EnemyMovement : MonoBehaviour
             animator.Play("Enemy_Walk");
         }
 
-        Vector3 directionAwayFromPlayer = (transform.position - player.position).normalized;
-        transform.Translate(directionAwayFromPlayer * runSpeed * Time.deltaTime, Space.World);
+        float directionX = transform.position.x - player.position.x;
         
-        if (directionAwayFromPlayer.x < 0)
+        if (directionX < 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.Translate(Vector3.left * runSpeed * Time.deltaTime);
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.Translate(Vector3.right * runSpeed * Time.deltaTime);
         }
     }
 
@@ -73,10 +74,17 @@ public class EnemyMovement : MonoBehaviour
 
     void OnBecameInvisible()
     {
-        if (isRunning)
+        if (!isDestroying && isRunning)
         {
-            Destroy(gameObject, destroyDelay);
+            StartCoroutine(DestroyAfterDelay());
         }
+    }
+
+    IEnumerator DestroyAfterDelay()
+    {
+        isDestroying = true;
+        yield return new WaitForSeconds(destroyDelay);
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()
