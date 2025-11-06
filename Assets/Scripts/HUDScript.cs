@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class HUDScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private static HUDScript triggerInstance;
+    void Awake()
     {
+            DontDestroyOnLoad(this);
+
+            if (triggerInstance == null)
+            {
+                triggerInstance = this;
+            }
+            else
+            {
+                DestroyObject(gameObject);
+            }
         
     }
 }
