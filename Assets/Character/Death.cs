@@ -11,6 +11,7 @@ public class Death : MonoBehaviour
     private SpriteRenderer _sprite;
     private Animator _animator;
     private PlayerMovement _PM;
+    [SerializeField] AudioSource DeathSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,13 +46,13 @@ public class Death : MonoBehaviour
         _PM._isdead = true;
         _sprite = Character.gameObject.GetComponent<SpriteRenderer>();
         _PM.speed = 0;
-        
-        
-        
+        DeathSound.Play();
+
+
         yield return new WaitForSeconds(1.25f);
         _sprite.enabled = false;
         _PM._isdead = false;
-        
+        DeathSound.Stop();
         Character.gameObject.GetComponent<PlayerMovement>().speed = 0f;
         yield return new WaitForSeconds(0.25f);
         
@@ -60,5 +61,6 @@ public class Death : MonoBehaviour
         _sprite.enabled = true;
         yield return new WaitForSeconds(1f);
         _PM._isRevive = false;
+        
     }
 }

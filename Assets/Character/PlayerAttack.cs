@@ -11,6 +11,8 @@ public class PlayerAttack : MonoBehaviour
     public bool HasAttack = false;
     public PlayerMovement PM;
     public bool _EnemyGO = false;
+    [SerializeField] AudioSource SwordSound;
+    [SerializeField] AudioSource EnnemyHit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,9 +48,10 @@ public class PlayerAttack : MonoBehaviour
             PM.speed = 0f;
             HasAttack = true;
             _Attack = true;
-
+            SwordSound.Play();
             yield return new WaitForSeconds(0.75f);
-            
+            EnnemyHit.Play();
+
 
             _Attack = false;
             yield return new WaitForSeconds(0.5f);
