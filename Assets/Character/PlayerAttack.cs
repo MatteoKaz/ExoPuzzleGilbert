@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public bool _Attack = false;
     public bool HasAttack = false;
     public PlayerMovement PM;
+    public bool _EnemyGO = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -52,6 +53,7 @@ public class PlayerAttack : MonoBehaviour
             _Attack = false;
             yield return new WaitForSeconds(0.5f);
             PM.speed = -0.5f;
+            _EnemyGO = true;
         }
     }
 }

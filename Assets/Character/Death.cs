@@ -15,7 +15,7 @@ public class Death : MonoBehaviour
     void Start()
     {
         RespawnLoc = Character.transform.position;
-        RespawnLoc = new Vector3(RespawnLoc.x,RespawnLoc.y+1,RespawnLoc.z);
+        RespawnLoc = new Vector3(RespawnLoc.x,RespawnLoc.y,RespawnLoc.z);
     }
 
     // Update is called once per frame

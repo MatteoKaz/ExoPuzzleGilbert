@@ -20,19 +20,27 @@ public class EnemyMovement : MonoBehaviour
     private bool isRunning = false;
     private float runningTime = 0f;
     private float speed = 0f;
-
+    public PlayerAttack _playerAttack;
+    private GameObject _PlayerRef;
+    private bool _RunAway = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
 
         if (player == null)
         {
+            
             GameObject playerObj = GameObject.Find("Idle_0");
+            
             if (playerObj == null) playerObj = GameObject.Find("Character");
+           
             if (playerObj != null) player = playerObj.transform;
+            _RunAway = _playerAttack._EnemyGO;
         }
+        
     }
 
     void Update()
@@ -40,10 +48,16 @@ public class EnemyMovement : MonoBehaviour
         if (player == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        _RunAway = _playerAttack._EnemyGO;
 
         if (distanceToPlayer <= detectionRange)
         {
-            RunAway();
+            if (_RunAway == true)
+            {
+                RunAway();
+            
+                
+            }
         }
         else
         {
@@ -52,11 +66,12 @@ public class EnemyMovement : MonoBehaviour
 
         if (rb != null)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
+            //rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
         }
 
         if (isRunning)
         {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
             runningTime += Time.deltaTime;
 
             if (runningTime >= destroyAfterSeconds)
