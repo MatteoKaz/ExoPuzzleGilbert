@@ -51,8 +51,11 @@ public class TransitionEntracte : MonoBehaviour
             trans.alpha = aValue;
             yield return null;
         }
-        yield return new WaitForSeconds(timeInLevel);
-        StartCoroutine(Fondu());
+        if (timeInLevel >= 0.01) 
+        { 
+            yield return new WaitForSeconds(timeInLevel);
+            StartCoroutine(Fondu()); 
+        }
     }
 
 

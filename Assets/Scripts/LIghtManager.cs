@@ -17,8 +17,10 @@ public class LIghtManager : MonoBehaviour
     {
         lum = lighting.GetComponent<Light>();
         lum.intensity = 0f;
+        HUD = GameObject.Find("=== HUD ===");
         trans = HUD.GetComponent<CanvasGroup>();
         RetourALaLumiere();
+        
         state = lighting.active;
         Debug.Log(state);
 
