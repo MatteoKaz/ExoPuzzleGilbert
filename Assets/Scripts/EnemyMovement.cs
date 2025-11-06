@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     private Rigidbody rb;
+    [SerializeField] public GameObject ManageEntracte;
 
     [Header("Detection Settings")]
     [SerializeField] private Transform player;
@@ -55,8 +56,8 @@ public class EnemyMovement : MonoBehaviour
             if (_RunAway == true)
             {
                 RunAway();
-            
-                
+
+
             }
         }
         else
@@ -68,16 +69,22 @@ public class EnemyMovement : MonoBehaviour
         {
             //rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
         }
+        if (_RunAway) 
+        {
+                runningTime += Time.deltaTime;
+
+            if (runningTime >= destroyAfterSeconds)
+            {
+
+                ManageEntracte.GetComponent<GoToEntracte>().ToEntracte();
+                Destroy(gameObject);
+            } 
+        }
 
         if (isRunning)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
-            runningTime += Time.deltaTime;
-
-            if (runningTime >= destroyAfterSeconds)
-            {
-                Destroy(gameObject);
-            }
+            
         }
     }
 
