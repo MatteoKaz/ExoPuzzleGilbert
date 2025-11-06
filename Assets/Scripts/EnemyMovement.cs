@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    private Rigidbody rb;
+
     [Header("Detection Settings")]
     [SerializeField] private Transform player;
     [SerializeField] private float detectionRange = 5f;
@@ -10,7 +12,6 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Destruction Settings")]
     [SerializeField] private float destroyAfterSeconds = 5f;
-    [SerializeField] private float destroyPositionX = 25f;
 
     [Header("Animation")]
     private Animator animator;
@@ -18,9 +19,11 @@ public class EnemyMovement : MonoBehaviour
 
     private bool isRunning = false;
     private float runningTime = 0f;
+    private float speed = 0f;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -36,12 +39,6 @@ public class EnemyMovement : MonoBehaviour
     {
         if (player == null) return;
 
-        if (transform.position.x >= destroyPositionX)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= detectionRange)
@@ -51,6 +48,11 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             StopRunning();
+        }
+
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
         }
 
         if (isRunning)
@@ -78,11 +80,11 @@ public class EnemyMovement : MonoBehaviour
 
         if (directionX < 0)
         {
-            transform.Translate(Vector3.left * runSpeed * Time.deltaTime);
+            speed = -runSpeed;
         }
         else
         {
-            transform.Translate(Vector3.right * runSpeed * Time.deltaTime);
+            speed = runSpeed;
         }
     }
 
@@ -94,14 +96,14 @@ public class EnemyMovement : MonoBehaviour
             runningTime = 0f;
             animator.Play("Enemy_IDLE");
         }
+
+        speed = 0f;
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(new Vector3(destroyPositionX, -100, 0), new Vector3(destroyPositionX, 100, 0));
     }
 }
+
