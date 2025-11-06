@@ -5,18 +5,19 @@ public class LIghtManager : MonoBehaviour
 {
     [SerializeField] public GameObject lighting;
     [SerializeField] public float transitionDuree;
+    [SerializeField] public float transitionDuree2;
     [SerializeField] public float valueLight;
     private Light lum;
     public bool state = false;
 
     private void Start()
     {
-        TurnOn();
+        TurnOn(lighting);
         state = lighting.active;
         Debug.Log(state);
     }
 
-    public void TurnOn()
+    public void TurnOn(GameObject lighting)
     {
         if (lighting != null)
         {
@@ -31,7 +32,7 @@ public class LIghtManager : MonoBehaviour
         }
     }
 
-    public void TurnOff()
+    public void TurnOff(GameObject lighting)
     {
         if (lighting != null)
         {
@@ -63,6 +64,20 @@ public class LIghtManager : MonoBehaviour
         {
             temps += Time.deltaTime;
             lum.intensity = Mathf.Lerp(valueLight, 0f, temps / transitionDuree);
+            yield return null;
+        }
+    }
+
+
+
+    private IEnumerator FonduEnNoir()
+    {
+        float temps = 0f;
+
+        while (temps < transitionDuree2)
+        {
+            temps += Time.deltaTime;
+            //opacité image = Mathf.Lerp(0f, 1f, temps / transitionDuree2);
             yield return null;
         }
     }
