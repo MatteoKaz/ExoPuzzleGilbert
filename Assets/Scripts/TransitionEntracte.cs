@@ -39,6 +39,12 @@ public class TransitionEntracte : MonoBehaviour
         ChangeLevel(whichNext);
     }
 
+
+    public void Fondeur()
+    {
+        StartCoroutine(Fondu());
+    }
+
     public IEnumerator Defondu()
     {
         float temps = 0f;
