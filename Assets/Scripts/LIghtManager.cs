@@ -15,8 +15,10 @@ public class LIghtManager : MonoBehaviour
 
     private void Start()
     {
-        trans = GetComponent<CanvasGroup>();
-        TurnOn(lighting);
+        lum = lighting.GetComponent<Light>();
+        lum.intensity = 0f;
+        trans = HUD.GetComponent<CanvasGroup>();
+        RetourALaLumiere();
         state = lighting.active;
         Debug.Log(state);
 
@@ -116,5 +118,7 @@ public class LIghtManager : MonoBehaviour
             trans.alpha = aValue;
             yield return null;
         }
+        yield return new WaitForSeconds(0.5f);
+        TurnOn(lighting);
     }
 }
