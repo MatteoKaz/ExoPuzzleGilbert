@@ -4,17 +4,22 @@ using UnityEngine;
 public class LIghtManager : MonoBehaviour
 {
     [SerializeField] public GameObject lighting;
+    [SerializeField] public GameObject HUD;
     [SerializeField] public float transitionDuree;
-    [SerializeField] public float transitionDuree2;
+    [SerializeField] public float transitionDuree2 = 1.5f;
     [SerializeField] public float valueLight;
     private Light lum;
     public bool state = false;
+    private float aValue = 0f;
+    private CanvasGroup trans;
 
     private void Start()
     {
+        trans = GetComponent<CanvasGroup>();
         TurnOn(lighting);
         state = lighting.active;
         Debug.Log(state);
+
     }
 
     public void TurnOn(GameObject lighting)
@@ -56,6 +61,9 @@ public class LIghtManager : MonoBehaviour
         }
 
     }
+
+    
+
     private IEnumerator DecreaseOpacity()
     {
         float temps = 0f;
@@ -65,6 +73,15 @@ public class LIghtManager : MonoBehaviour
             temps += Time.deltaTime;
             lum.intensity = Mathf.Lerp(valueLight, 0f, temps / transitionDuree);
             yield return null;
+        }
+        yield return new WaitForSeconds(1f);
+        if (trans != null)
+        {
+            StartCoroutine(FonduEnNoir());
+        }
+        else
+        {
+            Debug.Log("Canvasgroup Invalide");
         }
     }
 
@@ -77,7 +94,26 @@ public class LIghtManager : MonoBehaviour
         while (temps < transitionDuree2)
         {
             temps += Time.deltaTime;
-            //opacité image = Mathf.Lerp(0f, 1f, temps / transitionDuree2);
+            aValue = Mathf.Lerp(0f, 1f, temps / transitionDuree2);
+            trans.alpha = aValue;
+            yield return null;
+        }
+    }
+
+    public void RetourALaLumiere()
+    {
+        StartCoroutine(DeFonduEnNoir());
+    }
+
+    private IEnumerator DeFonduEnNoir()
+    {
+        float temps = 0f;
+
+        while (temps < transitionDuree2)
+        {
+            temps += Time.deltaTime;
+            aValue = Mathf.Lerp(1f, 0f, temps / transitionDuree2);
+            trans.alpha = aValue;
             yield return null;
         }
     }
