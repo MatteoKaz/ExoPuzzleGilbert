@@ -24,6 +24,10 @@ public class EnemyMovement : MonoBehaviour
     public PlayerAttack _playerAttack;
     private GameObject _PlayerRef;
     private bool _RunAway = false;
+
+    [SerializeField] AudioSource FootstepSound;
+    public bool Footstep = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -85,6 +89,21 @@ public class EnemyMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
             
+        }
+
+        if (speed != 0f)
+        {
+            if (Footstep == false)
+            {
+                Footstep = true;
+                FootstepSound.Play();
+            }
+
+        }
+        else
+        {
+            Footstep = false;
+            FootstepSound.Stop();
         }
     }
 

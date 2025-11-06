@@ -6591,6 +6591,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9ee030b17549f42917d90fde3e3bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackCamera: {fileID: 0}
+  vector: {x: 0, y: 0, z: 0}
 --- !u!225 &1283461466
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -9703,6 +9705,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1290544817}
   m_SourcePrefab: {fileID: 100100000, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
+--- !u!82 &2013557976 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6049342528372530967, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
+  m_PrefabInstance: {fileID: 2013557975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2022012639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
@@ -10808,6 +10815,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: EnnemyHit
+      value: 
+      objectReference: {fileID: 2013557976}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
