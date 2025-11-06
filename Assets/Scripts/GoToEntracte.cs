@@ -4,12 +4,23 @@ using UnityEngine.SceneManagement;
 
 public class GoToEntracte : MonoBehaviour
 {
-    [SerializeField] public int whichNext;
-    [SerializeField] public float timeInLevel = 10f;
+    [SerializeField] public int whichNext = 2;
     [SerializeField] public GameObject HUD;
+    [SerializeField] public LIghtManager lightner;
     private float aValue = 0f;
     private CanvasGroup trans;
     [SerializeField] public float transitionDuree = 1.5f;
+    public LightToTurn lighter;
+    public GameObject lighterGame;
+
+
+
+    private void Start()
+    {
+        lightner = FindFirstObjectByType<LIghtManager>();
+        lighter = FindFirstObjectByType<LightToTurn>();
+
+    }
 
     public void ToEntracte()
     {
@@ -23,16 +34,16 @@ public class GoToEntracte : MonoBehaviour
 
     public IEnumerator Fondu()
     {
-        float temps = 0f;
-
-        while (temps < transitionDuree)
-        {
-            temps += Time.deltaTime;
-            aValue = Mathf.Lerp(0f, 1f, temps / transitionDuree);
-            trans.alpha = aValue;
-            yield return null;
+        if (lighter != null)
+        {    
+         lighterGame = lighter.gameObject;
+         lightner.TurnOff(lighterGame); 
         }
-        yield return new WaitForSeconds(0.5f);
+        else
+        { Debug.Log("Vide"); }
+
+        yield return new WaitForSeconds(3.5f);
+
         ChangeLevel(whichNext);
     }
 

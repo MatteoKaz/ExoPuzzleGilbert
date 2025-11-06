@@ -5,7 +5,7 @@ public class LIghtManager : MonoBehaviour
 {
     [SerializeField] public GameObject lighting;
     [SerializeField] public GameObject HUD;
-    [SerializeField] public float transitionDuree;
+    [SerializeField] public float transitionDuree = 1f;
     [SerializeField] public float transitionDuree2 = 1.5f;
     [SerializeField] public float valueLight;
     private Light lum;
@@ -46,7 +46,7 @@ public class LIghtManager : MonoBehaviour
             StartCoroutine(DecreaseOpacity());
 
             state = false;
-            lighting.SetActive(false);
+            //lighting.SetActive(false);
         }
     }
 
