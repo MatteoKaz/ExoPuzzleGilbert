@@ -24,14 +24,14 @@ public class TransitionEntracte : MonoBehaviour
         SceneManager.LoadScene(whichNext);
     }
 
-    public IEnumerator Fondu()
+    public IEnumerator Fondu(float transitionDure)
     {
         float temps = 0f;
 
-        while (temps < transitionDuree)
+        while (temps < transitionDure)
         {
             temps += Time.deltaTime;
-            aValue = Mathf.Lerp(0f, 1f, temps / transitionDuree);
+            aValue = Mathf.Lerp(0f, 1f, temps / transitionDure);
             trans.alpha = aValue;
             yield return null;
         }
@@ -42,7 +42,7 @@ public class TransitionEntracte : MonoBehaviour
 
     public void Fondeur()
     {
-        StartCoroutine(Fondu());
+        StartCoroutine(Fondu(1.5f));
     }
 
     public IEnumerator Defondu()
@@ -60,7 +60,7 @@ public class TransitionEntracte : MonoBehaviour
         if (timeInLevel >= 0.01) 
         { 
             yield return new WaitForSeconds(timeInLevel);
-            StartCoroutine(Fondu()); 
+            StartCoroutine(Fondu(transitionDuree)); 
         }
     }
 
