@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     public bool _isdead;
     public bool _isRevive;
+    [SerializeField] AudioSource FootstepSound;
+    public bool Footstep = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,9 +32,23 @@ public class PlayerMovement : MonoBehaviour
            
         }
 
-
+        if (speed != 0f)
+        {
+            if (Footstep == false)
+            {
+                Footstep = true;
+                FootstepSound.Play();
+            }
+            
+        }
+        else
+        {
+            Footstep = false;
+            FootstepSound.Stop();
+        }
 
     }
+    
    
 
     

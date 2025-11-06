@@ -4,6 +4,9 @@ public class HUDScript : MonoBehaviour
 {
 
     private static HUDScript triggerInstance;
+    [SerializeField] public GameObject trackCamera;
+    [SerializeField] public Vector3 vector;
+
     void Awake()
     {
             DontDestroyOnLoad(this);
@@ -17,5 +20,12 @@ public class HUDScript : MonoBehaviour
                 DestroyObject(gameObject);
             }
         
+    }
+
+    private void Update()
+    {
+        transform.rotation = trackCamera.transform.rotation;
+        vector = trackCamera.transform.position;
+        transform.position = vector*1.01f;
     }
 }
