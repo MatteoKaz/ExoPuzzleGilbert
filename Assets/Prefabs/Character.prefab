@@ -180,6 +180,7 @@ MonoBehaviour:
   PM: {fileID: 0}
   _EnemyGO: 0
   SwordSound: {fileID: 3278573441124372121, guid: 8d130a2bb82b07d428572176c162db60, type: 3}
+  EnnemyHit: {fileID: 0}
 --- !u!95 &1149919294255066624
 Animator:
   serializedVersion: 7
@@ -253,7 +254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3278573441124372121, guid: 8d130a2bb82b07d428572176c162db60, type: 3}
       propertyPath: Loop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3278573441124372121, guid: 8d130a2bb82b07d428572176c162db60, type: 3}
       propertyPath: m_Resource
