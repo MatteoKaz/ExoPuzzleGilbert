@@ -11,7 +11,7 @@ public class GoToEntracte : MonoBehaviour
     private CanvasGroup trans;
     [SerializeField] public float transitionDuree = 1.5f;
 
-    publie void ToEntracte()
+    public void ToEntracte()
     {
         StartCoroutine(Fondu());
     }
