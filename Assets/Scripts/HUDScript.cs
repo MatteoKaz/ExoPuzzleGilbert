@@ -24,8 +24,11 @@ public class HUDScript : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = trackCamera.transform.rotation;
-        vector = trackCamera.transform.position;
-        transform.position = vector*1.01f;
+        if (trackCamera != null)
+        {
+            transform.rotation = trackCamera.transform.rotation;
+            vector = trackCamera.transform.position;
+            transform.position = vector * 1.01f;
+        }
     }
 }

@@ -48,8 +48,23 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    
-   
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<HereNoCollision>()!= null)
+        {
+            Debug.Log("Coll");
+        }
+        else
+        {
+            Debug.Log("Lloc");
+        }
+            gameObject.layer = LayerMask.NameToLayer("ShadowPlayerWithoutCube");
+        
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        gameObject.layer = LayerMask.NameToLayer("ShadowPlayer");
+    }
+
 }
