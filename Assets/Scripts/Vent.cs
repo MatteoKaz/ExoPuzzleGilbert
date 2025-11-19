@@ -8,6 +8,7 @@ public class Vent : MonoBehaviour
     public int direction = 1; //1 = gauche, 2 = haut, 3 = droite, 4 = bas
     [SerializeField] public Vector3 direct;
     [SerializeField] public float ventDistance = 2f;
+    private bool _bCummulation = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,32 +57,48 @@ public class Vent : MonoBehaviour
                 }
                 else if (direction == 2)
                 {
-                    hit.transform.gameObject.GetComponent<Impulseur>().AddImpact(direct,3f);
-
+                    hit.transform.gameObject.GetComponent<Impulseur>().AddImpact(direct, 3f);
+                }
+                
+                else if (direction == 3)
+                {
+                    if (_bCummulation == false)
+                    {
+                        oldmovePlayer = movePlayer.speed;
+                        movePlayer.speed = movePlayer.speed + -vitesseDePoussee;
+                        _bCummulation = true;
+                    }
+                }
+                else if (direction == 4)
+                {
+                    hit.transform.gameObject.GetComponent<Impulseur>().AddImpact(direct, 3f);
                 }
             }
             else
             {
-                if (direction == 1)
+                if (direction == 1 || direction == 3)
                 {
                     if (movePlayer != null)
                     {
                         movePlayer.speed = oldmovePlayer;
                         movePlayer = null;
+                        _bCummulation = false;
                     }
                 }
+                
             }
         }
         else
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(direct) * ventDistance, Color.white);
             
-            if (direction == 1)
+            if (direction == 1 || direction == 3)
             {
                 if (movePlayer != null)
                 {
                     movePlayer.speed = oldmovePlayer;
                     movePlayer = null;
+                    _bCummulation = false;
                 }
             }
             
