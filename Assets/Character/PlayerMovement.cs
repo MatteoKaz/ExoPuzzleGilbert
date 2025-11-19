@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
@@ -22,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float zMin = -Mathf.Infinity;
     public float zMax = Mathf.Infinity;
+
+    public bool impulsionEnCours;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,7 +67,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 move.z = 0;
             } // OUI CE PUTAIN DE CODE MARCHE ENFIN
-            controller.Move(move);
+
+            if (move.z > 2f)
+            {
+                move.z = 1f;
+            }
+            if (move.y > 10f)
+            {
+                move.y = 10f;
+            }
+            else if (move.y < -10f)
+            {
+                move.y = -10f;
+            }
+                controller.Move(move);
         }
 
         if (speed != 0f)
@@ -109,5 +125,74 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
+
+    /*
+    public void ForcePlayer()
+    {
+        bool impulsionEnCours = true;
+        StartCoroutine(UpImpulse());
+       // StartCoroutine(ThrowPlayer()); 
+    }
+
+    IEnumerator ThrowPlayer()
+    {
+        float throwDistance = 500f;
+        Vector3 upVector = new Vector3(0, 0.0001f, 0);
+        Vector3 throwVector;
+        for (int i = 0; i <= throwDistance; i++)
+        {
+            if (i <= throwDistance / 2)
+            {
+                throwVector = transform.forward + upVector;
+            }
+            else
+            {
+                throwVector = transform.forward - upVector;
+            }
+            controller.Move(throwVector);
+            if (!controller.isGrounded) yield return new WaitForFixedUpdate();
+        }
+        StopAllCoroutines();
+    }
+
+    IEnumerator UpImpulse()
+    {
+        float throwDistance = 250f;
+        Vector3 upVector = new Vector3(0, 0.0001f, 0);
+        Vector3 throwVector;
+        for (int i = 0; i <= throwDistance; i++)
+        {
+            if (i <= throwDistance / 2)
+            {
+                throwVector = transform.forward + upVector;
+            }
+            else
+            {
+                if (impulsionEnCours) 
+                { 
+
+                }
+                throwVector = transform.forward - upVector;
+            }
+            controller.Move(throwVector);
+            if (!controller.isGrounded) yield return new WaitForFixedUpdate();
+        }
+        
+    }
+    IEnumerator DownImpulse()
+    {
+        float throwDistance = 250f;
+        Vector3 upVector = new Vector3(0, 0.0001f, 0);
+        Vector3 throwVector;
+        for (int i = 0; i <= throwDistance; i++)
+        {
+            throwVector = transform.forward - upVector;
+            
+            controller.Move(throwVector);
+            if (!controller.isGrounded) yield return new WaitForFixedUpdate();
+        }
+        
+    }
+    */
 
 }
