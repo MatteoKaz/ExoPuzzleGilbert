@@ -27,6 +27,7 @@ public class Death : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other);
         if (other.gameObject.GetComponent<PlayerMovement>() != null)
         {
             _PM = other.gameObject.GetComponent<PlayerMovement>(); 

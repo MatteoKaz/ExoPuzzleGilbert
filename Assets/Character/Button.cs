@@ -21,7 +21,7 @@ public class Button : MonoBehaviour
         if (_MovementRef.speed == 0)
         {
             
-            _MovementRef.speed = -0.5f;
+            _MovementRef.speed = -0.25f;
             _Pressed = false;
 
         }
