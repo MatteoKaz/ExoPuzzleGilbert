@@ -4,7 +4,7 @@ public class ExitZone : MonoBehaviour
 {
     public Vector3 positionSpawn;
     [SerializeField] public GameObject positionRespawn;
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (positionRespawn  != null)
         {
