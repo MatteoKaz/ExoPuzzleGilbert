@@ -151,10 +151,18 @@ public class PlayerMovement : MonoBehaviour
 
             else
             {
-                speed = speedOriginal;
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
-                Offsetvalue = 0.08f;
-                StepClimb();
+                if(notOnGround ==false)
+                {
+                    speed = speedOriginal;
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
+                    Offsetvalue = 0.08f;
+                    StepClimb();
+                }
+               else
+                {
+                    Offsetvalue = 0.08f;
+                   
+                }
                
                 
             }
@@ -185,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("dddd");
                 speed = speedOriginal;
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
+               
             }
 
 
@@ -244,7 +252,7 @@ public class PlayerMovement : MonoBehaviour
 
     void StepClimb()
     {
-        if (notOnGround)
+        if (notOnGround == true)
             return;
         if (speed != 0)
         {
@@ -284,7 +292,7 @@ public class PlayerMovement : MonoBehaviour
                         Debug.DrawRay(lowOrigin, forward * dist, Color.green);
                         bool hitLow = Physics.Raycast(lowOrigin, forward, out RaycastHit hitLowInfo, dist);
 
-                        if (hitLow)
+                        if (hitLow && notOnGround == false)
                         {
                             // High ray
                             Vector3 highOrigin = origin + Vector3.up * stepMaxHeight;
