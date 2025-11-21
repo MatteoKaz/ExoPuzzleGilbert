@@ -11,8 +11,22 @@ public class InfiniteScrolling : MonoBehaviour
     public Transform secondSection;
     public float sectionWidth = 20f;
 
+    void Start()
+    {
+        if (firstSection == null && transform.childCount > 0)
+        {
+            firstSection = transform.GetChild(0);
+            Debug.Log($"FirstSection assigné automatiquement: {firstSection.name}");
+        }
+    }
+
     void Update()
     {
+        if (firstSection == null || secondSection == null)
+        {
+            return;
+        }
+
         firstSection.position += scrollDirection.normalized * scrollSpeed * Time.deltaTime;
         secondSection.position += scrollDirection.normalized * scrollSpeed * Time.deltaTime;
 
