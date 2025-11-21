@@ -22,8 +22,8 @@ public class Impulseur : MonoBehaviour
     void Update()
     {
         // application de la force d'impact
-        if (impact.magnitude > 0.2) character.Move(impact * Time.deltaTime);
+        //if (impact.magnitude > 0.2) character.Move(impact * Time.deltaTime);
         // perte de vitesse à chaque fois
-        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
+        //impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
     }
 }

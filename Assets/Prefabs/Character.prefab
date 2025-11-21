@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 2563787875026876766}
   - component: {fileID: 1235657730247462400}
   - component: {fileID: 3130770958802342752}
+  - component: {fileID: 3272524315040739937}
+  - component: {fileID: 1598113312839071439}
   m_Layer: 3
   m_Name: Character
   m_TagString: Untagged
@@ -134,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7164835cacb75b34bb4bd43251f626b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -0.5
+  speed: -0.25
   _isdead: 0
   _isRevive: 0
   FootstepSound: {fileID: 6820270394067319249}
@@ -145,6 +147,39 @@ MonoBehaviour:
   zMin: -Infinity
   zMax: Infinity
   impulsionEnCours: 0
+  SlopeNormal: {x: 0, y: 0, z: 0}
+  SlopeAngle: 0
+  maxSlopeAngle: 0
+  playerheight: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayDistance: 0.22
+  Onslope: 0
+  forwardOffset: 0.3
+  downwardOffset: 0.5
+  tamere: 0
+  speedOriginal: 0
+  mouvementPente: {x: 0, y: 0, z: 0}
+  yPente: 0
+  notOnGround: 0
+  slopeMultiplier: 2
+  v: {x: 0, y: 0, z: 0}
+  forceHelper: 2.65
+  maxHorizontalSpeed: 0.11
+  maxVerticalSpeed: 0.1
+  Offsetvalue: 0.2
+  stepHeight: 0.25
+  stepLow: 0.1
+  stepSmooth: 2.6
+  stepCheckDistance: 0.2
+  stepCooldown: 0.1
+  stepMinHeight: -0.12
+  stepMaxHeight: 0.005
+  stepVerticalRays: 5
+  stepMinDistance: 0.1
+  stepMaxDistance: 0.12
+  stepForwardRays: 3
 --- !u!114 &7716116992965790234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +277,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.13
   m_Height: 0.7
@@ -264,7 +299,7 @@ CharacterController:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 0.55
   m_Radius: 0.1
@@ -280,7 +315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4076572528148626261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f315c73cb539ec4bb4fd3259aa722ba, type: 3}
   m_Name: 
@@ -296,13 +331,56 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4076572528148626261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3da2481051a8c9a44a2f68f7999d0fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 3
   impact: {x: 0, y: 0, z: 0}
+--- !u!54 &3272524315040739937
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4076572528148626261}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 114
+  m_CollisionDetection: 0
+--- !u!114 &1598113312839071439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4076572528148626261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836df2c8e91cedf43b7ecd6247c1644a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plateformTransform: {fileID: 0}
+  rayDistance: 0.5
+  localOffset: {x: 0, y: 0, z: 0}
+  pm: {fileID: 0}
 --- !u!1 &5089007004890264501
 GameObject:
   m_ObjectHideFlags: 0
