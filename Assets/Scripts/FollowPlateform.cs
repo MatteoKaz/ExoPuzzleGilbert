@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowPlateform : MonoBehaviour
 {
     public Transform plateformTransform;
-    public float rayDistance = 0.5f;
+    public float rayDistance = 0.1f;
     private Rigidbody rb;
     public Vector3 localOffset;
     private bool onPlatform;
@@ -39,7 +39,7 @@ public class FollowPlateform : MonoBehaviour
                 plateformTransform = hit.collider.transform;
                 localOffset = transform.position - plateformTransform.position;
                 onPlatform = true;
-                onPlatform = true;
+                
             }
         }
         else
