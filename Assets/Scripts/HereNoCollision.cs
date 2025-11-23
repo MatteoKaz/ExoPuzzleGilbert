@@ -15,7 +15,7 @@ public class HereNoCollision : MonoBehaviour
     {
         
     }
-    void OnTriggerEnter(Collider collider)
+    /*void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.GetComponent<PlayerMovement>() != null)
         {
@@ -39,5 +39,5 @@ public class HereNoCollision : MonoBehaviour
         {
             return;
         }
-    }
+    }*/
 }
