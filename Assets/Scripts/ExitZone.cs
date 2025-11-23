@@ -7,26 +7,31 @@ public class ExitZone : MonoBehaviour
     [SerializeField] public GameObject positionRespawn;
     private void OnTriggerEnter(Collider other)
     {
-        XRGrabInteractable grab = other.GetComponent<XRGrabInteractable>();
-
-        if (grab != null && grab.isSelected == true)
+        if (other.GetComponent<IsAffectedByTp>() != null)
         {
-            var interactor = grab.firstInteractorSelecting;
+            XRGrabInteractable grab = other.GetComponent<XRGrabInteractable>();
 
-            if (interactor != null)
+            if (grab != null && grab.isSelected == true)
             {
-                other.GetComponent<XRGrabInteractable>().interactionManager.SelectExit(interactor, grab);
-            }
-        }
+                var interactor = grab.firstInteractorSelecting;
 
-        if (positionRespawn  != null)
-        {
-           other.transform.position = positionRespawn.transform.position;
+                if (interactor != null)
+                {
+                    other.GetComponent<XRGrabInteractable>().interactionManager.SelectExit(interactor, grab);
+                }
+            }
+
+            if (positionRespawn != null)
+            {
+                other.transform.position = positionRespawn.transform.position;
+            }
+            else
+            {
+                other.transform.position = positionSpawn;
+            }
+
+
+            
         }
-        else
-        {
-           other.transform.position = positionSpawn;
-        }
-             
     }
 }
