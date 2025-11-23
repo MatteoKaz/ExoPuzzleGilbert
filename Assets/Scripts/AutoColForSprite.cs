@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(MeshCollider))]
 public class AutoColForSprite : MonoBehaviour
 {
+    [Header("Small Thickness (required for PhysX)")]
+    public float thickness = 0.001f;
+
     void Start()
     {
         GenerateCollider();
@@ -19,61 +22,96 @@ public class AutoColForSprite : MonoBehaviour
 
         if (sprite == null)
         {
-            Debug.LogWarning("[" + name + "] No sprite found on SpriteRenderer.");
+            Debug.LogWarning("No sprite found.");
             return;
         }
 
-        int shapeCount = sprite.GetPhysicsShapeCount();
-        if (shapeCount == 0)
-        {
-            Debug.LogWarning("[" + name + "] Sprite has no Custom Physics Shape. Open Sprite Editor > Custom Physics Shape.");
-            return;
-        }
-
-        // On utilise seulement la première shape pour ce script
+        // Get physics shape
         List<Vector2> shape2D = new List<Vector2>();
         sprite.GetPhysicsShape(0, shape2D);
-
         if (shape2D.Count < 3)
         {
-            Debug.LogWarning("[" + name + "] Physics Shape has fewer than 3 points.");
+            Debug.LogWarning("Shape has <3 points.");
             return;
         }
 
-        // Triangulation du polygone 2D
-        int[] triangles = Triangulate(shape2D);
-        if (triangles == null || triangles.Length < 3)
+        // Triangulate
+        int[] triangles2D = Triangulate(shape2D);
+        if (triangles2D == null || triangles2D.Length < 3)
         {
-            Debug.LogWarning("[" + name + "] Triangulation failed.");
+            Debug.LogWarning("Triangulation failed.");
             return;
         }
 
-        // Conversion en vertices 3D (z = 0 => mur plat)
-        Vector3[] vertices = new Vector3[shape2D.Count];
-        for (int i = 0; i < shape2D.Count; i++)
+        // -----------------------------------------------
+        // BUILD 3D MESH WITH ULTRA SMALL THICKNESS
+        // -----------------------------------------------
+        int count = shape2D.Count;
+
+        Vector3[] vertices = new Vector3[count * 2];
+        List<int> tris = new List<int>();
+
+        float dz = thickness * 0.5f;
+
+        // FRONT vertices (-dz)
+        for (int i = 0; i < count; i++)
+            vertices[i] = new Vector3(shape2D[i].x, shape2D[i].y, -dz);
+
+        // BACK vertices (+dz)
+        for (int i = 0; i < count; i++)
+            vertices[i + count] = new Vector3(shape2D[i].x, shape2D[i].y, +dz);
+
+        // FRONT triangles
+        for (int i = 0; i < triangles2D.Length; i++)
+            tris.Add(triangles2D[i]);
+
+        // BACK triangles (reverse winding)
+        for (int i = 0; i < triangles2D.Length; i += 3)
         {
-            Vector2 p = shape2D[i];
-            vertices[i] = new Vector3(p.x, p.y, 0f);
+            tris.Add(triangles2D[i] + count);
+            tris.Add(triangles2D[i + 2] + count);
+            tris.Add(triangles2D[i + 1] + count);
         }
 
+        // SIDE WALLS
+        for (int i = 0; i < count; i++)
+        {
+            int next = (i + 1) % count;
+
+            int A = i;
+            int B = next;
+            int C = i + count;
+            int D = next + count;
+
+            // Quad A-B-D-C as two triangles
+            tris.Add(A);
+            tris.Add(B);
+            tris.Add(D);
+
+            tris.Add(A);
+            tris.Add(D);
+            tris.Add(C);
+        }
+
+        // -----------------------------------------------
+        // BUILD FINAL MESH
+        // -----------------------------------------------
         Mesh mesh = new Mesh();
-        mesh.name = "SpritePhysicsWallMesh";
+        mesh.name = "ColliderMesh";
         mesh.vertices = vertices;
-        mesh.triangles = triangles;
+        mesh.triangles = tris.ToArray();
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
 
         mc.sharedMesh = mesh;
-
-        // IMPORTANT : non-convexe pour garder la forme exacte (pour des murs statiques)
         mc.convex = false;
 
-        Debug.Log("[" + name + "] MeshCollider generated from Sprite Physics Shape.");
+        Debug.Log("MeshCollider generated (tiny thickness applied).");
     }
 
-    // ------------------------------
-    //  Triangulation Ear-Clipping
-    // ------------------------------
+    // -----------------------------------------------------------
+    // Your Ear-Clipping triangulation (unchanged)
+    // -----------------------------------------------------------
     private int[] Triangulate(List<Vector2> points)
     {
         int n = points.Count;
@@ -82,7 +120,7 @@ public class AutoColForSprite : MonoBehaviour
         List<int> indices = new List<int>();
         int[] V = new int[n];
 
-        // Orientation du polygone (aire signée)
+        // Orientation
         float area = 0f;
         for (int i = 0; i < n; i++)
         {
@@ -90,46 +128,40 @@ public class AutoColForSprite : MonoBehaviour
             area += points[i].x * points[j].y - points[j].x * points[i].y;
         }
 
-        // Si area > 0 => CCW, sinon on inverse
         if (area > 0f)
         {
-            for (int i = 0; i < n; i++)
-                V[i] = i;
+            for (int i = 0; i < n; i++) V[i] = i;
         }
         else
         {
-            for (int i = 0; i < n; i++)
-                V[i] = (n - 1) - i;
+            for (int i = 0; i < n; i++) V[i] = (n - 1) - i;
         }
 
         int nv = n;
-        int count = 2 * nv;   // sécurité anti boucle infinie
         int v = 0;
+        int count = 2 * nv;
 
         while (nv > 2 && count > 0)
         {
             int u = v;
-            if (nv <= u) u = 0;
+            if (u >= nv) u = 0;
             v = u + 1;
-            if (nv <= v) v = 0;
+            if (v >= nv) v = 0;
             int w = v + 1;
-            if (nv <= w) w = 0;
+            if (w >= nv) w = 0;
 
             if (Snip(points, u, v, w, nv, V))
             {
                 int a = V[u];
                 int b = V[v];
                 int c = V[w];
-
                 indices.Add(a);
                 indices.Add(b);
                 indices.Add(c);
 
-                // On retire le vertex "v"
                 for (int s = v; s < nv - 1; s++)
-                {
                     V[s] = V[s + 1];
-                }
+
                 nv--;
                 count = 2 * nv;
             }
@@ -137,7 +169,6 @@ public class AutoColForSprite : MonoBehaviour
             {
                 v++;
             }
-
             count--;
         }
 
@@ -149,48 +180,35 @@ public class AutoColForSprite : MonoBehaviour
 
     private bool Snip(List<Vector2> points, int u, int v, int w, int nv, int[] V)
     {
-        const float EPSILON = 1e-6f;
+        const float EPS = 1e-6f;
 
         Vector2 A = points[V[u]];
         Vector2 B = points[V[v]];
         Vector2 C = points[V[w]];
 
-        // Aire du triangle
         float area = (B.x - A.x) * (C.y - A.y) - (B.y - A.y) * (C.x - A.x);
-        if (area <= EPSILON)
-            return false;
+        if (area <= EPS) return false;
 
-        // Vérifier qu'aucun autre point n'est à l'intérieur du triangle
         for (int p = 0; p < nv; p++)
         {
             if (p == u || p == v || p == w) continue;
             Vector2 P = points[V[p]];
-            if (PointInTriangle(P, A, B, C))
-                return false;
+            if (PointInTriangle(P, A, B, C)) return false;
         }
-
         return true;
     }
 
     private bool PointInTriangle(Vector2 P, Vector2 A, Vector2 B, Vector2 C)
     {
-        float ax = C.x - B.x;
-        float ay = C.y - B.y;
-        float bx = A.x - C.x;
-        float by = A.y - C.y;
-        float cx = B.x - A.x;
-        float cy = B.y - A.y;
-        float apx = P.x - A.x;
-        float apy = P.y - A.y;
-        float bpx = P.x - B.x;
-        float bpy = P.y - B.y;
-        float cpx = P.x - C.x;
-        float cpy = P.y - C.y;
+        float cross1 = (B.x - A.x) * (P.y - A.y) - (B.y - A.y) * (P.x - A.x);
+        float cross2 = (C.x - B.x) * (P.y - B.y) - (C.y - B.y) * (P.x - B.x);
+        float cross3 = (A.x - C.x) * (P.y - C.y) - (A.y - C.y) * (P.x - C.x);
 
-        float aCROSSbp = ax * bpy - ay * bpx;
-        float cCROSSap = cx * apy - cy * apx;
-        float bCROSScp = bx * cpy - by * cpx;
+        bool hasNeg = (cross1 < 0) || (cross2 < 0) || (cross3 < 0);
+        bool hasPos = (cross1 > 0) || (cross2 > 0) || (cross3 > 0);
 
-        return (aCROSSbp >= 0f) && (bCROSScp >= 0f) && (cCROSSap >= 0f);
+        return !(hasNeg && hasPos);
     }
 }
+
+

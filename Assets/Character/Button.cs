@@ -22,14 +22,14 @@ public class Button : MonoBehaviour
         {
             
             _MovementRef.speed = -0.25f;
-            _MovementRef.speedOriginal = _MovementRef.speed; 
+            _MovementRef.speedOriginal = -0.25f; 
             _Pressed = false;
 
         }
         else 
         {
             _MovementRef.speed = 0f;
-            _MovementRef.speedOriginal = _MovementRef.speed;
+            _MovementRef.speedOriginal = 0f;
             _Pressed = true;
             Debug.Log("off");
         }

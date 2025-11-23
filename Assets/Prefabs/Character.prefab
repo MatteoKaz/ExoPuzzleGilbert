@@ -142,6 +142,7 @@ MonoBehaviour:
   FootstepSound: {fileID: 6820270394067319249}
   Footstep: 0
   gravity: -9.81
+  gravityValue: 0.9
   verticalSpeed: 0
   starterAxisX: 0
   zMin: -Infinity
@@ -154,7 +155,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 0
-  rayDistance: 0.22
+  rayDistance: 0.35
   Onslope: 0
   forwardOffset: 0.3
   downwardOffset: 0.5
@@ -163,23 +164,31 @@ MonoBehaviour:
   mouvementPente: {x: 0, y: 0, z: 0}
   yPente: 0
   notOnGround: 0
-  slopeMultiplier: 2
+  slopeMultiplier: 2.5
   v: {x: 0, y: 0, z: 0}
-  forceHelper: 2.65
-  maxHorizontalSpeed: 0.11
-  maxVerticalSpeed: 0.1
+  forceHelper: 2.8
+  maxHorizontalSpeed: 0.16
+  maxVerticalSpeed: 0.18
   Offsetvalue: 0.2
   stepHeight: 0.25
   stepLow: 0.1
-  stepSmooth: 2.6
+  stepSmooth: 2.75
   stepCheckDistance: 0.2
   stepCooldown: 0.1
-  stepMinHeight: -0.12
+  stepMinHeight: -0.22
   stepMaxHeight: 0.005
   stepVerticalRays: 5
   stepMinDistance: 0.1
   stepMaxDistance: 0.12
   stepForwardRays: 3
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  stepMinDistanceSlope: 0.04
+  stepMaxDistanceSlope: 0.12
+  stepMinHeightSlope: -0.18
+  stepMaxHeightSlope: -0.03
+  stepSmoothSlope: 2.8
 --- !u!114 &7716116992965790234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +289,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.13
-  m_Height: 0.7
+  m_Height: 0.76
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &2563787875026876766
@@ -364,7 +373,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 114
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1598113312839071439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +381,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4076572528148626261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 836df2c8e91cedf43b7ecd6247c1644a, type: 3}
   m_Name: 

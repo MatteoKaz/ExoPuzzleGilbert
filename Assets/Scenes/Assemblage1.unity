@@ -9407,6 +9407,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2031088005}
+    - target: {fileID: 4840877237353144912, guid: 831f702e9da56f640991d89ce5163b18, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.034
+      objectReference: {fileID: 0}
     - target: {fileID: 5049727070398264009, guid: 831f702e9da56f640991d89ce5163b18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.152
@@ -9483,6 +9487,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1211920944}
+    - target: {fileID: 8978637462346770732, guid: 831f702e9da56f640991d89ce5163b18, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.039
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11611,18 +11619,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1598113312839071439, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3272524315040739937, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3589444832192577058, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_Height
-      value: 0.76
-      objectReference: {fileID: 0}
     - target: {fileID: 4076572528148626261, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: m_Name
       value: Character
@@ -11668,10 +11664,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: PM
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: EnnemyHit
       value: 
       objectReference: {fileID: 404798418}
@@ -11683,38 +11675,6 @@ PrefabInstance:
       propertyPath: Reaction2
       value: 
       objectReference: {fileID: 1353120800}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: stepSmooth
-      value: 2.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: rayDistance
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: stepMinHeight
-      value: -0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: stepSmoothSlope
-      value: 2.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: stepMaxHeightSlope
-      value: -0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: stepMinHeightSlope
-      value: -0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: stepMaxDistanceSlope
-      value: 0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: stepMinDistanceSlope
-      value: 0.04
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

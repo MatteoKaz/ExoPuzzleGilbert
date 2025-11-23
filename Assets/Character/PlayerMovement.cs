@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 velocity;
     public float gravity = -9.81f;
+    public float gravityValue = 0.9f;
     public float verticalSpeed = 0f;
     public float starterAxisX;
 
@@ -94,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Dead", _isdead);
             _animator.SetBool("Revive", _isRevive);
             v = rb.linearVelocity;
-
+            
 
 
 
@@ -116,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
             FootstepSound.Stop();
             rb.useGravity = true;
         }
+       
 
         {
             Vector3 slopeDir = AdjustDirectionToSlope(baseDirection);
@@ -128,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
             // Set velocity directly
 
 
-            if (tamere > 15f && tamere < 70 && notOnGround == false)
+            if (tamere > 18f && tamere < 70 && notOnGround == false)
             {
                 
                 Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 4;
@@ -143,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
                     ClimbOnSlope();
 
                 }
-                Offsetvalue = -0.03f;
+                Offsetvalue = -0.028f;
                 // 4. CLAMP VITESSE VERTICALE (évite de voler)
                 if (v.y > maxVerticalSpeed)
                     v.y = maxVerticalSpeed;
@@ -152,7 +154,8 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = v;
                 if(speed ==0)
                 {
-                    rb.useGravity = true;
+                    rb.useGravity = false;
+                    rb.AddForce(Physics.gravity * gravityValue, ForceMode.Acceleration);
                 }
                 else
                 {
@@ -168,10 +171,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 if(notOnGround ==false)
                 {
-                    
+                    //La suite est a mettre dans le build final.
+                   // speed = speedOriginal;
+                    //Debug.Log(speedOriginal);
                     rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
                     Offsetvalue = 0.08f;
                     StepClimb();
+                    rb.useGravity = false;
+                    rb.AddForce(Physics.gravity * gravityValue, ForceMode.Acceleration);
 
                 }
                else
@@ -182,12 +189,20 @@ public class PlayerMovement : MonoBehaviour
                
                 
             }
-            if (tamere > 15f && tamere < 70 && slopeDir.y < 0 && notOnGround == false)
+            if (tamere > 20f && tamere < 70 && slopeDir.y < 0 && notOnGround == false)
             {
-                
+
                 Debug.Log("Descend");
                 Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 2.5f;
-                rb.AddForce(horizontalForce * -forceHelper * 2, ForceMode.Acceleration);
+                if (speed == 0f)
+                {
+                    rb.AddForce(horizontalForce * -forceHelper * 4f, ForceMode.Acceleration);
+                }
+                else
+                {
+                    rb.AddForce(horizontalForce * -forceHelper, ForceMode.Acceleration);
+                }
+                  
                 Vector3 horiz = new Vector3(v.x, 0f, speedOriginal);
                 if (horiz.magnitude < maxHorizontalSpeed)
                 {
@@ -196,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
                     v.z = horiz.z;
                     Offsetvalue = 0.0f;
                     rb.useGravity = true;
+                    rb.AddForce(Physics.gravity * 1, ForceMode.Acceleration);
 
                 }
                 if (notOnGround == false)
@@ -207,16 +223,21 @@ public class PlayerMovement : MonoBehaviour
                     // appliquer le clamp
                     rb.linearVelocity = v;
                     rb.useGravity = true;
+                    rb.AddForce(Physics.gravity * 1, ForceMode.Acceleration);
                 }
-            }
+            }   
             if (notOnGround != false)
             {
                 Debug.Log("dddd");
                 
-                rb.useGravity = true;
+                rb.useGravity = false;
+                //a remettre
+                //speed = 0f;
+                rb.AddForce(Physics.gravity * gravityValue, ForceMode.Acceleration);
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
 
             }
+            
 
 
         }
@@ -256,7 +277,7 @@ public class PlayerMovement : MonoBehaviour
     public void CheckGroud()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.28f))
         {
             
             notOnGround = false;
@@ -341,8 +362,9 @@ public class PlayerMovement : MonoBehaviour
                             {
                                 if (notOnGround == false)
                                 {
+                                    Vector3 dir = new Vector3(0, 0.75f, -0.15f);
                                     Debug.Log("je poussette ");
-                                    rb.AddForce(Vector3.up * stepSmooth, ForceMode.Impulse);
+                                    rb.AddForce(dir * stepSmooth, ForceMode.Impulse);
                                     stepTimer = stepCooldown;
                                     return; // We are done. One hit only is enough.
                                 }
@@ -357,8 +379,9 @@ public class PlayerMovement : MonoBehaviour
                     {
                         if (notOnGround == false)
                         {
+                            Vector3 dir = new Vector3(0, 0.75f, -0.15f);
                             Debug.Log("je pousse");
-                            rb.AddForce(Vector3.up * stepSmooth, ForceMode.Impulse);
+                            rb.AddForce(dir * stepSmooth, ForceMode.Impulse);
                             stepTimer = stepCooldown;
                         }
 
