@@ -5484,7 +5484,7 @@ Transform:
   m_GameObject: {fileID: 888430519}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -1.6150846, y: -0.43656301, z: -15.724263}
+  m_LocalPosition: {x: -1.6150846, y: -0.64, z: -15.724263}
   m_LocalScale: {x: 1.5869, y: 1.8036488, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5639,7 +5639,7 @@ Transform:
   m_GameObject: {fileID: 901377594}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 7.76, y: -5.966563, z: -15.72}
+  m_LocalPosition: {x: 5.62, y: -5.966563, z: -15.72}
   m_LocalScale: {x: 1.3372998, y: 1, z: 1.0462}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7468,6 +7468,10 @@ PrefabInstance:
     - target: {fileID: 5809986591686265641, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010792718146615134, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
+      propertyPath: m_Height
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 7182317679394397314, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
       propertyPath: m_CastShadows
@@ -10559,7 +10563,7 @@ Transform:
   m_GameObject: {fileID: 1718444018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -13, y: -5.966563, z: -15.7}
+  m_LocalPosition: {x: -9.44, y: -5.966563, z: -15.7}
   m_LocalScale: {x: 1.4871999, y: 1, z: 1.0462}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10683,7 +10687,7 @@ Transform:
   m_GameObject: {fileID: 1804132981}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9394064, y: -5.966563, z: -3.48}
+  m_LocalPosition: {x: -1.9394064, y: -5.966563, z: -9.26}
   m_LocalScale: {x: 1.4794315, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13204,6 +13208,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Porteur
       objectReference: {fileID: 0}
+    - target: {fileID: 8060365864033313789, guid: 164f786a1e19927448ff2431f9b1fbb0, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060365864033313789, guid: 164f786a1e19927448ff2431f9b1fbb0, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060365864033313789, guid: 164f786a1e19927448ff2431f9b1fbb0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fc226930e8fad4c499969204cecfbc05, type: 2}
     - target: {fileID: 8856168140977010808, guid: 164f786a1e19927448ff2431f9b1fbb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.54

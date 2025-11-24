@@ -257,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
                 // project movement onto slope surface
                 float slopeAngle = Vector3.Angle(normal, Vector3.up);
                 Vector3 slopeDirection = Vector3.ProjectOnPlane(dir, normal).normalized;
-                Debug.Log(slopeAngle);
+            //    Debug.Log(slopeAngle);
                 tamere = slopeAngle;
 
                 return slopeDirection;
