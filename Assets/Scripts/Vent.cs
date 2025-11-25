@@ -5,14 +5,18 @@ public class Vent : MonoBehaviour
     public PlayerMovement movePlayer;
     public float oldmovePlayer;
     public float vitesseDePoussee = 0.25f;
-    public int direction = 1; //1 = gauche, 2 = haut, 3 = droite, 4 = bas
+    public int direction = 1;
     [SerializeField] public Vector3 direct;
     [SerializeField] public Vector3 directPush;
     [SerializeField] public float ventDistance = 2f;
     private bool _bCummulation = false;
     public Rigidbody rb;
+    
+    [Header("Wind Sound")]
+    [SerializeField] private AudioSource windAudioSource;
+    [SerializeField] private AudioClip windSound;
+    [SerializeField] private float windVolume = 0.5f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (direction == 1)
@@ -35,21 +39,32 @@ public class Vent : MonoBehaviour
             direct = new Vector3(0f, -1f, 0f);
             directPush = new Vector3(0f, -1f, 0f);
         }
-
+        
+        SetupWindSound();
+    }
+    
+    private void SetupWindSound()
+    {
+        if (windAudioSource != null && windSound != null)
+        {
+            windAudioSource.clip = windSound;
+            windAudioSource.loop = true;
+            windAudioSource.volume = windVolume;
+            windAudioSource.Play();
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+    
     private void FixedUpdate()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(direct), out hit, ventDistance))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(direct) * hit.distance, Color.yellow);
-            
             
             if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null) 
             {
@@ -68,7 +83,6 @@ public class Vent : MonoBehaviour
                         _bCummulation = false;
                     }
                 }
-                
             }
         }
         else
@@ -84,7 +98,6 @@ public class Vent : MonoBehaviour
                     _bCummulation = false;
                 }
             }
-            
         }
     }
 }
