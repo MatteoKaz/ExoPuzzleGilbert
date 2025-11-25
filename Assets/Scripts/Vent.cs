@@ -9,6 +9,7 @@ public class Vent : MonoBehaviour
     [SerializeField] public Vector3 direct;
     [SerializeField] public Vector3 directPush;
     [SerializeField] public float ventDistance = 2f;
+    [SerializeField] public float liftForce = 0.45f;
     private bool _bCummulation = false;
     public Rigidbody rb;
     
@@ -70,7 +71,8 @@ public class Vent : MonoBehaviour
             {
                 movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
                 rb = hit.transform.gameObject.GetComponent<Rigidbody>();
-                rb.AddForce(directPush * vitesseDePoussee, ForceMode.Acceleration);
+                rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
+                rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
             }
             else
             {

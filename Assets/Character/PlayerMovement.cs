@@ -7,7 +7,7 @@ using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
 public class PlayerMovement : MonoBehaviour
 {
     // private Rigidbody rb;
-    private Rigidbody rb;
+    public Rigidbody rb;
     // private Vector3 moveDirection;
     public float speed = 0f;
     //  private Vector3 Direction;
@@ -238,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
                 //a remettre
                 //speed = 0f;
                 rb.AddForce(Physics.gravity * gravityValue, ForceMode.Acceleration);
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z );
 
             }
             
