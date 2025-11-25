@@ -232,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
                 
                 rb.useGravity = false;
                 //a remettre
-                //speed = 0f;
+                speed = 0f;
                 rb.AddForce(Physics.gravity * gravityValue, ForceMode.Acceleration);
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
 
