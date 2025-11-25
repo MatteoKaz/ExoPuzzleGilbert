@@ -63,7 +63,7 @@ public class Vent : MonoBehaviour
                 {
                     if (movePlayer != null)
                     {
-                        movePlayer.speed = oldmovePlayer;
+                        
                         movePlayer = null;
                         _bCummulation = false;
                     }
@@ -79,7 +79,7 @@ public class Vent : MonoBehaviour
             {
                 if (movePlayer != null)
                 {
-                    movePlayer.speed = oldmovePlayer;
+                    
                     movePlayer = null;
                     _bCummulation = false;
                 }

@@ -7,19 +7,22 @@ public class MurCollisionBlack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((wallMask.value & (1 << other.gameObject.layer)) != 0)
-        {
+        Debug.Log(wallMask);
+        Debug.Log(other.gameObject.layer);
+        Debug.Log(wallMask.value);
+    //    if (other.gameObject.layer == wallMask.value)
+       // {
             blackScreen.SetActive(true);
-            Debug.Log("Enter");
-        }
+     //       Debug.Log("Enter");
+     //  }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if ((wallMask.value & (1 << other.gameObject.layer)) != 0)
-        {
+    //   if (other.gameObject.layer == wallMask.value)
+    //    {
             blackScreen.SetActive(false);
             Debug.Log("Exit");
-        }
+   //     }
     }
 }

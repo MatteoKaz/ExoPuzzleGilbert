@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
             if (tamere > 20f && tamere < 70 && slopeDir.y < 0 && notOnGround == false)
             {
 
-                Debug.Log("Descend");
+                //Debug.Log("Descend");
                 Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 2.5f;
                 if (speed == 0f)
                 {
@@ -228,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
             }   
             if (notOnGround != false)
             {
-                Debug.Log("dddd");
+                
                 
                 rb.useGravity = false;
                 //a remettre
@@ -380,7 +380,7 @@ public class PlayerMovement : MonoBehaviour
                         if (notOnGround == false)
                         {
                             Vector3 dir = new Vector3(0, 0.75f, -0.15f);
-                            Debug.Log("je pousse");
+                            //Debug.Log("je pousse");
                             rb.AddForce(dir * stepSmooth, ForceMode.Impulse);
                             stepTimer = stepCooldown;
                         }
@@ -467,7 +467,7 @@ public class PlayerMovement : MonoBehaviour
                             if (notOnGround == false)
                             {
                                 Vector3 dir = new Vector3(0, 1, -0.15f);
-                                Debug.Log("je pousse");
+                                //Debug.Log("je pousse");
                                 rb.AddForce(dir * stepSmoothSlope, ForceMode.Impulse);
                                 stepTimer = stepCooldown;
                             }
