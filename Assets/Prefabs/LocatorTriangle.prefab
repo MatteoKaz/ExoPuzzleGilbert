@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7560919635714515528}
   - component: {fileID: 2104511120584659724}
   - component: {fileID: 5685624504580572842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CollisionOmbreTriangle
-  m_TagString: Untagged
+  m_TagString: CrushCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 338719681882192641}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.0060005197, y: 0.054, z: -4.285002}
+  m_LocalPosition: {x: 0.0060005197, y: 0.039, z: -4.285002}
   m_LocalScale: {x: 0.5, y: 1.7300006, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1854
+  m_VersionIndex: 1836
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -324,7 +324,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4026531909
+    m_Bits: 4026532165
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -347,9 +347,9 @@ GameObject:
   - component: {fileID: 2660759252129750835}
   - component: {fileID: 7095134694253741670}
   - component: {fileID: 8032045573026212542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collision2Long
-  m_TagString: Untagged
+  m_TagString: CrushCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,7 +363,7 @@ Transform:
   m_GameObject: {fileID: 1274409085338479228}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.001, y: -0.019, z: -1.141}
+  m_LocalPosition: {x: -0.001, y: -0.034, z: -1.141}
   m_LocalScale: {x: 0.7, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 811
+  m_VersionIndex: 814
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -748,7 +748,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4026531909
+    m_Bits: 4026532165
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
