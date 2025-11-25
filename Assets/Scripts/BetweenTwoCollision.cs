@@ -56,8 +56,8 @@ public class BetweenTwoCollision : MonoBehaviour
         Debug.Log("OnCrush: ignore collision with cube");
 
 
-        Physics.IgnoreCollision(characterCollider, cubeCollider, true);
-
+      //  Physics.IgnoreCollision(characterCollider, cubeCollider, true);
+        characterCollider.gameObject.layer = LayerMask.NameToLayer("ShadowPlayerWithoutCube");
 
         if (separationWatcher != null) StopCoroutine(separationWatcher);
         separationWatcher = StartCoroutine(WatchForSeparationAndReactivate());
@@ -82,8 +82,8 @@ public class BetweenTwoCollision : MonoBehaviour
 
             if (!isOverlapping)
             {
-
-                Physics.IgnoreCollision(characterCollider, cubeCollider, false);
+                characterCollider.gameObject.layer = LayerMask.NameToLayer("ShadowPlayer");
+                //       Physics.IgnoreCollision(characterCollider, cubeCollider, false);
                 isCrushed = false;
                 separationWatcher = null;
                 Debug.Log("Separation detected: collision with cube re-enabled");
