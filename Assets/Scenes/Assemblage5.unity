@@ -5793,6 +5793,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
+--- !u!64 &824273327 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 5720689941633035108, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
+  m_PrefabInstance: {fileID: 824273326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &824273328 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 817646257896784753, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
+  m_PrefabInstance: {fileID: 824273326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &848462766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13047,6 +13057,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3833223448524862531, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: cubeCollider
+      value: 
+      objectReference: {fileID: 824273328}
+    - target: {fileID: 3852625645104648925, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: cubeCollider
+      value: 
+      objectReference: {fileID: 824273327}
     - target: {fileID: 4076572528148626261, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: m_Name
       value: Character
