@@ -5115,6 +5115,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 508529974488014827, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
+      propertyPath: m_TagString
+      value: CrushCube
+      objectReference: {fileID: 0}
     - target: {fileID: 750159786614693456, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
       propertyPath: toFollow
       value: 
@@ -5188,6 +5192,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
+--- !u!64 &824273327 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 5720689941633035108, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
+  m_PrefabInstance: {fileID: 824273326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &848462766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6691,7 +6700,7 @@ GameObject:
   - component: {fileID: 1011431982}
   m_Layer: 0
   m_Name: SpriteMur
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9838,7 +9847,7 @@ GameObject:
   - component: {fileID: 1620998182}
   m_Layer: 0
   m_Name: Rocher_GAMEJAMVR (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11113,7 +11122,7 @@ GameObject:
   - component: {fileID: 1896480742}
   m_Layer: 0
   m_Name: Rocher_GAMEJAMVR (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12755,8 +12764,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4076572528148626261, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2854594257727451224}
   m_SourcePrefab: {fileID: 100100000, guid: 8a57458e35f14114797d27169a713374, type: 3}
+--- !u!65 &2854594257727451223 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8781660740352268301, guid: 8a57458e35f14114797d27169a713374, type: 3}
+  m_PrefabInstance: {fileID: 2854594257727451222}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2854594257727451224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023995066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ecedff5e8ac1468858e68004e6017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterCollider: {fileID: 2854594257727451223}
+  cubeCollider: {fileID: 824273327}
+  groundTag: Ground
+  cubeTag: CrushCube
 --- !u!1001 &4535180027713562043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12864,6 +12897,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2009074524324824689, guid: eff1ec5b280bc2246a5a3d901c2391f6, type: 3}
       propertyPath: m_Name
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009074524324824689, guid: eff1ec5b280bc2246a5a3d901c2391f6, type: 3}
+      propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 9193148349191292659, guid: eff1ec5b280bc2246a5a3d901c2391f6, type: 3}
