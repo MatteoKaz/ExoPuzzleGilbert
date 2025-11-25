@@ -7,7 +7,11 @@ public class Button : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _MovementRef = GameObject.Find("Character").GetComponent<PlayerMovement>();
+        if (GameObject.Find("Character") != null)
+        {
+            _MovementRef = GameObject.Find("Character").GetComponent<PlayerMovement>();
+        }
+        
     }
 
     // Update is called once per frame

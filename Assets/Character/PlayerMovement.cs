@@ -91,9 +91,13 @@ public class PlayerMovement : MonoBehaviour
         CheckGroud();
         if (rb != null)
         {
-            _animator.SetFloat("Speed", -speed);
-            _animator.SetBool("Dead", _isdead);
-            _animator.SetBool("Revive", _isRevive);
+            if (_animator != null)
+            {
+                _animator.SetFloat("Speed", -speed);
+                _animator.SetBool("Dead", _isdead);
+                _animator.SetBool("Revive", _isRevive);
+            }
+            
             v = rb.linearVelocity;
             
 
