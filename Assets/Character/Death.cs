@@ -2,8 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Globalization;
 
-
-
 public class Death : MonoBehaviour
 {
     private Vector3 RespawnLoc;
@@ -12,47 +10,45 @@ public class Death : MonoBehaviour
     private SpriteRenderer _sprite;
     private Animator _animator;
     private PlayerMovement _PM;
-    [SerializeField] AudioSource DeathSound;
+    
+    [Header("Death Sounds")]
+    [SerializeField] private AudioClip deathSound1;
+    [SerializeField] private AudioClip deathSound2;
+    [SerializeField] private AudioClip deathSound3;
+    [SerializeField] private AudioSource deathAudioSource;
+    
+    [Header("Respawn Sound")]
+    [SerializeField] private AudioClip respawnSound;
+    
     private bool isDying = false;
     private Coroutine deathRoutine;
     private Collider col;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         if (Character != null)
         {
-            
             RespawnLoc = Character.transform.position;
             RespawnLoc = new Vector3(RespawnLoc.x, RespawnLoc.y, RespawnLoc.z);
         }
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if (Character != null)
         {
             if (isDying) return;
             if (other.gameObject.GetComponent<PlayerMovement>() != null)
             {
-                
                 _PM = other.gameObject.GetComponent<PlayerMovement>();
-
                 isDying = true;
                 Dead();
-                
-                
             }
         }
-          
     }
 
     public void Dead()
@@ -60,18 +56,34 @@ public class Death : MonoBehaviour
         if (deathRoutine == null)
         {
             deathRoutine = StartCoroutine(ShadowTimerControl());
-           
         }
-
     }
 
+    private void PlayRandomDeathSound()
+    {
+        if (deathAudioSource == null) return;
+        
+        AudioClip[] deathClips = { deathSound1, deathSound2, deathSound3 };
+        AudioClip selectedClip = deathClips[Random.Range(0, deathClips.Length)];
+        
+        if (selectedClip != null)
+        {
+            deathAudioSource.PlayOneShot(selectedClip);
+        }
+    }
+
+    private void PlayRespawnSound()
+    {
+        if (deathAudioSource != null && respawnSound != null)
+        {
+            deathAudioSource.PlayOneShot(respawnSound);
+        }
+    }
 
     private IEnumerator ShadowTimerControl()
     {
-
         if (Character != null)
         {
-
             _PM._isdead = true;
             _sprite = Character.gameObject.GetComponent<SpriteRenderer>();
             _PM.speed = 0;
@@ -79,8 +91,7 @@ public class Death : MonoBehaviour
             col = Character.GetComponent<CapsuleCollider>();
             col.enabled = false;
 
-
-            DeathSound.Play();
+            PlayRandomDeathSound();
         }
 
         yield return new WaitForSeconds(1.25f);
@@ -88,7 +99,8 @@ public class Death : MonoBehaviour
         {
             _sprite.enabled = false;
             _PM._isdead = false;
-            DeathSound.Stop();
+            if (deathAudioSource != null)
+                deathAudioSource.Stop();
             Character.gameObject.GetComponent<PlayerMovement>().speed = 0f;
         }
         yield return new WaitForSeconds(0.25f);
@@ -98,14 +110,7 @@ public class Death : MonoBehaviour
             _PM.rb.constraints = RigidbodyConstraints.None;
             Character.transform.position = RespawnLoc;
 
-
-
-
-
             _PM.rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX;
-
-            
-
         }
         yield return new WaitForSeconds(0.25f);
         if (Character != null)
@@ -114,7 +119,8 @@ public class Death : MonoBehaviour
             _PM.rb.isKinematic = false;
             Debug.Log("tp");
             _sprite.enabled = true;
-
+            
+            PlayRespawnSound();
         }
         yield return new WaitForSeconds(0.75f);
         {
@@ -122,6 +128,5 @@ public class Death : MonoBehaviour
             _PM._isRevive = false;
             deathRoutine = null;
         }
-        
     }
 }
