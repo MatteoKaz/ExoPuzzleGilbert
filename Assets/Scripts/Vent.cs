@@ -74,13 +74,27 @@ public class Vent : MonoBehaviour
                 rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
                 rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
             }
+            else if (hit.transform.gameObject.GetComponent<Traversable>())
+            {
+                //Vector3 center = hit.transform.TransformPoint(hit.center);
+                Vector3 center = new Vector3(transform.position.x, hit.transform.position.y, hit.transform.position.z);
+                Vector3 impact = hit.point;
+                Vector3 pointSortie = center - (impact - center);
+                float newDistance = ventDistance - hit.distance;
+
+                if (Physics.Raycast(pointSortie, transform.TransformDirection(direct), out hit, newDistance))
+                {
+                    Debug.DrawRay(transform.position, transform.TransformDirection(direct) * hit.distance, Color.red);
+                    // A METTRE CODE POUR VENT (faire fonction ??)
+                }
+            }
             else
             {
                 if (direction == 1 || direction == 3)
                 {
                     if (movePlayer != null)
                     {
-                        
+
                         movePlayer = null;
                         _bCummulation = false;
                     }
