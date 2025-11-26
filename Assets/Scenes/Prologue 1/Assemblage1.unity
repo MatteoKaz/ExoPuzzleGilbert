@@ -12926,8 +12926,20 @@ PrefabInstance:
       value: 8192
       objectReference: {fileID: 0}
     - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: stucked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: mask.m_Bits
-      value: 4026533886
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 8321
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2563787875026876766, guid: 8a57458e35f14114797d27169a713374, type: 3}

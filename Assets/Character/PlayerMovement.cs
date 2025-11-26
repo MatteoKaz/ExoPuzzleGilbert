@@ -286,14 +286,16 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f, groundLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.9f, groundLayer);
         foreach (Collider collider in colliders)
         {
-            if (collider != null)
-            { 
+            //if (collider != null)
+           // {
+                notOnGround = false;
                 return true;
-            }
+           // }
         }
+        notOnGround = true;
         return false;
     }
   /*  public void CheckGroud()
