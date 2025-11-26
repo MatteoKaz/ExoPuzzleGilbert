@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rb;
     // private Vector3 moveDirection;
     public float speed = 0f;
+    public float stopSpeed = 1f;
     //  private Vector3 Direction;
     private Animator _animator;
     public bool _isdead;
@@ -74,6 +75,9 @@ public class PlayerMovement : MonoBehaviour
     public float stepMaxHeightSlope = 0.35f;
     public float stepSmoothSlope = 2f;
 
+    public bool stucked = false;
+    public LayerMask groundLayer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -88,7 +92,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        CheckGroud();
+        IsGrounded();
+       // CheckGroud();
         if (rb != null)
         {
             if (_animator != null)
@@ -178,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
                     //La suite est a mettre dans le build final.
                    // speed = speedOriginal;
                     //Debug.Log(speedOriginal);
-                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed*stopSpeed);
                     Offsetvalue = 0.08f;
                     StepClimb();
                     rb.useGravity = false;
@@ -278,8 +283,22 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void CheckGroud()
+
+    public bool IsGrounded()
     {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f, groundLayer);
+        foreach (Collider collider in colliders)
+        {
+            if (collider != null)
+            { 
+                return true;
+            }
+        }
+        return false;
+    }
+  /*  public void CheckGroud()
+    {
+        
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.28f))
         {
@@ -290,13 +309,25 @@ public class PlayerMovement : MonoBehaviour
         {
             notOnGround = true;
         }
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<HereNoCollision>() != null)
+        if (other.gameObject.GetComponent<TraversableMur>())
+        {
+            stucked = true;
+        }
+        if (other.gameObject.GetComponent<TraversableBisControl>())
+        {
+            stopSpeed = 1f;
+        }
+        if (other.gameObject.GetComponent<HereNoCollision>())
         {
             gameObject.layer = LayerMask.NameToLayer("ShadowPlayerWithoutCube");
+        }
+        if (other.gameObject.GetComponent<Traversable>())
+        {
+            gameObject.layer = LayerMask.NameToLayer("ShadowPlayerTraversable");
         }
 
 
@@ -304,12 +335,29 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<HereNoCollision>() != null)
+        if (other.gameObject.GetComponent<TraversableMur>())
+        {
+            stucked = false;
+            stopSpeed = 1f;
+        }
+        if (other.gameObject.GetComponent<TraversableBisControl>())
+        {
+            if (stucked)
+            {
+                stopSpeed = 0f;
+            }
+        }
+        if (other.gameObject.GetComponent<HereNoCollision>())
+        {
+            gameObject.layer = LayerMask.NameToLayer("ShadowPlayer");
+        }
+        if (other.gameObject.GetComponent<Traversable>())
         {
             gameObject.layer = LayerMask.NameToLayer("ShadowPlayer");
         }
 
     }
+    
 
     void StepClimb()
     {
