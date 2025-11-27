@@ -11945,6 +11945,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1290544817}
   m_SourcePrefab: {fileID: 100100000, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
+--- !u!82 &2013557976 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7896623334685928699, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
+  m_PrefabInstance: {fileID: 2013557975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &2013557977 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6049342528372530967, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
+  m_PrefabInstance: {fileID: 2013557975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2022012639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
@@ -12905,6 +12915,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: EnnemyHit
+      value: 
+      objectReference: {fileID: 2013557977}
+    - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: Reaction1
       value: 
       objectReference: {fileID: 466434573}
@@ -12912,6 +12926,10 @@ PrefabInstance:
       propertyPath: Reaction2
       value: 
       objectReference: {fileID: 1770789693}
+    - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: enemyCryAudioSource
+      value: 
+      objectReference: {fileID: 2013557976}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
