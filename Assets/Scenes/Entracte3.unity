@@ -7197,12 +7197,15 @@ MonoBehaviour:
   firstText: "Alors qu\u2019il s\u2019enfonce davantage sur la route du destin, la
     premi\xE8re \xE0 se dresser face \xE0 lui est le Minotaure,  incarnation des
     peines anciennes. "
-  secondText: "Repr\xE9sente la force sacrifi\xE9e et de la souffrance contenue.,
-    Il se dresse comme un colosse taill\xE9 dans la chair. condamn\xE9e \xE0 vivre
+  secondText: "Il repr\xE9sente la force sacrifi\xE9e et la souffrance contenue.
+    Il se dresse comme un colosse taill\xE9 dans la chair, condamn\xE9e \xE0 vivre
     dans la douleur et \xE0 l\u2019infliger."
   thirdText: 
-  delayBeforeSecondText: 10
-  delayBeforeThirdText: 6
+  firstTextDuration: 6
+  secondTextDuration: 6
+  thirdTextDuration: 0
+  autoTransitionToNextLevel: 1
+  delayBeforeTransition: 1
 --- !u!1001 &1713086351
 PrefabInstance:
   m_ObjectHideFlags: 0

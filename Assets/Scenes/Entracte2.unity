@@ -7202,8 +7202,13 @@ MonoBehaviour:
   thirdText: "Devenu un homme, il refusa de c\xE9der \xE0 la peur. Arm\xE9 de d\xE9termination
     et de col\xE8re, il quitta son village jurant de briser ce cycle de terreur qui
     avait \xE9touff\xE9 les siens."
-  delayBeforeSecondText: 10
-  delayBeforeThirdText: 6
+  firstTextDuration: 6
+  secondTextDuration: 6
+  thirdTextDuration: 6
+  fadeInDuration: 1.5
+  fadeOutDuration: 1.5
+  autoTransitionToNextLevel: 1
+  delayBeforeTransition: 1
 --- !u!1001 &1713086351
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,9 +12,20 @@ public class StoryTextManager : MonoBehaviour
     [SerializeField] private string secondText = "Nul ne sait quand il est né, ni quel visage il portait alors ; on ne se souvient que des ombres, des grondements, et de l'effroi qui couvrit les nuits pendant des siècles.";
     [SerializeField] private string thirdText = "";
     
-    [Header("Timing")]
-    [SerializeField] private float delayBeforeSecondText = 6f;
-    [SerializeField] private float delayBeforeThirdText = 6f;
+    [Header("Timing - Durée de chaque dialogue")]
+    [SerializeField] private float firstTextDuration = 6f;
+    [SerializeField] private float secondTextDuration = 6f;
+    [SerializeField] private float thirdTextDuration = 6f;
+    
+    [Header("Fade Settings")]
+    [SerializeField] private float fadeInDuration = 1.5f;
+    [SerializeField] private float fadeOutDuration = 1.5f;
+    
+    [Header("Transition Settings")]
+    [SerializeField] private bool autoTransitionToNextLevel = true;
+    [SerializeField] private float delayBeforeTransition = 1f;
+    
+    private TransitionEntracte transitionManager;
     
     void Start()
     {
@@ -23,21 +34,69 @@ public class StoryTextManager : MonoBehaviour
             storyText = GetComponent<TextMeshProUGUI>();
         }
         
+        transitionManager = FindFirstObjectByType<TransitionEntracte>();
+        
         StartCoroutine(DisplayStorySequence());
     }
     
     private IEnumerator DisplayStorySequence()
     {
-        storyText.text = firstText;
+        yield return StartCoroutine(ShowTextWithFade(firstText, firstTextDuration));
         
-        yield return new WaitForSeconds(delayBeforeSecondText);
-        
-        storyText.text = secondText;
+        yield return StartCoroutine(ShowTextWithFade(secondText, secondTextDuration));
         
         if (!string.IsNullOrEmpty(thirdText))
         {
-            yield return new WaitForSeconds(delayBeforeThirdText);
-            storyText.text = thirdText;
+            yield return StartCoroutine(ShowTextWithFade(thirdText, thirdTextDuration));
         }
+        
+        if (autoTransitionToNextLevel && transitionManager != null)
+        {
+            yield return new WaitForSeconds(delayBeforeTransition);
+            transitionManager.Fondeur();
+        }
+    }
+    
+    private IEnumerator ShowTextWithFade(string text, float displayDuration)
+    {
+        storyText.text = text;
+        
+        yield return StartCoroutine(FadeIn());
+        
+        yield return new WaitForSeconds(displayDuration);
+        
+        yield return StartCoroutine(FadeOut());
+    }
+    
+    private IEnumerator FadeIn()
+    {
+        float elapsed = 0f;
+        Color textColor = storyText.color;
+        
+        while (elapsed < fadeInDuration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, elapsed / fadeInDuration);
+            storyText.color = new Color(textColor.r, textColor.g, textColor.b, alpha);
+            yield return null;
+        }
+        
+        storyText.color = new Color(textColor.r, textColor.g, textColor.b, 1f);
+    }
+    
+    private IEnumerator FadeOut()
+    {
+        float elapsed = 0f;
+        Color textColor = storyText.color;
+        
+        while (elapsed < fadeOutDuration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeOutDuration);
+            storyText.color = new Color(textColor.r, textColor.g, textColor.b, alpha);
+            yield return null;
+        }
+        
+        storyText.color = new Color(textColor.r, textColor.g, textColor.b, 0f);
     }
 }

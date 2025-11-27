@@ -7194,12 +7194,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storyText: {fileID: 1702091986}
-  firstText: "Dans un village accroch\xE9 aux flancs d'une montagne oubli\xE9e, les
-    anciens murmurent qu'un mal sans nom ronge la vall\xE9e depuis des g\xE9n\xE9rations."
-  secondText: "Nul ne sait quand il est n\xE9, ni quel visage il portait alors ;
-    on ne se souvient que des ombres, des grondements, et de l'effroi qui couvrit
-    les nuits pendant des si\xE8cles."
-  delayBeforeSecondText: 10
+  firstText: "Prologue \u2014 L'arriv\xE9e du D\xE9mon"
+  secondText: "Dans un village accroch\xE9 aux flancs d'une montagne oubli\xE9e,
+    les anciens murmurent qu'un mal sans nom ronge la vall\xE9e depuis des g\xE9n\xE9rations."
+  thirdText: "Nul ne sait quand il est n\xE9, ni quel visage il portait alors ; on
+    ne se souvient que des ombres, des grondements, et de l'effroi qui couvrit les
+    nuits pendant des si\xE8cles."
+  firstTextDuration: 3
+  secondTextDuration: 6
+  thirdTextDuration: 6
+  fadeInDuration: 1.5
+  fadeOutDuration: 1.5
+  autoTransitionToNextLevel: 1
+  delayBeforeTransition: 1
 --- !u!1001 &1713086351
 PrefabInstance:
   m_ObjectHideFlags: 0
