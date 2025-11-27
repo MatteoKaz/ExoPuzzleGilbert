@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class Vent : MonoBehaviour
@@ -60,55 +61,93 @@ public class Vent : MonoBehaviour
     {
         
     }
-    
+
     private void FixedUpdate()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(direct), out hit, ventDistance))
+        Collider[] overlaps = Physics.OverlapSphere(transform.position, 0.01f);
+        Collider[] filtered = overlaps
+            .Where(col => col.GetComponent<NoAffectByRaycastDetect>() == null)
+            .ToArray();
+
+        if (filtered.Length > 0)
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(direct) * hit.distance, Color.yellow);
-            
-            if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null) 
+            foreach (Collider col in filtered)
             {
-                movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
-                rb = hit.transform.gameObject.GetComponent<Rigidbody>();
-                rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
-                rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
+
             }
-            else if (hit.transform.gameObject.GetComponent<Traversable>())
+        }
+        else
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(direct), out hit, ventDistance))
             {
-                //Vector3 center = hit.transform.TransformPoint(hit.center);
-                Vector3 center = new Vector3(transform.position.x, hit.transform.position.y, hit.transform.position.z);
-                Vector3 impact = hit.point;
-                Vector3 betweenImpact = impact - center;
-                Vector3 impactOpposee = new Vector3(betweenImpact.x, betweenImpact.y*-1, betweenImpact.z);
-                Vector3 pointSortie = center - impactOpposee;
-                float newDistance = ventDistance - hit.distance;
+                Debug.DrawRay(transform.position, transform.TransformDirection(direct) * hit.distance, Color.yellow);
 
-                
-
-                if (Physics.Raycast(pointSortie, transform.TransformDirection(direct), out hit, newDistance))
+                if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
                 {
-                    if (Physics.SphereCast(pointSortie * 0.01f, 0.1f, transform.TransformDirection(direct), out RaycastHit hit2))
+                    movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
+                    rb = hit.transform.gameObject.GetComponent<Rigidbody>();
+                    rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
+                    rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
+                }
+                else if (hit.transform.gameObject.GetComponent<Traversable>())
+                {
+                    //Vector3 center = hit.transform.TransformPoint(hit.center);
+                    Vector3 center = new Vector3(transform.position.x, hit.transform.position.y, hit.transform.position.z);
+                    Vector3 impact = hit.point;
+                    Vector3 betweenImpact = impact - center;
+                    Vector3 impactOpposee = new Vector3(betweenImpact.x, betweenImpact.y * -1, betweenImpact.z);
+                    Vector3 pointSortie = center - impactOpposee;
+                    float newDistance = ventDistance - hit.distance;
+
+
+                    Collider[] overlaps1 = Physics.OverlapSphere(pointSortie, 0.01f);
+                    Collider[] filtered1 = overlaps1
+                        .Where(col => col.GetComponent<NoAffectByRaycastDetect>() == null)
+                        .ToArray();
+
+                    if (filtered1.Length > 0)
                     {
-                        Debug.Log(hit2.transform.gameObject);
+                        foreach (Collider col in filtered1)
+                        {
+
+                        }
                     }
                     else
                     {
-                        Debug.DrawRay(pointSortie, transform.TransformDirection(direct) * hit.distance, Color.red);
-                        if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
+
+                        if (Physics.Raycast(pointSortie, transform.TransformDirection(direct), out hit, newDistance))
                         {
-                            movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
-                            rb = hit.transform.gameObject.GetComponent<Rigidbody>();
-                            rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
-                            rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
+                            Debug.DrawRay(pointSortie, transform.TransformDirection(direct) * hit.distance, Color.red);
+                            if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
+                            {
+                                movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
+                                rb = hit.transform.gameObject.GetComponent<Rigidbody>();
+                                rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
+                                rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    if (direction == 1 || direction == 3)
+                    {
+                        if (movePlayer != null)
+                        {
+
+                            movePlayer = null;
+                            _bCummulation = false;
                         }
                     }
                 }
-                
             }
+
             else
             {
+                Debug.DrawRay(transform.position, transform.TransformDirection(direct) * ventDistance, Color.white);
+
                 if (direction == 1 || direction == 3)
                 {
                     if (movePlayer != null)
@@ -117,20 +156,6 @@ public class Vent : MonoBehaviour
                         movePlayer = null;
                         _bCummulation = false;
                     }
-                }
-            }
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(direct) * ventDistance, Color.white);
-            
-            if (direction == 1 || direction == 3)
-            {
-                if (movePlayer != null)
-                {
-                    
-                    movePlayer = null;
-                    _bCummulation = false;
                 }
             }
         }
