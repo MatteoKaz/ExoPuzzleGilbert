@@ -136,6 +136,10 @@ public class Vent : MonoBehaviour
                                 rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
                             }
                         }
+                        else
+                        {
+                            Debug.DrawRay(pointSortie, transform.TransformDirection(direct) * newDistance, Color.magenta);
+                        }
                     }
 
                 }
