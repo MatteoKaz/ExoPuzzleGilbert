@@ -89,15 +89,23 @@ public class Vent : MonoBehaviour
 
                 if (Physics.Raycast(pointSortie, transform.TransformDirection(direct), out hit, newDistance))
                 {
-                    Debug.DrawRay(pointSortie, transform.TransformDirection(direct) * hit.distance, Color.red);
-                    if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
+                    if (Physics.SphereCast(pointSortie * 0.01f, 0.1f, transform.TransformDirection(direct), out RaycastHit hit2))
                     {
-                        movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
-                        rb = hit.transform.gameObject.GetComponent<Rigidbody>();
-                        rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
-                        rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
+                        Debug.Log(hit2.transform.gameObject);
+                    }
+                    else
+                    {
+                        Debug.DrawRay(pointSortie, transform.TransformDirection(direct) * hit.distance, Color.red);
+                        if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
+                        {
+                            movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
+                            rb = hit.transform.gameObject.GetComponent<Rigidbody>();
+                            rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
+                            rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
+                        }
                     }
                 }
+                
             }
             else
             {
