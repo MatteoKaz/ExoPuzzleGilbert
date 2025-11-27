@@ -108,7 +108,8 @@ public class Vent : MonoBehaviour
                         Vector3 impactOpposee = new Vector3(betweenImpact.x, betweenImpact.y, betweenImpact.z*-1);
                         pointSortie = center - impactOpposee;
                     }
-                    float newDistance = ventDistance - hit.distance;
+                    float sphereHeight = Vector3.Distance(impact, pointSortie);
+                    float newDistance = ventDistance - hit.distance - sphereHeight;
 
 
                     Collider[] overlaps1 = Physics.OverlapSphere(pointSortie, 0.01f);
