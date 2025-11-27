@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 588722240147658536}
   - component: {fileID: 692473580217367669}
   - component: {fileID: 3545241716824083799}
+  - component: {fileID: 2913800540975770731}
   m_Layer: 13
   m_Name: IntengibleCollision
   m_TagString: Untagged
@@ -1065,7 +1066,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2249
+  m_VersionIndex: 2255
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1184,6 +1185,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148414c4a96590d4fb09a5fea6b038ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2913800540975770731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558918357491885727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2d328620a66384093ef07921381561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &560725928799488642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,6 +1302,7 @@ GameObject:
   - component: {fileID: 1227947142235157697}
   - component: {fileID: 7941185392290310931}
   - component: {fileID: 533854629337696804}
+  - component: {fileID: 4579367140284394736}
   m_Layer: 13
   m_Name: IntengibleCollisionControl (1)
   m_TagString: Untagged
@@ -2339,7 +2353,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2249
+  m_VersionIndex: 2255
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2456,5 +2470,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f35de2fe453ba34b8c652d516f0c90f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4579367140284394736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507684164030238765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2d328620a66384093ef07921381561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
