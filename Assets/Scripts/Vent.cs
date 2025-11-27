@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Vent : MonoBehaviour
@@ -79,13 +80,23 @@ public class Vent : MonoBehaviour
                 //Vector3 center = hit.transform.TransformPoint(hit.center);
                 Vector3 center = new Vector3(transform.position.x, hit.transform.position.y, hit.transform.position.z);
                 Vector3 impact = hit.point;
-                Vector3 pointSortie = center - (impact - center);
+                Vector3 betweenImpact = impact - center;
+                Vector3 impactOpposee = new Vector3(betweenImpact.x, betweenImpact.y*-1, betweenImpact.z);
+                Vector3 pointSortie = center - impactOpposee;
                 float newDistance = ventDistance - hit.distance;
+
+                
 
                 if (Physics.Raycast(pointSortie, transform.TransformDirection(direct), out hit, newDistance))
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(direct) * hit.distance, Color.red);
-                    // A METTRE CODE POUR VENT (faire fonction ??)
+                    Debug.DrawRay(pointSortie, transform.TransformDirection(direct) * hit.distance, Color.red);
+                    if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
+                    {
+                        movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
+                        rb = hit.transform.gameObject.GetComponent<Rigidbody>();
+                        rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
+                        rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
+                    }
                 }
             }
             else
