@@ -19,6 +19,8 @@ public class Vent : MonoBehaviour
     [SerializeField] private AudioSource windAudioSource;
     [SerializeField] private AudioClip windSound;
     [SerializeField] private float windVolume = 0.5f;
+    private Vector3 pointSortie = Vector3.zero;
+
 
     void Start()
     {
@@ -73,7 +75,6 @@ public class Vent : MonoBehaviour
         {
             foreach (Collider col in filtered)
             {
-
             }
         }
         else
@@ -96,8 +97,17 @@ public class Vent : MonoBehaviour
                     Vector3 center = new Vector3(transform.position.x, hit.transform.position.y, hit.transform.position.z);
                     Vector3 impact = hit.point;
                     Vector3 betweenImpact = impact - center;
-                    Vector3 impactOpposee = new Vector3(betweenImpact.x, betweenImpact.y * -1, betweenImpact.z);
-                    Vector3 pointSortie = center - impactOpposee;
+                    
+                    if (direction == 1 || direction == 3)
+                    {
+                        Vector3 impactOpposee = new Vector3(betweenImpact.x, betweenImpact.y * -1, betweenImpact.z);
+                        pointSortie = center - impactOpposee;
+                    }
+                    else if (direction == 2 || direction == 4)
+                    {
+                        Vector3 impactOpposee = new Vector3(betweenImpact.x, betweenImpact.y, betweenImpact.z*-1);
+                        pointSortie = center - impactOpposee;
+                    }
                     float newDistance = ventDistance - hit.distance;
 
 
@@ -110,7 +120,6 @@ public class Vent : MonoBehaviour
                     {
                         foreach (Collider col in filtered1)
                         {
-
                         }
                     }
                     else
