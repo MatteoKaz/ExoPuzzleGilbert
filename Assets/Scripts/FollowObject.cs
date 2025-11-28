@@ -9,7 +9,7 @@ public class FollowObject : MonoBehaviour
         dir = transform.forward;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         transform.position = toFollow.transform.position;
     }

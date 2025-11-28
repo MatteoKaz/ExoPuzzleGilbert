@@ -14,7 +14,7 @@ public class FollowTarget : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         float currentZ = transform.eulerAngles.z;
 
