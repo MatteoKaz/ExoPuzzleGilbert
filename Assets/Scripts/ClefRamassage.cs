@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ClefRamassage : MonoBehaviour
 {
+    public UnityEvent keyGetted;
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerMovement>())
@@ -14,6 +16,7 @@ public class ClefRamassage : MonoBehaviour
 
     public void OuverturePorte()
     {
+        keyGetted.Invoke();
         Destroy(gameObject);
     }
 }
