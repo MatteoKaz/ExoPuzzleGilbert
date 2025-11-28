@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2104511120584659724}
   - component: {fileID: 5685624504580572842}
   - component: {fileID: 7362905998269626282}
+  - component: {fileID: 5524055739353255157}
   m_Layer: 7
   m_Name: CollisionOmbreTriangle
   m_TagString: CrushCube
@@ -228,7 +229,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1848
+  m_VersionIndex: 1854
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -361,6 +362,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
+--- !u!114 &5524055739353255157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338719681882192641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e590b62049ad68458380cb18b64002d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1274409085338479228
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +389,7 @@ GameObject:
   - component: {fileID: 7095134694253741670}
   - component: {fileID: 8032045573026212542}
   - component: {fileID: 7234883779637440142}
+  - component: {fileID: 6658505039309967269}
   m_Layer: 7
   m_Name: Collision2Long
   m_TagString: CrushCube
@@ -679,7 +693,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 826
+  m_VersionIndex: 832
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -813,6 +827,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
+--- !u!114 &6658505039309967269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274409085338479228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e590b62049ad68458380cb18b64002d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5739869968213069453
 GameObject:
   m_ObjectHideFlags: 0
