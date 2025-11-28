@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4849048945227378346}
   - component: {fileID: 5720689941633035108}
   - component: {fileID: 8404576379889286133}
+  - component: {fileID: 2527609691481456966}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -281,7 +282,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1034
+  m_VersionIndex: 1040
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -414,6 +415,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
+--- !u!114 &2527609691481456966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508529974488014827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e590b62049ad68458380cb18b64002d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1222875662151296940
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +503,7 @@ GameObject:
   - component: {fileID: 4320176422070178457}
   - component: {fileID: 817646257896784753}
   - component: {fileID: 6808215838422698763}
+  - component: {fileID: 2291669725425208653}
   m_Layer: 0
   m_Name: Cone (1)
   m_TagString: Untagged
@@ -560,3 +574,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
+--- !u!114 &2291669725425208653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7173260226437745083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e590b62049ad68458380cb18b64002d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

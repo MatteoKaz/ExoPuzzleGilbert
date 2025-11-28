@@ -22,17 +22,31 @@ public class DeplacementRails : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.gameObject.GetComponent<Rigidbody>() != null)
+        if (collision.transform.gameObject.GetComponent<PousseurAimant>() != null)
         {
             listColl.Add(collision);
+        }
+        else
+        {
+            if (listColl.Count <= 0)
+            {
+                GetComponent<Rigidbody>().isKinematic = true;
+            }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.transform.gameObject.GetComponent<Rigidbody>() != null)
+        if (collision.transform.gameObject.GetComponent<PousseurAimant>() != null)
         {
             listColl.Remove(collision);
+            if (listColl.Count <= 0)
+            {
+                GetComponent<Rigidbody>().isKinematic = false;
+            }
+        }
+        else
+        {
             if (listColl.Count <= 0)
             {
                 GetComponent<Rigidbody>().isKinematic = false;
