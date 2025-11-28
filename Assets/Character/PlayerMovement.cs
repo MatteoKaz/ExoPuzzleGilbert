@@ -74,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     public float stepMinHeightSlope = 0.05f;        // lowest ray height
     public float stepMaxHeightSlope = 0.35f;
     public float stepSmoothSlope = 2f;
+    public float controlGravity =1f;
 
     public bool stucked = false;
     public LayerMask groundLayer;
@@ -124,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Footstep = false;
             FootstepSound.Stop();
-            rb.useGravity = true;
+           // rb.useGravity = true;
         }
        
 
@@ -164,12 +165,12 @@ public class PlayerMovement : MonoBehaviour
                 if(speed ==0)
                 {
                     rb.useGravity = false;
-                    rb.AddForce(Physics.gravity * gravityValue, ForceMode.Acceleration);
+                    rb.AddForce(Physics.gravity * gravityValue*controlGravity, ForceMode.Acceleration);
                 }
                 else
                 {
                     rb.useGravity = false;
-                    rb.AddForce(Physics.gravity * 0.80f, ForceMode.Acceleration);
+                    rb.AddForce(Physics.gravity * 0.80f*controlGravity, ForceMode.Acceleration);
                     ClimbOnSlope();
                 }
             }
@@ -187,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
                     Offsetvalue = 0.08f;
                     StepClimb();
                     rb.useGravity = false;
-                    rb.AddForce(Physics.gravity * gravityValue, ForceMode.Acceleration);
+                    rb.AddForce(Physics.gravity * gravityValue*controlGravity, ForceMode.Acceleration);
 
                 }
                else
@@ -242,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.useGravity = false;
                 //a remettre
                 //speed = 0f;
-                rb.AddForce(Physics.gravity * gravityValue, ForceMode.Acceleration);
+                rb.AddForce(Physics.gravity * gravityValue * controlGravity, ForceMode.Acceleration);
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z );
 
             }
