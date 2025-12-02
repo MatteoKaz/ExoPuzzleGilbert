@@ -1,40 +1,41 @@
+using System.Collections;
 using UnityEngine;
 
 public class PorteOuverture : MonoBehaviour
 {
     public ClefRamassage clef;
+    public float hauteur = 2f;
+    private Vector3 hautePosition;
+    public float vitesseDePositionnement = 1f;
+    private Coroutine moveRoutine;
+
     void Start()
     {
+        hautePosition = new Vector3(transform.localPosition.x, hauteur, transform.localPosition.z);
         clef.keyGetted.AddListener(() => OuvrirPorte());
     }
 
     public void OuvrirPorte()
     {
-       /* public void MouvementRampe(bool hauteur)
-    {
-        _bMonte = hauteur;
         if (moveRoutine != null)
         {
             StopCoroutine(moveRoutine);
         }
-        moveRoutine = StartCoroutine(MoveRamp());
+        moveRoutine = StartCoroutine(MovePorte());
     }
 
-    private IEnumerator MoveRamp()
+    private IEnumerator MovePorte()
     {
-        Vector3 target = _bMonte ? hautePosition : bassePosition;  // en fonction de la valeur de _bMonte, target a la valeur de haute position ou de basse position
-
-        while (Vector3.Distance(rampe.position, target) > 0.01f)
+        while (Vector3.Distance(transform.localPosition, hautePosition) > 0.01f)
         {
-            rampe.position = Vector3.MoveTowards(rampe.position, target, Time.deltaTime * vitesseDePositionnement);
+            transform.localPosition = Vector3.MoveTowards(
+                transform.localPosition,
+                hautePosition,
+                Time.deltaTime * vitesseDePositionnement
+            );
             yield return null;
-
-            Vector3 newTarget = _bMonte ? hautePosition : bassePosition;
-            if (newTarget != target)
-            {
-                target = newTarget;
-            }
         }
-        rampe.position = target;*/
+        transform.localPosition = hautePosition;
     }
+
 }
