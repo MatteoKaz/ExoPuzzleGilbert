@@ -249,7 +249,25 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z );
 
             }
-            
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, rayDistance))
+            {
+                if (hit.transform.gameObject.layer == 12)
+                {
+                    climbLayer += ~LayerMask.GetMask("Cube");
+                    Debug.DrawRay(transform.position, Vector3.down * rayDistance, Color.magenta);
+                }
+                else
+                {
+                    climbLayer += LayerMask.GetMask("Cube");
+                }
+                
+            }
+            else
+                {
+                    climbLayer += LayerMask.GetMask("Cube");
+                }
 
 
         }
@@ -289,7 +307,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.9f, groundLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.19f, groundLayer);
         foreach (Collider collider in colliders)
         {
             //if (collider != null)
@@ -299,7 +317,9 @@ public class PlayerMovement : MonoBehaviour
            // }
         }
         notOnGround = true;
+        Debug.Log("Pastouche");
         return false;
+        
     }
   /*  public void CheckGroud()
     {
