@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 7103583659173199499}
   - component: {fileID: 8046423740642208545}
   - component: {fileID: 2711855254521559368}
+  - component: {fileID: 2164024718679219012}
   m_Layer: 3
   m_Name: Character
   m_TagString: Untagged
@@ -196,10 +197,14 @@ MonoBehaviour:
   stepMinHeightSlope: -0.18
   stepMaxHeightSlope: -0.03
   stepSmoothSlope: 2.8
+  controlGravity: 1
   stucked: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8321
+  climbLayer:
+    serializedVersion: 2
+    m_Bits: 4026599423
 --- !u!114 &7716116992965790234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +556,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f2d328620a66384093ef07921381561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2164024718679219012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4076572528148626261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb80f905e89c3844855d75719513662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5089007004890264501

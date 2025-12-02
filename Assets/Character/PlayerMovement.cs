@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool stucked = false;
     public LayerMask groundLayer;
+    public LayerMask climbLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -88,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat("Speed", -speed);
         starterAxisX = transform.position.x;
         mask = ~LayerMask.GetMask("Slope");
+        mask += ~LayerMask.GetMask("Traversable");
     }
 
     // Update is called once per frame
@@ -402,7 +404,7 @@ public class PlayerMovement : MonoBehaviour
 
                         // Low ray
                         Debug.DrawRay(lowOrigin, forward * dist, Color.green);
-                        bool hitLow = Physics.Raycast(lowOrigin, forward, out RaycastHit hitLowInfo, dist);
+                        bool hitLow = Physics.Raycast(lowOrigin, forward, out RaycastHit hitLowInfo, dist, climbLayer);
 
                         if (hitLow && notOnGround == false)
                         {
