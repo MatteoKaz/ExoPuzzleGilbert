@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 692473580217367669}
   - component: {fileID: 3545241716824083799}
   - component: {fileID: 2913800540975770731}
+  - component: {fileID: 4110974695839012805}
   m_Layer: 13
   m_Name: IntengibleCollision
   m_TagString: Untagged
@@ -1066,7 +1067,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2267
+  m_VersionIndex: 2273
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1168,7 +1169,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -1197,6 +1198,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2d328620a66384093ef07921381561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &4110974695839012805
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558918357491885727}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 0.05000002
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.000000007450581, z: -0.00000023841858}
 --- !u!1 &560725928799488642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1327,7 @@ GameObject:
   - component: {fileID: 7941185392290310931}
   - component: {fileID: 533854629337696804}
   - component: {fileID: 4579367140284394736}
+  - component: {fileID: 3042364362300010771}
   m_Layer: 13
   m_Name: IntengibleCollisionControl (1)
   m_TagString: Untagged
@@ -2353,7 +2378,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2267
+  m_VersionIndex: 2273
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2455,7 +2480,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -2484,3 +2509,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2d328620a66384093ef07921381561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &3042364362300010771
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507684164030238765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 0.05000002
+  m_Direction: 1
+  m_Center: {x: 0.00000047683716, y: 0.000000007450581, z: 0}
