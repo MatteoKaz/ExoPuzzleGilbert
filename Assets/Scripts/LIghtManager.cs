@@ -23,6 +23,10 @@ public class LIghtManager : MonoBehaviour
             trans = HUD.GetComponent<CanvasGroup>();
             RetourALaLumiere();
         }
+        else
+        {
+            TurnOn(lighting);
+        }
         
         state = lighting.active;
         Debug.Log(state);
