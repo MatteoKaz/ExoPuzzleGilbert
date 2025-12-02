@@ -317,7 +317,6 @@ public class PlayerMovement : MonoBehaviour
            // }
         }
         notOnGround = true;
-        Debug.Log("Pastouche");
         return false;
         
     }

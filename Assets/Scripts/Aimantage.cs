@@ -15,13 +15,14 @@ public class Aimantage : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, directionAimant, out hit, distanceMagnétisme))
             {
+                Debug.DrawRay(transform.position, directionAimant * hit.distance, Color.blue);
 
-                if (other.GetComponent<PlayerMovement>() != null)
+                if (hit.transform.GetComponent<PlayerMovement>() != null)
                 {
-                    if (other.GetComponent<PlayerMovement>().speed != 0)
+                    if (hit.transform.GetComponent<PlayerMovement>().speed != 0)
                     {
-                        Rigidbody rb = other.transform.gameObject.GetComponent<Rigidbody>();
-                        other.GetComponent<PlayerMovement>().controlGravity = 0f;
+                        Rigidbody rb = hit.transform.gameObject.GetComponent<Rigidbody>();
+                        hit.transform.GetComponent<PlayerMovement>().controlGravity = 0f;
                         rb.useGravity = false;
                         rb.AddForce(-directionAimant * vitesseDePoussee, ForceMode.VelocityChange);
                      //   rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
@@ -29,9 +30,12 @@ public class Aimantage : MonoBehaviour
                 }
                 else
                 {
-                    Rigidbody rb = other.transform.gameObject.GetComponent<Rigidbody>();
-                    rb.useGravity = false;
-                    rb.AddForce(-directionAimant * vitesseDePoussee, ForceMode.VelocityChange);
+                    if (hit.transform.GetComponent<Rigidbody>() != null)
+                    {
+                        Rigidbody rb = hit.transform.gameObject.GetComponent<Rigidbody>();
+                        rb.useGravity = false;
+                        rb.AddForce(-directionAimant * vitesseDePoussee, ForceMode.VelocityChange);
+                    }
                  //   rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
                 }
             }
