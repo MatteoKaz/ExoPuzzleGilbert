@@ -30,7 +30,7 @@ public class Aimantage : MonoBehaviour
                 }
                 else
                 {
-                    if (hit.transform.GetComponent<Rigidbody>() != null)
+                    if (hit.transform.GetComponent<CanBeAimanted>() != null)
                     {
                         Rigidbody rb = hit.transform.gameObject.GetComponent<Rigidbody>();
                         rb.useGravity = false;
