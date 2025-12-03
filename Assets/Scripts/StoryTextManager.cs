@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StoryTextManager : MonoBehaviour
 {
@@ -18,12 +19,16 @@ public class StoryTextManager : MonoBehaviour
     [SerializeField] private float thirdTextDuration = 6f;
     
     [Header("Fade Settings")]
-    [SerializeField] private float fadeInDuration = 1.5f;
-    [SerializeField] private float fadeOutDuration = 1.5f;
+    [SerializeField] private float fadeInDuration = 1f;
+    [SerializeField] private float fadeOutDuration = 1f;
     
     [Header("Transition Settings")]
     [SerializeField] private bool autoTransitionToNextLevel = true;
     [SerializeField] private float delayBeforeTransition = 1f;
+    
+    [Header("Music Settings")]
+    [SerializeField] private bool triggerMusicSwitch = false;
+    [SerializeField] private string sceneThatSwitchesMusic = "Entracte3";
     
     private TransitionEntracte transitionManager;
     
@@ -35,6 +40,18 @@ public class StoryTextManager : MonoBehaviour
         }
         
         transitionManager = FindFirstObjectByType<TransitionEntracte>();
+        
+        if (triggerMusicSwitch && SceneManager.GetActiveScene().name == sceneThatSwitchesMusic)
+        {
+            if (PrologueMusicManager.Instance != null)
+            {
+                PrologueMusicManager.Instance.TriggerSwitchToMain();
+            }
+            else
+            {
+                Debug.LogWarning("PrologueMusicManager.Instance est null, impossible de changer la musique.");
+            }
+        }
         
         StartCoroutine(DisplayStorySequence());
     }
