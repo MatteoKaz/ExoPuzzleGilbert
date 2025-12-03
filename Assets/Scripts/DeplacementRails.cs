@@ -26,7 +26,7 @@ public class DeplacementRails : MonoBehaviour
         if (collision.transform.gameObject.GetComponent<PousseurAimant>() != null)
         {
             listColl.Add(collision);
-           
+            gameObject.layer = LayerMask.NameToLayer("ShadowPlayerTraversable");
         }
         else
         {
@@ -46,6 +46,7 @@ public class DeplacementRails : MonoBehaviour
             if (listColl.Count <= 0)
             {
                 GetComponent<Rigidbody>().isKinematic = false;
+                gameObject.layer = LayerMask.NameToLayer("Aimant");
             }
         }
         else
@@ -53,33 +54,10 @@ public class DeplacementRails : MonoBehaviour
             if (listColl.Count <= 0)
             {
                 GetComponent<Rigidbody>().isKinematic = false;
+                gameObject.layer = LayerMask.NameToLayer("Aimant");
             }
         }
-        if (collision.gameObject.GetComponent<Traversable>())
-        {
-            gameObject.layer = LayerMask.NameToLayer("Aimant");
-        }
+       
     }
-    private void OnTriggerEnter(Collider other)
-    {
-
-
-        if (other.gameObject.GetComponent<Traversable>())
-        {
-            gameObject.layer = LayerMask.NameToLayer("ShadowPlayerTraversable");
-            Debug.Log("je deviens traversabe");
-        }
-
-
-
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.GetComponent<Traversable>())
-        {
-            gameObject.layer = LayerMask.NameToLayer("Aimant");
-             Debug.Log("je deviens traversabe");
-            
-        }
-    }
+    
 }
