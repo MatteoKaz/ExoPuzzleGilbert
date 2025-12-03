@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Content.Interaction;
 
 public class DeplacementRails : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class DeplacementRails : MonoBehaviour
     {
         //Vector3 pos = transform.position;
         Vector3 pos = transform.localPosition;
-        pos.z = Mathf.Clamp(pos.z, minClamp, maxClamp); 
+        pos.z = Mathf.Clamp(pos.z, minClamp, maxClamp);
         if (pos.z >= maxClamp || pos.z <= minClamp)
         {
             if (listColl.Count > 0)
             {
                 GetComponent<Rigidbody>().isKinematic = true;
-            }   
+            }
         }
         transform.localPosition = pos;
     }
@@ -25,6 +26,7 @@ public class DeplacementRails : MonoBehaviour
         if (collision.transform.gameObject.GetComponent<PousseurAimant>() != null)
         {
             listColl.Add(collision);
+           
         }
         else
         {
@@ -33,6 +35,7 @@ public class DeplacementRails : MonoBehaviour
                 GetComponent<Rigidbody>().isKinematic = true;
             }
         }
+       
     }
 
     private void OnCollisionExit(Collision collision)
@@ -51,6 +54,32 @@ public class DeplacementRails : MonoBehaviour
             {
                 GetComponent<Rigidbody>().isKinematic = false;
             }
+        }
+        if (collision.gameObject.GetComponent<Traversable>())
+        {
+            gameObject.layer = LayerMask.NameToLayer("Aimant");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+
+
+        if (other.gameObject.GetComponent<Traversable>())
+        {
+            gameObject.layer = LayerMask.NameToLayer("ShadowPlayerTraversable");
+            Debug.Log("je deviens traversabe");
+        }
+
+
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<Traversable>())
+        {
+            gameObject.layer = LayerMask.NameToLayer("Aimant");
+             Debug.Log("je deviens traversabe");
+            
         }
     }
 }
