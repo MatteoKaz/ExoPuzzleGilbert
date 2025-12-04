@@ -5102,6 +5102,9 @@ MonoBehaviour:
   "distanceMagn\xE9tisme": 3
   vitesseDePoussee: 1.5
   liftForce: 0
+  movePlayer: {fileID: 0}
+  rb: {fileID: 0}
+  directionBas: 0
 --- !u!65 &685328162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8220,6 +8223,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6023946260519473299, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1131816141}
+    - target: {fileID: 6023946260519473299, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
       propertyPath: targetObject
       value: 
       objectReference: {fileID: 1023995073}
@@ -8228,6 +8235,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
+--- !u!20 &1131816141 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 366349417295850675, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
+  m_PrefabInstance: {fileID: 1131816140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1144949862 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
