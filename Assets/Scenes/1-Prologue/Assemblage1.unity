@@ -2993,12 +2993,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587507907}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.198324, y: 1.8516219, z: 3.706808}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.1143246, y: 0.15162182, z: 1.9808081}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 925082637}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &593759264 stripped
 Transform:
@@ -5429,7 +5429,8 @@ Transform:
   m_LocalPosition: {x: 9.084, y: 1.7, z: 1.726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 587507909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &925194810
@@ -11998,9 +11999,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1149919294255066624, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2320289408375971222, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: cubeCollider
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272524315040739937, guid: 8a57458e35f14114797d27169a713374, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3833223448524862531, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: cubeCollider
@@ -12253,7 +12262,6 @@ SceneRoots:
   - {fileID: 1359279742794907648}
   - {fileID: 303445720}
   - {fileID: 145388492}
-  - {fileID: 587507909}
   - {fileID: 1465705159}
   - {fileID: 925082637}
   - {fileID: 1283461464}
