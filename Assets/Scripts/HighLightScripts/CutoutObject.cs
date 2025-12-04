@@ -4,35 +4,36 @@ using UnityEngine;
 
 public class CutoutObject : MonoBehaviour
 {
-    [SerializeField]
-    private Transform targetObject;
+    [SerializeField] private Transform targetObject;
+    [SerializeField] private LayerMask wallMask;
 
-    [SerializeField]
-    private LayerMask wallMask;
-
-    private Camera mainCamera;
-
-    private void Awake()
-    {
-        mainCamera = GetComponent<Camera>();
-    }
+    [SerializeField] private float cutoutSize = 0.04f;
+    [SerializeField] private float falloffSize = 0.01f;
 
     private void Update()
     {
-        Vector2 cutoutPos = mainCamera.WorldToViewportPoint(targetObject.position);
+        if (targetObject == null) return;
 
-        Vector3 offset = targetObject.position - transform.position;
-        RaycastHit[] hitObjects = Physics.RaycastAll(transform.position, offset, offset.magnitude, wallMask);
+        Vector3 cutoutWorldPos = targetObject.position;
+        Vector3 offset = cutoutWorldPos - Camera.main.transform.position;
+        float distance = offset.magnitude;
 
-        for (int i = 0; i < hitObjects.Length; ++i)
+        // Raycast vers tous les objets sur le layer wallMask
+        RaycastHit[] hits = Physics.RaycastAll(Camera.main.transform.position, offset, distance, wallMask);
+
+        foreach (RaycastHit hit in hits)
         {
-            Material[] materials = hitObjects[i].transform.GetComponent<Renderer>().materials;
+            Renderer renderer = hit.transform.GetComponent<Renderer>();
+            if (renderer == null) continue;
 
-            for(int m = 0; m < materials.Length; ++m)
+            Material[] materials = renderer.materials;
+
+            foreach (Material mat in materials)
             {
-                materials[m].SetVector("_CutoutPos", cutoutPos);
-                materials[m].SetFloat("_CutoutSize", 0.04f);
-                materials[m].SetFloat("_FalloffSize", 0.010f);
+                // On passe la position dans le monde au shader
+                mat.SetVector("_CutoutWorldPos", cutoutWorldPos);
+                mat.SetFloat("_CutoutSize", cutoutSize);
+                mat.SetFloat("_FalloffSize", falloffSize);
             }
         }
     }
