@@ -14,10 +14,23 @@ public class TransitionEntracte : MonoBehaviour
 
     private void Start()
     {
-        HUD = FindFirstObjectByType<HUDScript>().gameObject;
-        trans = HUD.GetComponent<CanvasGroup>();
+        if (HUD == null)
+        {
+            HUDScript hudScript = FindFirstObjectByType<HUDScript>();
+            if (hudScript != null)
+            {
+                HUD = hudScript.gameObject;
+            }
+        }
+    
+        if (HUD != null)
+        {
+            trans = HUD.GetComponent<CanvasGroup>();
+        }
+    
         StartCoroutine(Defondu());
     }
+
 
     public void ChangeLevel(int whichNext)
     {
