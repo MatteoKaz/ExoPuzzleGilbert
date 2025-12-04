@@ -20,18 +20,12 @@ public class CutoutObject : MonoBehaviour
     private void Update()
     {
         Vector2 cutoutPos = mainCamera.WorldToViewportPoint(targetObject.position);
-     //   Ray ray = CustomScreenPointToRay(targetObject.position);
-      //  Vector3 newCutoutPos = CustomScreenToWorldPoint(targetObject.position);
+        Ray ray = CustomScreenPointToRay(targetObject.position);
+        Vector3 newCutoutPos = CustomScreenToWorldPoint(targetObject.position);
 
 
-        // Vector3 leftPos = WorldToViewportStereo(mainCamera, targetObject.position, Camera.StereoscopicEye.Left);
-        // Vector3 rightPos = WorldToViewportStereo(mainCamera, targetObject.position, Camera.StereoscopicEye.Right);
-
-        Vector3 leftPos = WorldToViewportStereo(mainCamera, targetObject.position, Camera.StereoscopicEye.Left);
-        Vector3 rightPos = WorldToViewportStereo(mainCamera, targetObject.position, Camera.StereoscopicEye.Right);
-
-        // Moyenne pour centrer sur les deux yeux
-        Vector3 centerPos = (leftPos + rightPos) * 0.5f;
+       // Vector3 leftPos = WorldToViewportStereo(mainCamera, targetObject.position, Camera.StereoscopicEye.Left);
+       // Vector3 rightPos = WorldToViewportStereo(mainCamera, targetObject.position, Camera.StereoscopicEye.Right);
 
 
         Vector3 offset = targetObject.position - mainCamera.transform.position;
@@ -46,7 +40,7 @@ public class CutoutObject : MonoBehaviour
 
                // materials[m].SetVector("_CutoutPosLeft", leftPos);
               //  materials[m].SetVector("_CutoutPosRight", rightPos);
-                materials[m].SetVector("_CutoutPos", centerPos);
+                materials[m].SetVector("_CutoutPos", cutoutPos);
              //   materials[m].SetVector("_CutoutPos", newCutoutPos);
                 materials[m].SetFloat("_CutoutSize", 0.04f);
                 materials[m].SetFloat("_FalloffSize", 0.010f);
@@ -54,7 +48,7 @@ public class CutoutObject : MonoBehaviour
         }
     }
 
-    private Vector3 WorldToViewportStereo(Camera cam, Vector3 worldPos, Camera.StereoscopicEye eye)
+    /*private Vector3 WorldToViewportStereo(Camera cam, Vector3 worldPos, Camera.StereoscopicEye eye)
     {
         Matrix4x4 vp = cam.GetStereoProjectionMatrix(eye) * cam.GetStereoViewMatrix(eye);
 
@@ -69,10 +63,10 @@ public class CutoutObject : MonoBehaviour
             (clip.y + 1f) * 0.5f,
             clip.z
         );
-    }
+    }*/
 
 
-   /* public Ray CustomScreenPointToRay(Vector3 screenPoint)
+    public Ray CustomScreenPointToRay(Vector3 screenPoint)
     {
         // スクリーン空間の点をワールド空間に変換（自作の関数を使用）
         Vector3 pointInWorldSpace = CustomScreenToWorldPoint(new Vector3(screenPoint.x, screenPoint.y, mainCamera.nearClipPlane));
@@ -96,7 +90,7 @@ public class CutoutObject : MonoBehaviour
         // （透視投影の完全な逆変換を行うには、カメラの透視投影行列の逆行列計算が必要）
 
         return viewportPoint;
-    }*/
+    }
 
 
 }
