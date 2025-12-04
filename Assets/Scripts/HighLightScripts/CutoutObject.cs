@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class CutoutObject : MonoBehaviour
 {
@@ -12,60 +11,46 @@ public class CutoutObject : MonoBehaviour
     private LayerMask wallMask;
 
     [SerializeField]
-    private Camera mainCamera;
+    private Transform xrOriginCamera;
 
-    [SerializeField]
-    private bool useXRCenterEye = true;
-
-    private Transform xrCameraTransform;
+    private Camera renderCamera;
 
     private void Awake()
     {
-        if (mainCamera == null)
-        {
-            mainCamera = GetComponent<Camera>();
-        }
+        renderCamera = GetComponent<Camera>();
 
-        xrCameraTransform = mainCamera.transform;
+        if (xrOriginCamera == null)
+        {
+            xrOriginCamera = transform;
+        }
     }
 
     private void Update()
     {
-        Vector3 referencePosition = GetReferencePosition();
-        Vector2 cutoutPos = mainCamera.WorldToViewportPoint(targetObject.position);
+        Vector3 cameraCenter = xrOriginCamera.position;
 
-        Vector3 offset = targetObject.position - referencePosition;
-        RaycastHit[] hitObjects = Physics.RaycastAll(referencePosition, offset, offset.magnitude, wallMask);
+        Vector2 cutoutPos = renderCamera.WorldToViewportPoint(targetObject.position);
+
+        cutoutPos.x = Mathf.Clamp01(cutoutPos.x);
+        cutoutPos.y = Mathf.Clamp01(cutoutPos.y);
+
+        Vector3 offset = targetObject.position - cameraCenter;
+        RaycastHit[] hitObjects = Physics.RaycastAll(cameraCenter, offset.normalized, offset.magnitude, wallMask);
 
         for (int i = 0; i < hitObjects.Length; ++i)
         {
-            Material[] materials = hitObjects[i].transform.GetComponent<Renderer>().materials;
-
-            for (int m = 0; m < materials.Length; ++m)
+            Renderer renderer = hitObjects[i].transform.GetComponent<Renderer>();
+            if (renderer != null)
             {
-                materials[m].SetVector("_CutoutPos", cutoutPos);
-                materials[m].SetFloat("_CutoutSize", 0.04f);
-                materials[m].SetFloat("_FalloffSize", 0.010f);
+                Material[] materials = renderer.materials;
+
+                for (int m = 0; m < materials.Length; ++m)
+                {
+                    materials[m].SetVector("_CutoutPos", cutoutPos);
+                    materials[m].SetFloat("_CutoutSize", 0.04f);
+                    materials[m].SetFloat("_FalloffSize", 0.010f);
+                }
             }
         }
-    }
-
-    private Vector3 GetReferencePosition()
-    {
-        if (!useXRCenterEye || !XRSettings.enabled)
-        {
-            return mainCamera.transform.position;
-        }
-
-        Vector3 leftEyePos = InputDevices.GetDeviceAtXRNode(XRNode.LeftEye).TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 leftPos) ? leftPos : Vector3.zero;
-        Vector3 rightEyePos = InputDevices.GetDeviceAtXRNode(XRNode.RightEye).TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 rightPos) ? rightPos : Vector3.zero;
-
-        if (leftEyePos != Vector3.zero && rightEyePos != Vector3.zero)
-        {
-            Vector3 centerEyeLocal = (leftEyePos + rightEyePos) * 0.5f;
-            return xrCameraTransform.TransformPoint(centerEyeLocal);
-        }
-
-        return xrCameraTransform.position;
     }
 }
