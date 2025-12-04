@@ -5102,6 +5102,9 @@ MonoBehaviour:
   "distanceMagn\xE9tisme": 3
   vitesseDePoussee: 1.5
   liftForce: 0
+  movePlayer: {fileID: 0}
+  rb: {fileID: 0}
+  directionBas: 0
 --- !u!65 &685328162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8217,6 +8220,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351904833967977962, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767715217220676053, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
+      propertyPath: m_AllowXRRendering
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6023946260519473299, guid: 4e660da2419d1614198b2c073ddf863d, type: 3}
