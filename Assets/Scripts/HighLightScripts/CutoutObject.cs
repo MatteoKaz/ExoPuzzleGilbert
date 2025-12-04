@@ -4,36 +4,35 @@ using UnityEngine;
 
 public class CutoutObject : MonoBehaviour
 {
-    [SerializeField] private Transform targetObject;
-    [SerializeField] private LayerMask wallMask;
+    [SerializeField]
+    private Transform targetObject;
 
-    [SerializeField] private float cutoutSize = 0.04f;
-    [SerializeField] private float falloffSize = 0.01f;
+    [SerializeField]
+    private LayerMask wallMask;
+
+    private Camera mainCamera;
+
+    private void Awake()
+    {
+        mainCamera = GetComponent<Camera>();
+    }
 
     private void Update()
     {
-        if (targetObject == null) return;
+        Vector2 cutoutPos = mainCamera.WorldToViewportPoint(targetObject.position);
 
-        Vector3 cutoutWorldPos = targetObject.position;
-        Vector3 offset = cutoutWorldPos - Camera.main.transform.position;
-        float distance = offset.magnitude;
+        Vector3 offset = targetObject.position - transform.position;
+        RaycastHit[] hitObjects = Physics.RaycastAll(transform.position, offset, offset.magnitude, wallMask);
 
-        // Raycast vers tous les objets sur le layer wallMask
-        RaycastHit[] hits = Physics.RaycastAll(Camera.main.transform.position, offset, distance, wallMask);
-
-        foreach (RaycastHit hit in hits)
+        for (int i = 0; i < hitObjects.Length; ++i)
         {
-            Renderer renderer = hit.transform.GetComponent<Renderer>();
-            if (renderer == null) continue;
+            Material[] materials = hitObjects[i].transform.GetComponent<Renderer>().materials;
 
-            Material[] materials = renderer.materials;
-
-            foreach (Material mat in materials)
+            for(int m = 0; m < materials.Length; ++m)
             {
-                // On passe la position dans le monde au shader
-                mat.SetVector("_CutoutWorldPos", cutoutWorldPos);
-                mat.SetFloat("_CutoutSize", cutoutSize);
-                mat.SetFloat("_FalloffSize", falloffSize);
+                materials[m].SetVector("_CutoutPos", cutoutPos);
+                materials[m].SetFloat("_CutoutSize", 0.04f);
+                materials[m].SetFloat("_FalloffSize", 0.010f);
             }
         }
     }
