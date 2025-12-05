@@ -1,12 +1,11 @@
 using System.Collections;
-using UnityEditor.ShaderGraph.Internal;
+//using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // private Rigidbody rb;
     public Rigidbody rb;
     // private Vector3 moveDirection;
     public float speed = 0f;
@@ -80,6 +79,12 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask climbLayer;
 
+    [Header("Jump Control")]
+    public bool isJumping = false;
+    public float jumpGravityMultiplier = 2f; // Gravité pendant le saut
+    private Collider[] groundCheckColliders = new Collider[5];
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -88,15 +93,15 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponent<Animator>();
         _animator.SetFloat("Speed", -speed);
         starterAxisX = transform.position.x;
-        mask = ~LayerMask.GetMask("Slope");
-        mask += ~LayerMask.GetMask("Traversable");
+        mask = ~(LayerMask.GetMask("Slope") | LayerMask.GetMask("Traversable"));
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        
         IsGrounded();
-       // CheckGroud();
+        //CheckGroud();
         if (rb != null)
         {
             if (_animator != null)
@@ -144,40 +149,43 @@ public class PlayerMovement : MonoBehaviour
 
             if (tamere > 18f && tamere < 70 && notOnGround == false)
             {
-                
-                Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 4;
-                rb.AddForce(horizontalForce * forceHelper, ForceMode.Acceleration);
-                Vector3 horiz = new Vector3(v.x, 0f, speedOriginal);
-                if (horiz.magnitude > maxHorizontalSpeed)
-                {
-                    horiz = horiz.normalized * maxHorizontalSpeed;
-                    v.x = horiz.x;
-                    v.z = horiz.z;
-                    
-                    ClimbOnSlope();
-
-                }
-                Offsetvalue = -0.028f;
-                // 4. CLAMP VITESSE VERTICALE (évite de voler)
-                if (v.y > maxVerticalSpeed)
-                    v.y = maxVerticalSpeed;
-
-                // appliquer le clamp
-                rb.linearVelocity = v;
-                if(speed ==0)
+                if (speed != 0)
                 {
                     rb.useGravity = false;
-                    rb.AddForce(Physics.gravity * gravityValue*controlGravity, ForceMode.Acceleration);
+                    rb.AddForce(Physics.gravity * 0.80f * controlGravity, ForceMode.Acceleration);
+                    ClimbOnSlope();
+
+                    Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 4;
+                    rb.AddForce(horizontalForce * forceHelper, ForceMode.Acceleration);
+                    Vector3 horiz = new Vector3(rb.linearVelocity.x, 0f, speed/*Original*/);
+
+                    if (horiz.magnitude > maxHorizontalSpeed)
+                    {
+                        horiz = horiz.normalized * maxHorizontalSpeed;
+                      /*  v.x = horiz.x;
+                        v.z = horiz.z;*/
+                    }
+                    Offsetvalue = -0.028f;
+                    // 4. CLAMP VITESSE VERTICALE (évite de voler)
+                   /* if (v.y > maxVerticalSpeed)
+                        v.y = maxVerticalSpeed;
+
+                    // appliquer le clamp              A VERIFIER
+                    rb.linearVelocity = v;*/
+                    
+                    
+                    
+                }
+                else if(speed ==0)
+                {
+                    rb.useGravity = false;
+                 //   rb.AddForce(Physics.gravity * gravityValue*controlGravity, ForceMode.Acceleration);
                 }
                 else
                 {
-                    rb.useGravity = false;
-                    rb.AddForce(Physics.gravity * 0.80f*controlGravity, ForceMode.Acceleration);
-                    ClimbOnSlope();
+                    
                 }
             }
-
-
 
             else
             {
@@ -190,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
                     Offsetvalue = 0.08f;
                     StepClimb();
                     rb.useGravity = false;
-                    rb.AddForce(Physics.gravity * gravityValue*controlGravity, ForceMode.Acceleration);
+                  // rb.AddForce(Physics.gravity * gravityValue*controlGravity, ForceMode.Acceleration);
 
                 }
                else
@@ -205,40 +213,56 @@ public class PlayerMovement : MonoBehaviour
             {
 
                 //Debug.Log("Descend");
-                Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 2.5f;
+                Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 1.5f;
                 if (speed == 0f)
                 {
-                    rb.AddForce(horizontalForce * -forceHelper * 4f, ForceMode.Acceleration);
+                    // rb.AddForce(horizontalForce * -forceHelper * 4f, ForceMode.Acceleration);
+                   // rb.linearVelocity = new Vector3(0f,0f,0f);
                 }
                 else
                 {
                     rb.AddForce(horizontalForce * -forceHelper, ForceMode.Acceleration);
                 }
                   
-                Vector3 horiz = new Vector3(v.x, 0f, speedOriginal);
-                if (horiz.magnitude < maxHorizontalSpeed)
+                Vector3 horiz = new Vector3(rb.linearVelocity.x, 0f, speed/*Original*/);
+
+                if (notOnGround == true)
+                {
+                    rb.useGravity = false;
+                    rb.AddForce(Physics.gravity * gravityValue * controlGravity, ForceMode.Acceleration);
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
+                }
+                // NOUVEAU : Appliquer aussi la gravité quand en train de sauter
+                else if (isJumping && notOnGround == false)
+                {
+                    rb.useGravity = false;
+                    rb.AddForce(Physics.gravity * jumpGravityMultiplier * controlGravity, ForceMode.Acceleration);
+                }
+
+
+                if (horiz.magnitude > maxHorizontalSpeed)
                 {
                     horiz = horiz.normalized * maxHorizontalSpeed;
-                    v.x = horiz.x;
-                    v.z = horiz.z;
+                   /* v.x = horiz.x;
+                    v.z = horiz.z;*/
                     Offsetvalue = 0.0f;
-                    rb.useGravity = true;
-                    rb.AddForce(Physics.gravity * 1, ForceMode.Acceleration);
+                    rb.useGravity = false;
+                  //  rb.AddForce(Physics.gravity * 1, ForceMode.Acceleration);
 
                 }
                 if (notOnGround == false)
                 {
                     // 4. CLAMP VITESSE VERTICALE (évite de voler)
-                    if (v.y < maxVerticalSpeed)
-                        v.y = maxVerticalSpeed;
+                  /*  if (v.y > maxVerticalSpeed)
+                        v.y = maxVerticalSpeed;*/
 
                     // appliquer le clamp
-                    rb.linearVelocity = v;
-                    rb.useGravity = true;
-                    rb.AddForce(Physics.gravity * 1, ForceMode.Acceleration);
+                    //rb.linearVelocity = v;
+                    rb.useGravity = false;
+                  //  rb.AddForce(Physics.gravity * 1, ForceMode.Acceleration);
                 }
             }   
-            if (notOnGround != false)
+            if (notOnGround == true)
             {
                 
                 
@@ -246,7 +270,7 @@ public class PlayerMovement : MonoBehaviour
                 //a remettre
                 //speed = 0f;
                 rb.AddForce(Physics.gravity * gravityValue * controlGravity, ForceMode.Acceleration);
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z );
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed ); // a voir
 
             }
 
@@ -255,19 +279,19 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (hit.transform.gameObject.layer == 12)
                 {
-                    climbLayer += ~LayerMask.GetMask("Cube");
+                    climbLayer = climbLayer & ~LayerMask.GetMask("Cube");
                     Debug.DrawRay(transform.position, Vector3.down * rayDistance, Color.magenta);
                 }
                 else
                 {
-                    climbLayer += LayerMask.GetMask("Cube");
+                    climbLayer = climbLayer | LayerMask.GetMask("Cube");
                 }
                 
             }
             else
-                {
-                    climbLayer += LayerMask.GetMask("Cube");
-                }
+            {
+                    climbLayer = climbLayer | LayerMask.GetMask("Cube");
+            }
 
 
         }
@@ -306,21 +330,35 @@ public class PlayerMovement : MonoBehaviour
 
 
     public bool IsGrounded()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.19f, groundLayer);
+    {   
+        int count = Physics.OverlapSphereNonAlloc(new Vector3(transform.position.x, transform.position.y - 0.12f, transform.position.z), 0.07f, groundCheckColliders, groundLayer);
+        if (count > 0)
+        {
+            notOnGround = false;
+            Debug.Log("SurLeSol");
+        }
+        else
+        {
+            notOnGround = true;
+        }
+            return count > 0;
+
+
+  /*  Collider[] colliders = Physics.OverlapSphere(new Vector3(transform.position.x, transform.position.y-0.12f, transform.position.z), 0.07f, groundLayer);
         foreach (Collider collider in colliders)
         {
             //if (collider != null)
            // {
                 notOnGround = false;
+           // Debug.Log("surlesol");
                 return true;
            // }
         }
         notOnGround = true;
-        return false;
+        return false;*/
         
     }
-  /*  public void CheckGroud()
+    public void CheckGroud()
     {
         
         RaycastHit hit;
@@ -333,7 +371,7 @@ public class PlayerMovement : MonoBehaviour
         {
             notOnGround = true;
         }
-    }*/
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -381,7 +419,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    
+
 
     void StepClimb()
     {
@@ -389,22 +427,19 @@ public class PlayerMovement : MonoBehaviour
             return;
         if (speed != 0)
         {
-            // cooldown
             if (stepTimer > 0f && notOnGround == false)
             {
-                stepTimer -= Time.deltaTime;
+                stepTimer -= Time.fixedDeltaTime;
                 return;
             }
 
             Vector3 origin = transform.position;
             Vector3 forward = transform.right;
 
-            // vertical spacing
             float heightStep = 0f;
             if (stepVerticalRays > 1)
                 heightStep = (stepMaxHeight - stepMinHeight) / (stepVerticalRays - 1);
 
-            // forward spacing
             float distStep = 0f;
             if (stepForwardRays > 1)
                 distStep = (stepMaxDistance - stepMinDistance) / (stepForwardRays - 1);
@@ -421,28 +456,30 @@ public class PlayerMovement : MonoBehaviour
                     {
                         float dist = stepMinDistance + d * distStep;
 
-                        // Low ray
                         Debug.DrawRay(lowOrigin, forward * dist, Color.green);
                         bool hitLow = Physics.Raycast(lowOrigin, forward, out RaycastHit hitLowInfo, dist, climbLayer);
 
                         if (hitLow && notOnGround == false)
                         {
-                            // High ray
                             Vector3 highOrigin = origin + Vector3.up * stepMaxHeight;
                             Debug.DrawRay(highOrigin, forward * dist, Color.red);
 
                             bool hitHigh = Physics.Raycast(highOrigin, forward, dist);
 
-                            // If top is clear -> step immediately
                             if (!hitHigh)
                             {
                                 if (notOnGround == false)
                                 {
-                                    Vector3 dir = new Vector3(0, 0.75f, -0.15f);
-                                    Debug.Log("je poussette ");
+                                    Vector3 dir = new Vector3(0, 0.75f, -0.15f*-speed);
+                                    Debug.Log("je poussette step");
                                     rb.AddForce(dir * stepSmooth, ForceMode.Impulse);
                                     stepTimer = stepCooldown;
-                                    return; // We are done. One hit only is enough.
+
+                                    // NOUVEAU : Activer le flag de saut
+                                    isJumping = true;
+                                    StartCoroutine(ResetJumpAfterLanding());
+
+                                    return;
                                 }
                             }
                         }
@@ -456,173 +493,192 @@ public class PlayerMovement : MonoBehaviour
                         if (notOnGround == false)
                         {
                             Vector3 dir = new Vector3(0, 0.75f, -0.15f);
-                            //Debug.Log("je pousse");
                             rb.AddForce(dir * stepSmooth, ForceMode.Impulse);
+                            Debug.Log("Saut1");
                             stepTimer = stepCooldown;
-                        }
 
+                            // NOUVEAU : Activer le flag de saut
+                            isJumping = true;
+                            StartCoroutine(ResetJumpAfterLanding());
+                        }
                     }
                 }
-
             }
-
         }
-
     }
 
-         void ClimbOnSlope()
-         {
-            if (notOnGround == true)
-                return;
-            if (speed != 0)
+
+    void ClimbOnSlope()
+    {
+        if (notOnGround == true)
+            return;
+        if (speed != 0)
+        {
+            if (stepTimer > 0f && notOnGround == false)
             {
-                // cooldown
-                if (stepTimer > 0f && notOnGround == false)
+                stepTimer -= Time.fixedDeltaTime;
+                return;
+            }
+
+            Vector3 origin = transform.position;
+            Vector3 forward = transform.right;
+
+            float heightStep = 0f;
+            if (stepVerticalRays > 1)
+                heightStep = (stepMaxHeightSlope - stepMinHeightSlope) / (stepVerticalRays - 1);
+
+            float distStep = 0f;
+            if (stepForwardRays > 1)
+                distStep = (stepMaxDistanceSlope - stepMinDistanceSlope) / (stepForwardRays - 1);
+
+            bool canStep = false;
+            if (notOnGround == false)
+            {
+                for (int h = 0; h < stepVerticalRays; h++)
                 {
-                    stepTimer -= Time.deltaTime;
-                    return;
-                }
+                    float yOffset = stepMinHeightSlope + h * heightStep;
+                    Vector3 lowOrigin = origin + Vector3.up * yOffset;
 
-                Vector3 origin = transform.position;
-                Vector3 forward = transform.right;
-
-                // vertical spacing
-                float heightStep = 0f;
-                if (stepVerticalRays > 1)
-                    heightStep = (stepMaxHeightSlope - stepMinHeightSlope) / (stepVerticalRays - 1);
-
-                // forward spacing
-                float distStep = 0f;
-                if (stepForwardRays > 1)
-                    distStep = (stepMaxDistanceSlope - stepMinDistanceSlope) / (stepForwardRays - 1);
-
-                bool canStep = false;
-                if (notOnGround == false)
-                {
-                    for (int h = 0; h < stepVerticalRays; h++)
+                    for (int d = 0; d < stepForwardRays; d++)
                     {
-                        float yOffset = stepMinHeightSlope + h * heightStep;
-                        Vector3 lowOrigin = origin + Vector3.up * yOffset;
+                        float dist = stepMinDistanceSlope + d * distStep;
 
-                        for (int d = 0; d < stepForwardRays; d++)
+                        Debug.DrawRay(lowOrigin, forward * dist, Color.green);
+                        bool hitLow = Physics.Raycast(lowOrigin, forward, out RaycastHit hitLowInfo, dist, mask);
+
+                        if (hitLow && notOnGround == false)
                         {
-                            float dist = stepMinDistanceSlope + d * distStep;
+                            Vector3 highOrigin = origin + Vector3.up * stepMaxHeightSlope;
+                            Debug.DrawRay(highOrigin, forward * dist, Color.red);
 
-                            // Low ray
-                            Debug.DrawRay(lowOrigin, forward * dist, Color.green);
-                            bool hitLow = Physics.Raycast(lowOrigin, forward, out RaycastHit hitLowInfo, dist, mask);
+                            bool hitHigh = Physics.Raycast(highOrigin, forward, dist, mask);
 
-                            if (hitLow && notOnGround == false)
+                            if (!hitHigh)
                             {
-                                // High ray
-                                Vector3 highOrigin = origin + Vector3.up * stepMaxHeightSlope;
-                                Debug.DrawRay(highOrigin, forward * dist, Color.red);
-
-                                bool hitHigh = Physics.Raycast(highOrigin, forward, dist, mask);
-
-                                // If top is clear -> step immediately
-                                if (!hitHigh)
+                                if (notOnGround == false)
                                 {
-                                    if (notOnGround == false)
-                                    {
-                                        Vector3 dir = new Vector3(0, 1, -0.15f);
-                                        Debug.Log("je poussette ");
-                                        rb.AddForce(dir * stepSmoothSlope, ForceMode.Impulse);
-                                        stepTimer = stepCooldown;
-                                        return; // We are done. One hit only is enough.
-                                    }
+                                    Vector3 dir = new Vector3(0, 1, -0.15f);
+                                    Debug.Log("je poussette slope");
+                                    rb.AddForce(dir * stepSmoothSlope, ForceMode.Impulse);
+                                    stepTimer = stepCooldown;
+
+                                    // NOUVEAU : Activer le flag de saut
+                                    isJumping = true;
+                                    StartCoroutine(ResetJumpAfterLanding());
+
+                                    return;
                                 }
                             }
-
-                            if (canStep)
-                                break;
                         }
 
                         if (canStep)
-                        {
-                            if (notOnGround == false)
-                            {
-                                Vector3 dir = new Vector3(0, 1, -0.15f);
-                                //Debug.Log("je pousse");
-                                rb.AddForce(dir * stepSmoothSlope, ForceMode.Impulse);
-                                stepTimer = stepCooldown;
-                            }
-
-                        }
+                            break;
                     }
 
-                }
+                    if (canStep)
+                    {
+                        if (notOnGround == false)
+                        {
+                            Vector3 dir = new Vector3(0, 1, -0.15f);
+                            Debug.Log("Saut2");
+                            rb.AddForce(dir * stepSmoothSlope, ForceMode.Impulse);
+                            stepTimer = stepCooldown;
 
+                            // NOUVEAU : Activer le flag de saut
+                            isJumping = true;
+                            StartCoroutine(ResetJumpAfterLanding());
+                        }
+                    }
+                }
             }
         }
+    }
 
-            /*
-            public void ForcePlayer()
+
+
+
+IEnumerator ResetJumpAfterLanding()
+    {
+        // Attendre que le personnage atterrisse
+        yield return new WaitForSeconds(0.1f);
+
+        while (notOnGround == true)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        // Une fois au sol, réinitialiser le flag
+        isJumping = false;
+        Debug.Log("Atterrissage détecté");
+    }
+
+    /*
+    public void ForcePlayer()
+    {
+        bool impulsionEnCours = true;
+        StartCoroutine(UpImpulse());
+       // StartCoroutine(ThrowPlayer()); 
+    }
+
+    IEnumerator ThrowPlayer()
+    {
+        float throwDistance = 500f;
+        Vector3 upVector = new Vector3(0, 0.0001f, 0);
+        Vector3 throwVector;
+        for (int i = 0; i <= throwDistance; i++)
+        {
+            if (i <= throwDistance / 2)
             {
-                bool impulsionEnCours = true;
-                StartCoroutine(UpImpulse());
-               // StartCoroutine(ThrowPlayer()); 
+                throwVector = transform.forward + upVector;
             }
-
-            IEnumerator ThrowPlayer()
+            else
             {
-                float throwDistance = 500f;
-                Vector3 upVector = new Vector3(0, 0.0001f, 0);
-                Vector3 throwVector;
-                for (int i = 0; i <= throwDistance; i++)
-                {
-                    if (i <= throwDistance / 2)
-                    {
-                        throwVector = transform.forward + upVector;
-                    }
-                    else
-                    {
-                        throwVector = transform.forward - upVector;
-                    }
-                    controller.Move(throwVector);
-                    if (!controller.isGrounded) yield return new WaitForFixedUpdate();
+                throwVector = transform.forward - upVector;
+            }
+            controller.Move(throwVector);
+            if (!controller.isGrounded) yield return new WaitForFixedUpdate();
+        }
+        StopAllCoroutines();
+    }
+
+    IEnumerator UpImpulse()
+    {
+        float throwDistance = 250f;
+        Vector3 upVector = new Vector3(0, 0.0001f, 0);
+        Vector3 throwVector;
+        for (int i = 0; i <= throwDistance; i++)
+        {
+            if (i <= throwDistance / 2)
+            {
+                throwVector = transform.forward + upVector;
+            }
+            else
+            {
+                if (impulsionEnCours) 
+                { 
+
                 }
-                StopAllCoroutines();
+                throwVector = transform.forward - upVector;
             }
+            controller.Move(throwVector);
+            if (!controller.isGrounded) yield return new WaitForFixedUpdate();
+        }
 
-            IEnumerator UpImpulse()
-            {
-                float throwDistance = 250f;
-                Vector3 upVector = new Vector3(0, 0.0001f, 0);
-                Vector3 throwVector;
-                for (int i = 0; i <= throwDistance; i++)
-                {
-                    if (i <= throwDistance / 2)
-                    {
-                        throwVector = transform.forward + upVector;
-                    }
-                    else
-                    {
-                        if (impulsionEnCours) 
-                        { 
+    }
+    IEnumerator DownImpulse()
+    {
+        float throwDistance = 250f;
+        Vector3 upVector = new Vector3(0, 0.0001f, 0);
+        Vector3 throwVector;
+        for (int i = 0; i <= throwDistance; i++)
+        {
+            throwVector = transform.forward - upVector;
 
-                        }
-                        throwVector = transform.forward - upVector;
-                    }
-                    controller.Move(throwVector);
-                    if (!controller.isGrounded) yield return new WaitForFixedUpdate();
-                }
+            controller.Move(throwVector);
+            if (!controller.isGrounded) yield return new WaitForFixedUpdate();
+        }
 
-            }
-            IEnumerator DownImpulse()
-            {
-                float throwDistance = 250f;
-                Vector3 upVector = new Vector3(0, 0.0001f, 0);
-                Vector3 throwVector;
-                for (int i = 0; i <= throwDistance; i++)
-                {
-                    throwVector = transform.forward - upVector;
+    }
+    */
 
-                    controller.Move(throwVector);
-                    if (!controller.isGrounded) yield return new WaitForFixedUpdate();
-                }
-
-            }
-            */
-        
 }
