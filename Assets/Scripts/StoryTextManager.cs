@@ -28,7 +28,7 @@ public class StoryTextManager : MonoBehaviour
     
     [Header("Music Settings")]
     [SerializeField] private bool triggerMusicSwitch = false;
-    [SerializeField] private string sceneThatSwitchesMusic = "Entracte3";
+    [SerializeField] private string newMusicTrackName = "";
     
     private TransitionEntracte transitionManager;
     
@@ -40,18 +40,6 @@ public class StoryTextManager : MonoBehaviour
         }
         
         transitionManager = FindFirstObjectByType<TransitionEntracte>();
-        
-        if (triggerMusicSwitch && SceneManager.GetActiveScene().name == sceneThatSwitchesMusic)
-        {
-            if (PrologueMusicManager.Instance != null)
-            {
-                PrologueMusicManager.Instance.TriggerSwitchToMain();
-            }
-            else
-            {
-                Debug.LogWarning("PrologueMusicManager.Instance est null, impossible de changer la musique.");
-            }
-        }
         
         StartCoroutine(DisplayStorySequence());
     }
@@ -65,6 +53,18 @@ public class StoryTextManager : MonoBehaviour
         if (!string.IsNullOrEmpty(thirdText))
         {
             yield return StartCoroutine(ShowTextWithFade(thirdText, thirdTextDuration));
+        }
+        
+        if (triggerMusicSwitch && !string.IsNullOrEmpty(newMusicTrackName))
+        {
+            if (GameMusicManager.Instance != null)
+            {
+                GameMusicManager.Instance.SwitchToTrack(newMusicTrackName);
+            }
+            else
+            {
+                Debug.LogWarning("GameMusicManager.Instance est null, impossible de changer la musique.");
+            }
         }
         
         if (autoTransitionToNextLevel && transitionManager != null)
