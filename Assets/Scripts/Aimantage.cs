@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Aimantage : MonoBehaviour
 {
-    public float distanceMagnÈtisme = 3f;
+    public float distanceMagn√©tisme = 3f;
     public float vitesseDePoussee = 0.2f;
     public float liftForce = 0f;
     private Vector3 pointSortie = Vector3.zero;
@@ -11,6 +11,31 @@ public class Aimantage : MonoBehaviour
     public Rigidbody rb;
     public bool directionBas;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip magnetismSound;
+    [SerializeField] private float minVolume = 0.3f;
+    [SerializeField] private float maxVolume = 1f;
+    private AudioSource audioSource;
+    private bool isPlayerAttracted = false;
+    private Transform playerTransform;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.loop = true;
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
+        
+        if (magnetismSound != null)
+        {
+            audioSource.clip = magnetismSound;
+        }
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -18,7 +43,7 @@ public class Aimantage : MonoBehaviour
         {
             var directionAimant = other.transform.position - transform.position;
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, directionAimant, out hit, distanceMagnÈtisme))
+            if (Physics.Raycast(transform.position, directionAimant, out hit, distanceMagn√©tisme))
             {
                 Debug.DrawRay(transform.position, directionAimant * hit.distance, Color.blue);
 
@@ -26,21 +51,26 @@ public class Aimantage : MonoBehaviour
                 {
                     if (hit.transform.GetComponent<PlayerMovement>().speed != 0)
                     {
+                        if (!isPlayerAttracted)
+                        {
+                            playerTransform = hit.transform;
+                            PlayMagnetismSound();
+                        }
+                        
+                        UpdateVolumeBasedOnDistance(hit.distance);
+                        
                         Rigidbody rb = hit.transform.gameObject.GetComponent<Rigidbody>();
                         hit.transform.GetComponent<PlayerMovement>().controlGravity = 0f;
                         rb.useGravity = false;
                         rb.AddForce(-directionAimant * vitesseDePoussee, ForceMode.VelocityChange);
-                        //   rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
                     }
                 }
                 else if (hit.transform.gameObject.GetComponent<Traversable>())
                 {
                     Debug.Log("je hit traversable");
-                    //Vector3 center = hit.transform.TransformPoint(hit.center);
                     Vector3 center = new Vector3(transform.position.x, hit.transform.position.y, hit.transform.position.z);
                     Vector3 impact = hit.point;
                     Vector3 betweenImpact = impact - center;
-
 
                     if (directionBas == true)
                     {
@@ -54,9 +84,7 @@ public class Aimantage : MonoBehaviour
                     }
 
                     float sphereHeight = Vector3.Distance(impact, pointSortie);
-                    float newDistance = distanceMagnÈtisme - hit.distance - sphereHeight;
-
-
+                    float newDistance = distanceMagn√©tisme - hit.distance - sphereHeight;
 
                     Collider[] overlaps1 = Physics.OverlapSphere(pointSortie, 0.01f);
                     Collider[] filtered1 = overlaps1
@@ -65,7 +93,6 @@ public class Aimantage : MonoBehaviour
 
                     if (filtered1.Length > 0)
                     {
-                        
                         foreach (Collider col in filtered1)
                         {
                             Debug.Log(col);
@@ -73,18 +100,24 @@ public class Aimantage : MonoBehaviour
                     }
                     else
                     {
-
                         if (Physics.Raycast(pointSortie, transform.TransformDirection(directionAimant), out hit, newDistance))
                         {
                             Debug.Log("je suis au point de sortie");
                             Debug.DrawRay(pointSortie, transform.TransformDirection(directionAimant) * hit.distance, Color.red);
                             if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
                             {
+                                if (!isPlayerAttracted)
+                                {
+                                    playerTransform = hit.transform;
+                                    PlayMagnetismSound();
+                                }
+                                
+                                UpdateVolumeBasedOnDistance(hit.distance);
+                                
                                 Rigidbody rb = hit.transform.gameObject.GetComponent<Rigidbody>();
                                 hit.transform.GetComponent<PlayerMovement>().controlGravity = 0f;
                                 rb.useGravity = false;
                                 rb.AddForce(-directionAimant * vitesseDePoussee, ForceMode.VelocityChange);
-
                             }
                         }
                         else
@@ -102,37 +135,61 @@ public class Aimantage : MonoBehaviour
                         rb.useGravity = false;
                         rb.AddForce(-directionAimant * vitesseDePoussee, ForceMode.VelocityChange);
                     }
-
                     else
                     {
                         Debug.Log("Il y a un obstacle entre l'aimant et la cible");
-                    }//   rb.AddForce(Vector3.up * liftForce, ForceMode.VelocityChange);
+                    }
                 }
-
-
-               
-                //PlayerMovement movePlayer = other.transform.gameObject.GetComponent<PlayerMovement>();
-
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<CanBeAimanted>())
         {
             if (other.GetComponent<PlayerMovement>() != null)
             {
+                StopMagnetismSound();
+                
                 other.GetComponent<PlayerMovement>().controlGravity = 1f;
                 Rigidbody rb = other.transform.gameObject.GetComponent<Rigidbody>();
                 rb.useGravity = true;
-
             }
             else
             {
                 Rigidbody rb = other.transform.gameObject.GetComponent<Rigidbody>();
                 rb.useGravity = true;
             }
+        }
+    }
 
+    private void PlayMagnetismSound()
+    {
+        if (audioSource != null && magnetismSound != null && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+            isPlayerAttracted = true;
+        }
+    }
+
+    private void StopMagnetismSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+            isPlayerAttracted = false;
+            playerTransform = null;
+        }
+    }
+
+    private void UpdateVolumeBasedOnDistance(float distance)
+    {
+        if (audioSource != null && isPlayerAttracted)
+        {
+            float normalizedDistance = Mathf.Clamp01(distance / distanceMagn√©tisme);
+            float volume = Mathf.Lerp(maxVolume, minVolume, normalizedDistance);
+            audioSource.volume = volume;
         }
     }
 }
