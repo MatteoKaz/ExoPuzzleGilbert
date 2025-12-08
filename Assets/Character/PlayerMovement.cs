@@ -212,8 +212,8 @@ public class PlayerMovement : MonoBehaviour
             if (tamere > 20f && tamere < 70 && slopeDir.y < 0 && notOnGround == false)
             {
 
-                //Debug.Log("Descend");
-                Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 1.5f;
+                Debug.Log("Descend");
+                Vector3 horizontalForce = new Vector3(slopeDir.x, slopeDir.y, slopeDir.z) * 3.5f;
                 if (speed == 0f)
                 {
                     // rb.AddForce(horizontalForce * -forceHelper * 4f, ForceMode.Acceleration);
@@ -335,7 +335,7 @@ public class PlayerMovement : MonoBehaviour
         if (count > 0)
         {
             notOnGround = false;
-            Debug.Log("SurLeSol");
+           // Debug.Log("SurLeSol");
         }
         else
         {

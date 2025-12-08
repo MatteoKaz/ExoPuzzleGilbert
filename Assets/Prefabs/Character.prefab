@@ -186,8 +186,8 @@ MonoBehaviour:
   stepMinHeight: -0.24
   stepMaxHeight: 0.005
   stepVerticalRays: 5
-  stepMinDistance: 0.1
-  stepMaxDistance: 0.12
+  stepMinDistance: 0.14
+  stepMaxDistance: 0.18
   stepForwardRays: 3
   mask:
     serializedVersion: 2
@@ -205,6 +205,8 @@ MonoBehaviour:
   climbLayer:
     serializedVersion: 2
     m_Bits: 4026603519
+  isJumping: 0
+  jumpGravityMultiplier: 2
 --- !u!114 &7716116992965790234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +245,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: cd6db07fce2b92f43b9694d6ee279e1a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
