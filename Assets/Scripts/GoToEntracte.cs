@@ -12,7 +12,7 @@ public class GoToEntracte : MonoBehaviour
     [SerializeField] public float transitionDuree = 1.5f;
     public LightToTurn lighter;
     public GameObject lighterGame;
-
+    private int nextLevel;
 
 
     private void Start()
@@ -47,8 +47,13 @@ public class GoToEntracte : MonoBehaviour
         ChangeLevel(whichNext);
     }
 
+    public void LevelNext()
+    {
+        int levelCurrent = SceneManager.GetActiveScene().buildIndex;
+        nextLevel = levelCurrent+1;
+        ChangeLevel(nextLevel);
+    }
 
-
-
+    
 
 }

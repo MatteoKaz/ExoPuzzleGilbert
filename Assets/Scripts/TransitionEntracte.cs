@@ -10,6 +10,7 @@ public class TransitionEntracte : MonoBehaviour
     private float aValue = 0f;
     private CanvasGroup trans;
     [SerializeField] public float transitionDuree = 1.5f;
+    private int nextLevel;
 
 
     private void Start()
@@ -79,13 +80,18 @@ public class TransitionEntracte : MonoBehaviour
 
 
 
-
-   
-        
-  
-
-  
-    
-        
-
+    public void LevelNext()
+    {
+        int levelCurrent = SceneManager.GetActiveScene().buildIndex;
+        nextLevel = levelCurrent + 1;
+        ChangeLevel(nextLevel);
     }
+
+
+
+
+
+
+
+
+}

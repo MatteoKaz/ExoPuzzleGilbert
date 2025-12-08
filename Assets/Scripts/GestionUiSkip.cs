@@ -32,12 +32,14 @@ public class GestionUiSkip : MonoBehaviour
             yield return null;
         }
         ui.alpha = 1.0f;
+        ui.blocksRaycasts = true;
         yield return null; 
     }
 
     public void DesafficherUI()
     {
         ui = GetComponent<CanvasGroup>();
+        ui.blocksRaycasts = false;
         if (opacity == null && unopacity == null)
         {
             unopacity = StartCoroutine(OpacityDown());
@@ -56,7 +58,6 @@ public class GestionUiSkip : MonoBehaviour
             yield return null;
         }
         ui.alpha = 0f;
-        gameObject.SetActive(false);
         yield return null;
     }
 }
