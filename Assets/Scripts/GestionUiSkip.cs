@@ -15,10 +15,9 @@ public class GestionUiSkip : MonoBehaviour
         ui = GetComponent<CanvasGroup>();
 
         gameObject.SetActive(true);
-        if (opacity == null && unopacity == null)
-        {
+        
             opacity = StartCoroutine(OpacityUp());
-        }
+        
     }
 
     private IEnumerator OpacityUp()
@@ -40,10 +39,8 @@ public class GestionUiSkip : MonoBehaviour
     {
         ui = GetComponent<CanvasGroup>();
         ui.blocksRaycasts = false;
-        if (opacity == null && unopacity == null)
-        {
             unopacity = StartCoroutine(OpacityDown());
-        }
+        
 
     }
     private IEnumerator OpacityDown()
