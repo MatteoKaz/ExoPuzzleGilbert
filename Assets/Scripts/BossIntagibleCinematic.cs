@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class BossIntangibleCinematic : MonoBehaviour
@@ -8,36 +8,69 @@ public class BossIntangibleCinematic : MonoBehaviour
     public Animator minotaureAnimator;
     public Animator rocherAnimator;
 
-    [Header("Animation Names")]
-    public string heroIdleAnim = "Idle_Booshero";
-    public string heroRunAttackAnim = "Anim_Saut_Attaque_Boss";
-    public string heroCoupeCordeAnim = "coupe_cordeanim";
-    public string heroDeathAnim = "Death_BossIntangible";
+    [Header("Hero Animations")]
+    public AnimationClip heroIdleClip;
+    public AnimationClip heroRunAttackClip;
+    public AnimationClip heroPropulsionClip;
+    public AnimationClip heroRelevementClip;
+    public AnimationClip heroCoupeCordeClip;
+    public AnimationClip heroDeathClip;
 
-    public string minotaureAttaqueAnim = "Boss_Fight_ATTAQUE_Minotaure";
-    public string minotaureRireAnim = "Boss_Fight_RIRE_Minotaure";
-    public string minotaureEcrasementAnim = "Boss_Fight_Ecrasement_Minotaure";
+    [Header("Minotaure Animations")]
+    public AnimationClip minotaureIdleClip;
+    public AnimationClip minotaureAttaqueClip;
+    public AnimationClip minotaureRireClip;
+    public AnimationClip minotaureEcrasementClip;
 
-    public string rocherEboulementAnim = "Eboulement"
+    [Header("Rocher Animations")]
+    public AnimationClip rocherEboulementClip;
 
-    [Header("Timing (in seconds)")]
-    public float idleDuration = 2f;
-    public float runAttackDuration = 2.5f;
+    [Header("Hero Durations (seconds)")]
+    public float heroIdleDuration = 2f;
+    public float heroRunAttackDuration = 2.5f;
+    public float heroPropulsionDuration = 1.5f;
+    public float heroRelevementDuration = 1.5f;
+    public float heroCoupeCordeDuration = 1f;
+    public float heroDeathDuration = 3f;
+
+    [Header("Minotaure Durations (seconds)")]
+    public float minotaureIdleDuration = 2f;
     public float minotaureAttaqueDuration = 2f;
     public float minotaureRireDuration = 2f;
-    public float coupeCordeDuration = 1f;
-    public float eboulementDuration = 2f;
-    public float ecrasementDuration = 2f;
+    public float minotaureEcrasementDuration = 2f;
+
+    [Header("Rocher Durations (seconds)")]
+    public float rocherEboulementDuration = 2f;
 
     [Header("Settings")]
     public bool playOnStart = true;
+    public bool useCustomDurations = true;
+    public bool lockPositions = true;
+
+    private Vector3 heroStartPosition;
+    private Vector3 minotaureStartPosition;
+    private Vector3 rocherStartPosition;
 
     void Start()
     {
+        SaveInitialPositions();
+
         if (playOnStart)
         {
             StartCinematic();
         }
+    }
+
+    void SaveInitialPositions()
+    {
+        if (heroAnimator != null)
+            heroStartPosition = heroAnimator.transform.position;
+
+        if (minotaureAnimator != null)
+            minotaureStartPosition = minotaureAnimator.transform.position;
+
+        if (rocherAnimator != null)
+            rocherStartPosition = rocherAnimator.transform.position;
     }
 
     public void StartCinematic()
@@ -47,59 +80,48 @@ public class BossIntangibleCinematic : MonoBehaviour
 
     IEnumerator PlayCinematicSequence()
     {
-        Debug.Log("Cinématique Boss Intangible - Début");
+        Debug.Log("CinÃ©matique Boss Intangible - DÃ©but");
 
-        // 1. Idle du héro
-        Debug.Log("1. Hero Idle");
-        PlayAnimation(heroAnimator, heroIdleAnim);
-        yield return new WaitForSeconds(idleDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroIdleClip, "Hero Idle", heroStartPosition, heroIdleDuration);
+        yield return PlayAnimationAndWait(minotaureAnimator, minotaureIdleClip, "Minotaure Idle", minotaureStartPosition, minotaureIdleDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroRunAttackClip, "Hero Run Attack", heroStartPosition, heroRunAttackDuration);
+        yield return PlayAnimationAndWait(minotaureAnimator, minotaureAttaqueClip, "Minotaure Attaque", minotaureStartPosition, minotaureAttaqueDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroPropulsionClip, "Hero Propulsion", heroStartPosition, heroPropulsionDuration);
+        yield return PlayAnimationAndWait(minotaureAnimator, minotaureRireClip, "Minotaure Rire", minotaureStartPosition, minotaureRireDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroRelevementClip, "Hero RelÃ¨vement", heroStartPosition, heroRelevementDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroCoupeCordeClip, "Hero Coupe Corde", heroStartPosition, heroCoupeCordeDuration);
+        yield return PlayAnimationAndWait(rocherAnimator, rocherEboulementClip, "Ã‰boulement", rocherStartPosition, rocherEboulementDuration);
+        yield return PlayAnimationAndWait(minotaureAnimator, minotaureEcrasementClip, "Minotaure Ã‰crasement", minotaureStartPosition, minotaureEcrasementDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroDeathClip, "Hero Death", heroStartPosition, heroDeathDuration);
 
-        // 2. RunAttack du héro
-        Debug.Log("2. Hero Run Attack");
-        PlayAnimation(heroAnimator, heroRunAttackAnim);
-        yield return new WaitForSeconds(runAttackDuration);
-
-        // 3. Attaque du Minotaure
-        Debug.Log("3. Minotaure Attaque");
-        PlayAnimation(minotaureAnimator, minotaureAttaqueAnim);
-        yield return new WaitForSeconds(minotaureAttaqueDuration);
-
-        // 4. Rire du Minotaure
-        Debug.Log("4. Minotaure Rire");
-        PlayAnimation(minotaureAnimator, minotaureRireAnim);
-        yield return new WaitForSeconds(minotaureRireDuration);
-
-        // 5. Héro coupe la corde
-        Debug.Log("5. Hero Coupe Corde");
-        PlayAnimation(heroAnimator, heroCoupeCordeAnim);
-        yield return new WaitForSeconds(coupeCordeDuration);
-
-        // 6. Éboulement du rocher
-        Debug.Log("6. Éboulement");
-        PlayAnimation(rocherAnimator, rocherEboulementAnim);
-        yield return new WaitForSeconds(eboulementDuration);
-
-        // 7. Écrasement du Minotaure
-        Debug.Log("7. Minotaure Écrasement");
-        PlayAnimation(minotaureAnimator, minotaureEcrasementAnim);
-        yield return new WaitForSeconds(ecrasementDuration);
-
-        // 8. Death du héro
-        Debug.Log("8. Hero Death");
-        PlayAnimation(heroAnimator, heroDeathAnim);
-
-        Debug.Log("Cinématique Boss Intangible - Fin");
+        Debug.Log("CinÃ©matique Boss Intangible - Fin");
     }
 
-    void PlayAnimation(Animator animator, string animationName)
+    IEnumerator PlayAnimationAndWait(Animator animator, AnimationClip clip, string debugName, Vector3 lockedPosition, float customDuration)
     {
-        if (animator != null && !string.IsNullOrEmpty(animationName))
+        if (animator == null || clip == null)
         {
-            animator.Play(animationName);
+            Debug.LogWarning($"Animation ou Animator manquant pour: {debugName}");
+            yield break;
         }
-        else
+
+        Debug.Log($"â–¶ {debugName}");
+
+        animator.Play(clip.name);
+
+        float duration = useCustomDurations ? customDuration : clip.length;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
         {
-            Debug.LogWarning($"Impossible de jouer l'animation: {animationName}");
+            if (lockPositions)
+            {
+                animator.transform.position = lockedPosition;
+            }
+
+            elapsed += Time.deltaTime;
+            yield return null;
         }
     }
 }
+

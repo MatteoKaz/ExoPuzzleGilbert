@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 6289662}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6914399, z: -0, w: 0.72243404}
-  m_LocalPosition: {x: 19.181402, y: 0.61, z: 3.33}
+  m_LocalPosition: {x: 19.158, y: 0.61, z: 3.33}
   m_LocalScale: {x: 0.39896, y: 0.39896, z: 0.39896}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1370,7 +1370,7 @@ Transform:
   m_GameObject: {fileID: 252158690}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7010897, z: -0, w: 0.71307313}
-  m_LocalPosition: {x: -1.2604332, y: -0.41736042, z: 1.8210957}
+  m_LocalPosition: {x: -1.260433, y: -0.41, z: 1.821096}
   m_LocalScale: {x: 0.6455327, y: 0.6660355, z: 2.0835183}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2056,7 +2056,7 @@ Transform:
   m_GameObject: {fileID: 313622674}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6608282, z: -0, w: 0.7505373}
-  m_LocalPosition: {x: 19.319357, y: 2.57, z: 5.3}
+  m_LocalPosition: {x: 19.319357, y: 2.57, z: 4.69}
   m_LocalScale: {x: 1.6092888, y: 3.8203676, z: 0.9769543}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2537,7 +2537,7 @@ Transform:
   m_GameObject: {fileID: 424843704}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.60648966, z: -0, w: 0.79509145}
-  m_LocalPosition: {x: -1.1320763, y: -0.26652157, z: -1.0411446}
+  m_LocalPosition: {x: -1.132076, y: -0.22, z: -1.041145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2624,7 +2624,7 @@ Transform:
   m_GameObject: {fileID: 433792351}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6914399, z: -0, w: 0.72243404}
-  m_LocalPosition: {x: 19.181402, y: 0.61, z: 4.42}
+  m_LocalPosition: {x: 19.168, y: 0.61, z: 4.42}
   m_LocalScale: {x: 0.39896, y: 0.39896, z: 0.39896}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4736,7 +4736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 968460258}
-  - component: {fileID: 968460257}
+  - component: {fileID: 968460259}
   m_Layer: 0
   m_Name: CinematicManager
   m_TagString: Untagged
@@ -4744,37 +4744,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &968460257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968460256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 469fd1a8b698c004f82efa49ff3459a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heroAnimator: {fileID: 252158691}
-  minotaureAnimator: {fileID: 424843705}
-  rocherAnimator: {fileID: 615214638}
-  heroIdleAnim: Idle_Booshero
-  heroRunAttackAnim: Anim_Saut_Attaque_Boss
-  heroCoupeCordeAnim: coupe_cordeanim
-  heroDeathAnim: Death_BossIntangible
-  minotaureAttaqueAnim: Boss_Fight_ATTAQUE_Minotaure
-  minotaureRireAnim: Boss_Fight_RIRE_Minotaure
-  minotaureEcrasementAnim: Boss_Fight_Ecrasement_Minotaure
-  rocherEboulementAnim: Rocher_Explosion
-  idleDuration: 2
-  runAttackDuration: 2.5
-  minotaureAttaqueDuration: 2
-  minotaureRireDuration: 2
-  coupeCordeDuration: 1
-  eboulementDuration: 2
-  ecrasementDuration: 2
-  playOnStart: 1
 --- !u!4 &968460258
 Transform:
   m_ObjectHideFlags: 0
@@ -4795,6 +4764,46 @@ Transform:
   - {fileID: 615214640}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968460259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968460256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469fd1a8b698c004f82efa49ff3459a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroAnimator: {fileID: 252158691}
+  minotaureAnimator: {fileID: 424843705}
+  rocherAnimator: {fileID: 615214638}
+  heroIdleClip: {fileID: 7400000, guid: a969d7315edf2e14eb9d58b5671f656c, type: 2}
+  heroRunAttackClip: {fileID: 7400000, guid: b80abb3efcf10db4aa9f05bc893e5907, type: 2}
+  heroPropulsionClip: {fileID: 7400000, guid: 07abcf8d25cb3124c83b00039bb87054, type: 2}
+  heroRelevementClip: {fileID: 7400000, guid: f0ee37210d73df94a9b33f495aaf4868, type: 2}
+  heroCoupeCordeClip: {fileID: 7400000, guid: 746ac3c1ebfaccb4588da12f9dbad88c, type: 2}
+  heroDeathClip: {fileID: 7400000, guid: dcf2927ce8ffc8946bba7496adef6b8b, type: 2}
+  minotaureIdleClip: {fileID: 7400000, guid: d35007b151a5f0a4eb63a89ea84c01f8, type: 2}
+  minotaureAttaqueClip: {fileID: 7400000, guid: 244d67c00de66f44c85f2dc59a2c7340, type: 2}
+  minotaureRireClip: {fileID: 7400000, guid: 80f0e1ec4ddacdc4fa79389a09d26758, type: 2}
+  minotaureEcrasementClip: {fileID: 7400000, guid: 43889481e23d5e24ea6ba678ac12b2f0, type: 2}
+  rocherEboulementClip: {fileID: 7400000, guid: 16ccb65667fabd741889b34ce65a82a6, type: 2}
+  heroIdleDuration: 2
+  heroRunAttackDuration: 2.5
+  heroPropulsionDuration: 1.5
+  heroRelevementDuration: 1.5
+  heroCoupeCordeDuration: 1
+  heroDeathDuration: 3
+  minotaureIdleDuration: 5
+  minotaureAttaqueDuration: 3
+  minotaureRireDuration: 1
+  minotaureEcrasementDuration: 10
+  rocherEboulementDuration: 2
+  playOnStart: 1
+  useCustomDurations: 1
+  lockPositions: 1
 --- !u!1001 &969543035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5277,7 +5286,7 @@ Transform:
   m_GameObject: {fileID: 1048640708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6914399, z: -0, w: 0.72243404}
-  m_LocalPosition: {x: 19.181402, y: 0.61, z: 4.06}
+  m_LocalPosition: {x: 19.163, y: 0.61, z: 4.06}
   m_LocalScale: {x: 0.39896, y: 0.39896, z: 0.39896}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5967,7 +5976,7 @@ Transform:
   m_GameObject: {fileID: 1141372299}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6914399, z: -0, w: 0.72243404}
-  m_LocalPosition: {x: 19.181402, y: 0.61, z: 5.69}
+  m_LocalPosition: {x: 19.117, y: 0.61, z: 5.69}
   m_LocalScale: {x: 0.39896, y: 0.39896, z: 0.39896}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6944,7 +6953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4606041823369104894, guid: 9cf17ad07410b4343ac7f12e16775522, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9570954
+      value: 1.3470953
       objectReference: {fileID: 0}
     - target: {fileID: 4606041823369104894, guid: 9cf17ad07410b4343ac7f12e16775522, type: 3}
       propertyPath: m_LocalRotation.w
