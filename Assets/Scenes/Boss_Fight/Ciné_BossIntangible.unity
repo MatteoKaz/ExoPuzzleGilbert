@@ -1046,6 +1046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 205657264}
   - component: {fileID: 205657263}
+  - component: {fileID: 205657265}
   m_Layer: 0
   m_Name: opacity_rocher_sprite_ombre
   m_TagString: Untagged
@@ -1117,12 +1118,34 @@ Transform:
   m_GameObject: {fileID: 205657262}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7008537, z: -0, w: 0.71330506}
-  m_LocalPosition: {x: -1.3474331, y: -0.09736049, z: -1.0139043}
+  m_LocalPosition: {x: -1.347433, y: -0.09736049, z: -1.013904}
   m_LocalScale: {x: 2.617968, y: 5.759021, z: 1.7542}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 968460258}
   m_LocalEulerAnglesHint: {x: 0, y: -88.991, z: 0}
+--- !u!95 &205657265
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205657262}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ef46b9beed19dd47b3548d0c9baa6cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &217908586 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
@@ -1255,7 +1278,7 @@ Transform:
   m_GameObject: {fileID: 224831323}
   serializedVersion: 2
   m_LocalRotation: {x: 0.59977853, y: 0.3975932, z: 0.5259017, w: 0.4534455}
-  m_LocalPosition: {x: 19.319357, y: 2.96, z: 1.862}
+  m_LocalPosition: {x: 19.319357, y: 2.96, z: 1.825}
   m_LocalScale: {x: 0.1500723, y: 0.091796525, z: 0.12201}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1370,7 +1393,7 @@ Transform:
   m_GameObject: {fileID: 252158690}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7010897, z: -0, w: 0.71307313}
-  m_LocalPosition: {x: -1.260433, y: -0.41, z: 1.821096}
+  m_LocalPosition: {x: -1.260433, y: -0.41, z: 1.816}
   m_LocalScale: {x: 0.6455327, y: 0.6660355, z: 2.0835183}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4776,38 +4799,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469fd1a8b698c004f82efa49ff3459a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationSequence:
+  - stepName: 
+    targetAnimator: {fileID: 252158691}
+    clip: {fileID: 7400000, guid: a969d7315edf2e14eb9d58b5671f656c, type: 2}
+    duration: 0.3
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 424843705}
+    clip: {fileID: 7400000, guid: d35007b151a5f0a4eb63a89ea84c01f8, type: 2}
+    duration: 0.5
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 252158691}
+    clip: {fileID: 7400000, guid: b80abb3efcf10db4aa9f05bc893e5907, type: 2}
+    duration: 0
+    startDelay: 5
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 424843705}
+    clip: {fileID: 7400000, guid: 244d67c00de66f44c85f2dc59a2c7340, type: 2}
+    duration: 0.5
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 252158691}
+    clip: {fileID: 7400000, guid: 07abcf8d25cb3124c83b00039bb87054, type: 2}
+    duration: 1
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 252158691}
+    clip: {fileID: 7400000, guid: 746ac3c1ebfaccb4588da12f9dbad88c, type: 2}
+    duration: 0.2
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 1727666278}
+    clip: {fileID: 7400000, guid: 06b948c3a2e40f24bb32974e9f105de6, type: 2}
+    duration: 0.01
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 615214638}
+    clip: {fileID: 7400000, guid: 16ccb65667fabd741889b34ce65a82a6, type: 2}
+    duration: 0.5
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 205657265}
+    clip: {fileID: 7400000, guid: 5b430344dc898994b8d8aa4e269fbf65, type: 2}
+    duration: 1
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 424843705}
+    clip: {fileID: 7400000, guid: 43889481e23d5e24ea6ba678ac12b2f0, type: 2}
+    duration: 0.5
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 252158691}
+    clip: {fileID: 7400000, guid: dcf2927ce8ffc8946bba7496adef6b8b, type: 2}
+    duration: 5
+    startDelay: 0
+    playInParallel: 0
   heroAnimator: {fileID: 252158691}
   minotaureAnimator: {fileID: 424843705}
   rocherAnimator: {fileID: 615214638}
-  cordeAnimator: {fileID: 0}
-  heroIdleClip: {fileID: 7400000, guid: a969d7315edf2e14eb9d58b5671f656c, type: 2}
-  heroRunAttackClip: {fileID: 7400000, guid: b80abb3efcf10db4aa9f05bc893e5907, type: 2}
-  heroPropulsionClip: {fileID: 7400000, guid: 07abcf8d25cb3124c83b00039bb87054, type: 2}
-  heroRelevementClip: {fileID: 7400000, guid: f0ee37210d73df94a9b33f495aaf4868, type: 2}
-  heroCoupeCordeClip: {fileID: 7400000, guid: 746ac3c1ebfaccb4588da12f9dbad88c, type: 2}
-  heroDeathClip: {fileID: 7400000, guid: dcf2927ce8ffc8946bba7496adef6b8b, type: 2}
-  minotaureIdleClip: {fileID: 7400000, guid: d35007b151a5f0a4eb63a89ea84c01f8, type: 2}
-  minotaureRireClip: {fileID: 7400000, guid: 80f0e1ec4ddacdc4fa79389a09d26758, type: 2}
-  minotaureAttaqueClip: {fileID: 7400000, guid: 244d67c00de66f44c85f2dc59a2c7340, type: 2}
-  minotaureEcrasementClip: {fileID: 7400000, guid: 43889481e23d5e24ea6ba678ac12b2f0, type: 2}
-  rocherEboulementClip: {fileID: 7400000, guid: 16ccb65667fabd741889b34ce65a82a6, type: 2}
-  cordeTombeClip: {fileID: 0}
-  heroIdleDuration: 0.3
-  heroRunAttackDuration: 1
-  heroPropulsionDuration: 0.2
-  heroRelevementDuration: 1
-  heroCoupeCordeDuration: 0.03
-  heroDeathDuration: 0.03
-  minotaureIdleDuration: 5
-  minotaureRireDuration: 1
-  minotaureAttaqueDuration: 1
-  minotaureEcrasementDuration: 10
-  rocherEboulementDuration: 2
-  cordeTombeDuration: 1
-  rireStartDelay: 0.5
-  ecrasementStartDelay: 0.5
+  cordeAnimator: {fileID: 1727666278}
   playOnStart: 1
-  useCustomDurations: 1
   lockPositions: 1
 --- !u!1001 &969543035
 PrefabInstance:
@@ -5585,7 +5648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2786906955929968649, guid: 7dac701c8b1916c42bcce4203ab5657c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.6399045
+      value: -0.681
       objectReference: {fileID: 0}
     - target: {fileID: 2786906955929968649, guid: 7dac701c8b1916c42bcce4203ab5657c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6954,7 +7017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4606041823369104894, guid: 9cf17ad07410b4343ac7f12e16775522, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33763945
+      value: 0.239
       objectReference: {fileID: 0}
     - target: {fileID: 4606041823369104894, guid: 9cf17ad07410b4343ac7f12e16775522, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8525,6 +8588,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
+--- !u!95 &1727666278 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 347881660705991711, guid: 9cf17ad07410b4343ac7f12e16775522, type: 3}
+  m_PrefabInstance: {fileID: 1400100556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1803876492
 PrefabInstance:
   m_ObjectHideFlags: 0
