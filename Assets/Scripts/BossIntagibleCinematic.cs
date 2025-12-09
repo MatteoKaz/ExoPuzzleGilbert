@@ -17,6 +17,7 @@ public class BossIntangibleCinematic : MonoBehaviour
     public AnimationClip heroDeathClip;
 
     [Header("Minotaure Animations")]
+    public AnimationClip minotaureIdleClip;
     public AnimationClip minotaureAttaqueClip;
     public AnimationClip minotaureRireClip;
     public AnimationClip minotaureEcrasementClip;
@@ -24,9 +25,26 @@ public class BossIntangibleCinematic : MonoBehaviour
     [Header("Rocher Animations")]
     public AnimationClip rocherEboulementClip;
 
+    [Header("Hero Durations (seconds)")]
+    public float heroIdleDuration = 2f;
+    public float heroRunAttackDuration = 2.5f;
+    public float heroPropulsionDuration = 1.5f;
+    public float heroRelevementDuration = 1.5f;
+    public float heroCoupeCordeDuration = 1f;
+    public float heroDeathDuration = 3f;
+
+    [Header("Minotaure Durations (seconds)")]
+    public float minotaureIdleDuration = 2f;
+    public float minotaureAttaqueDuration = 2f;
+    public float minotaureRireDuration = 2f;
+    public float minotaureEcrasementDuration = 2f;
+
+    [Header("Rocher Durations (seconds)")]
+    public float rocherEboulementDuration = 2f;
+
     [Header("Settings")]
     public bool playOnStart = true;
-    public bool useClipDurations = true;
+    public bool useCustomDurations = true;
     public bool lockPositions = true;
 
     private Vector3 heroStartPosition;
@@ -64,21 +82,22 @@ public class BossIntangibleCinematic : MonoBehaviour
     {
         Debug.Log("Cinématique Boss Intangible - Début");
 
-        yield return PlayAnimationAndWait(heroAnimator, heroIdleClip, "Hero Idle", heroStartPosition);
-        yield return PlayAnimationAndWait(heroAnimator, heroRunAttackClip, "Hero Run Attack", heroStartPosition);
-        yield return PlayAnimationAndWait(minotaureAnimator, minotaureAttaqueClip, "Minotaure Attaque", minotaureStartPosition);
-        yield return PlayAnimationAndWait(heroAnimator, heroPropulsionClip, "Hero Propulsion", heroStartPosition);
-        yield return PlayAnimationAndWait(minotaureAnimator, minotaureRireClip, "Minotaure Rire", minotaureStartPosition);
-        yield return PlayAnimationAndWait(heroAnimator, heroRelevementClip, "Hero Relèvement", heroStartPosition);
-        yield return PlayAnimationAndWait(heroAnimator, heroCoupeCordeClip, "Hero Coupe Corde", heroStartPosition);
-        yield return PlayAnimationAndWait(rocherAnimator, rocherEboulementClip, "Éboulement", rocherStartPosition);
-        yield return PlayAnimationAndWait(minotaureAnimator, minotaureEcrasementClip, "Minotaure Écrasement", minotaureStartPosition);
-        yield return PlayAnimationAndWait(heroAnimator, heroDeathClip, "Hero Death", heroStartPosition);
+        yield return PlayAnimationAndWait(heroAnimator, heroIdleClip, "Hero Idle", heroStartPosition, heroIdleDuration);
+        yield return PlayAnimationAndWait(minotaureAnimator, minotaureIdleClip, "Minotaure Idle", minotaureStartPosition, minotaureIdleDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroRunAttackClip, "Hero Run Attack", heroStartPosition, heroRunAttackDuration);
+        yield return PlayAnimationAndWait(minotaureAnimator, minotaureAttaqueClip, "Minotaure Attaque", minotaureStartPosition, minotaureAttaqueDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroPropulsionClip, "Hero Propulsion", heroStartPosition, heroPropulsionDuration);
+        yield return PlayAnimationAndWait(minotaureAnimator, minotaureRireClip, "Minotaure Rire", minotaureStartPosition, minotaureRireDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroRelevementClip, "Hero Relèvement", heroStartPosition, heroRelevementDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroCoupeCordeClip, "Hero Coupe Corde", heroStartPosition, heroCoupeCordeDuration);
+        yield return PlayAnimationAndWait(rocherAnimator, rocherEboulementClip, "Éboulement", rocherStartPosition, rocherEboulementDuration);
+        yield return PlayAnimationAndWait(minotaureAnimator, minotaureEcrasementClip, "Minotaure Écrasement", minotaureStartPosition, minotaureEcrasementDuration);
+        yield return PlayAnimationAndWait(heroAnimator, heroDeathClip, "Hero Death", heroStartPosition, heroDeathDuration);
 
         Debug.Log("Cinématique Boss Intangible - Fin");
     }
 
-    IEnumerator PlayAnimationAndWait(Animator animator, AnimationClip clip, string debugName, Vector3 lockedPosition)
+    IEnumerator PlayAnimationAndWait(Animator animator, AnimationClip clip, string debugName, Vector3 lockedPosition, float customDuration)
     {
         if (animator == null || clip == null)
         {
@@ -90,7 +109,7 @@ public class BossIntangibleCinematic : MonoBehaviour
 
         animator.Play(clip.name);
 
-        float duration = useClipDurations ? clip.length : 1f;
+        float duration = useCustomDurations ? customDuration : clip.length;
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -105,3 +124,4 @@ public class BossIntangibleCinematic : MonoBehaviour
         }
     }
 }
+
