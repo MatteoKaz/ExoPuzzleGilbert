@@ -2536,13 +2536,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424843704}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.60648966, z: -0, w: 0.79509145}
+  m_LocalRotation: {x: -0, y: -0.66709954, z: -0, w: 0.7449686}
   m_LocalPosition: {x: -1.132076, y: -0.22, z: -1.041145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 968460258}
-  m_LocalEulerAnglesHint: {x: 0, y: -74.672, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -83.687, z: 0}
 --- !u!1 &433792351
 GameObject:
   m_ObjectHideFlags: 0
@@ -4779,6 +4779,7 @@ MonoBehaviour:
   heroAnimator: {fileID: 252158691}
   minotaureAnimator: {fileID: 424843705}
   rocherAnimator: {fileID: 615214638}
+  cordeAnimator: {fileID: 0}
   heroIdleClip: {fileID: 7400000, guid: a969d7315edf2e14eb9d58b5671f656c, type: 2}
   heroRunAttackClip: {fileID: 7400000, guid: b80abb3efcf10db4aa9f05bc893e5907, type: 2}
   heroPropulsionClip: {fileID: 7400000, guid: 07abcf8d25cb3124c83b00039bb87054, type: 2}
@@ -4786,21 +4787,25 @@ MonoBehaviour:
   heroCoupeCordeClip: {fileID: 7400000, guid: 746ac3c1ebfaccb4588da12f9dbad88c, type: 2}
   heroDeathClip: {fileID: 7400000, guid: dcf2927ce8ffc8946bba7496adef6b8b, type: 2}
   minotaureIdleClip: {fileID: 7400000, guid: d35007b151a5f0a4eb63a89ea84c01f8, type: 2}
-  minotaureAttaqueClip: {fileID: 7400000, guid: 244d67c00de66f44c85f2dc59a2c7340, type: 2}
   minotaureRireClip: {fileID: 7400000, guid: 80f0e1ec4ddacdc4fa79389a09d26758, type: 2}
+  minotaureAttaqueClip: {fileID: 7400000, guid: 244d67c00de66f44c85f2dc59a2c7340, type: 2}
   minotaureEcrasementClip: {fileID: 7400000, guid: 43889481e23d5e24ea6ba678ac12b2f0, type: 2}
   rocherEboulementClip: {fileID: 7400000, guid: 16ccb65667fabd741889b34ce65a82a6, type: 2}
-  heroIdleDuration: 2
-  heroRunAttackDuration: 2.5
-  heroPropulsionDuration: 1.5
-  heroRelevementDuration: 1.5
-  heroCoupeCordeDuration: 1
-  heroDeathDuration: 3
+  cordeTombeClip: {fileID: 0}
+  heroIdleDuration: 0.3
+  heroRunAttackDuration: 1
+  heroPropulsionDuration: 0.2
+  heroRelevementDuration: 1
+  heroCoupeCordeDuration: 0.03
+  heroDeathDuration: 0.03
   minotaureIdleDuration: 5
-  minotaureAttaqueDuration: 3
   minotaureRireDuration: 1
+  minotaureAttaqueDuration: 1
   minotaureEcrasementDuration: 10
   rocherEboulementDuration: 2
+  cordeTombeDuration: 1
+  rireStartDelay: 0.5
+  ecrasementStartDelay: 0.5
   playOnStart: 1
   useCustomDurations: 1
   lockPositions: 1
@@ -5572,7 +5577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2786906955929968649, guid: 7dac701c8b1916c42bcce4203ab5657c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1320763
+      value: -1.132076
       objectReference: {fileID: 0}
     - target: {fileID: 2786906955929968649, guid: 7dac701c8b1916c42bcce4203ab5657c, type: 3}
       propertyPath: m_LocalPosition.y
