@@ -696,11 +696,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9014f6209f316e74ab16ba7a77903ce9, type: 3}
   m_PrefabInstance: {fileID: 71385890}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &73634313 stripped
-MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 5685624504580572842, guid: 831f702e9da56f640991d89ce5163b18, type: 3}
-  m_PrefabInstance: {fileID: 1037774489}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &84240767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5150,11 +5145,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!64 &809355093 stripped
-MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 8032045573026212542, guid: 831f702e9da56f640991d89ce5163b18, type: 3}
-  m_PrefabInstance: {fileID: 1037774489}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &813442857
 GameObject:
   m_ObjectHideFlags: 0
@@ -7289,11 +7279,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
   m_PrefabInstance: {fileID: 850969615}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1021307766 stripped
-MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 5720689941633035108, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
-  m_PrefabInstance: {fileID: 1458319954}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1023995066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4076572528148626261, guid: 8a57458e35f14114797d27169a713374, type: 3}
@@ -8175,11 +8160,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9014f6209f316e74ab16ba7a77903ce9, type: 3}
   m_PrefabInstance: {fileID: 1150645861}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1192995962 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 817646257896784753, guid: 4c7b59abaef74cc4f9a42fc395a1e7af, type: 3}
-  m_PrefabInstance: {fileID: 1458319954}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1193790570
 GameObject:
@@ -14057,50 +14037,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1149919294255066624, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320289408375971222, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320289408375971222, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: cubeCollider
-      value: 
-      objectReference: {fileID: 73634313}
-    - target: {fileID: 3272524315040739937, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_Mass
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3272524315040739937, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3589444832192577058, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: f89fe8184b24a7a4ca5ab261a087c04a, type: 2}
-    - target: {fileID: 3833223448524862531, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: cubeCollider
-      value: 
-      objectReference: {fileID: 1192995962}
-    - target: {fileID: 3852625645104648925, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: cubeCollider
-      value: 
-      objectReference: {fileID: 1021307766}
     - target: {fileID: 4076572528148626261, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
-    - target: {fileID: 7103583659173199499, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7103583659173199499, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: cubeCollider
-      value: 
-      objectReference: {fileID: 809355093}
     - target: {fileID: 7660234274715002659, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.96
@@ -14140,18 +14080,6 @@ PrefabInstance:
     - target: {fileID: 7660234274715002659, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8781660740352268301, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: gravityValue
-      value: 0.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869225152561614487, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: climbLayer.m_Bits
-      value: 4026603515
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
