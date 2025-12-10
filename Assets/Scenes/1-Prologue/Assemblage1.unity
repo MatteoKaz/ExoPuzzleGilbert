@@ -11293,6 +11293,10 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7896623334685928699, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 4a150dbe49e8d394ea55fec6b16ae0d4, type: 2}
     - target: {fileID: 8542264528478704925, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
       propertyPath: m_Name
       value: Enemy_Anim (1)
@@ -12072,18 +12076,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1149919294255066624, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320289408375971222, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: cubeCollider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3272524315040739937, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3833223448524862531, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: cubeCollider
       value: 
@@ -12095,10 +12087,6 @@ PrefabInstance:
     - target: {fileID: 4076572528148626261, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: m_Name
       value: Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 7103583659173199499, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: cubeCollider
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7660234274715002659, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: m_LocalPosition.x

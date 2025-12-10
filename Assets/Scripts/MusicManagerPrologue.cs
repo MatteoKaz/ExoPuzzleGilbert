@@ -86,7 +86,7 @@ public class MusicManager : MonoBehaviour
                 PlayOrCrossfadeTo(musicA, 1);
             }
         }
-        else if (buildIndex == 5)
+        else if (buildIndex == 8)
         {
             // Niveau 5 : crossfade vers B
             if (currentPhase != 2)
@@ -94,7 +94,7 @@ public class MusicManager : MonoBehaviour
                 PlayOrCrossfadeTo(musicB, 2);
             }
         }
-        else if (buildIndex >= 6)
+        else if (buildIndex >= 10)
         {
             // Niveaux 6+ : musique C
             if (currentPhase != 3)
