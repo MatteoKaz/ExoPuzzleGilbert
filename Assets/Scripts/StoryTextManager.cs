@@ -45,9 +45,9 @@ public class StoryTextManager : MonoBehaviour
     
     private IEnumerator DisplayStorySequence()
     {
-        yield return StartCoroutine(ShowTextWithFade(firstText, firstTextDuration));
+       /* yield return*/ StartCoroutine(ShowTextWithFade(firstText, firstTextDuration));
         
-        yield return StartCoroutine(ShowTextWithFade(secondText, secondTextDuration));
+        /*yield return*/ StartCoroutine(ShowTextWithFade(secondText, secondTextDuration));
         
         if (!string.IsNullOrEmpty(thirdText))
         {
