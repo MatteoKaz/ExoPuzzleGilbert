@@ -46,7 +46,10 @@ public class TransitionEntracte : MonoBehaviour
         {
             temps += Time.deltaTime;
             aValue = Mathf.Lerp(0f, 1f, temps / transitionDure);
-            trans.alpha = aValue;
+            if (trans != null)
+            {
+                trans.alpha = aValue;
+            }
             yield return null;
         }
         yield return new WaitForSeconds(0.5f);
@@ -68,7 +71,10 @@ public class TransitionEntracte : MonoBehaviour
         {
             temps += Time.deltaTime;
             aValue = Mathf.Lerp(1f, 0f, temps / transitionDuree);
-            trans.alpha = aValue;
+            if (trans != null)
+            {
+                trans.alpha = aValue;
+            }
             yield return null;
         }
         if (timeInLevel >= 0.01) 
