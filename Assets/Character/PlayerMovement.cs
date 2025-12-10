@@ -194,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
                     //La suite est a mettre dans le build final.
                    // speed = speedOriginal;
                     //Debug.Log(speedOriginal);
-                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed*stopSpeed);
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed*stopSpeed); 
                     Offsetvalue = 0.08f;
                     StepClimb();
                     rb.useGravity = false;
@@ -270,7 +270,14 @@ public class PlayerMovement : MonoBehaviour
                 //a remettre
                 //speed = 0f;
                 rb.AddForce(Physics.gravity * gravityValue * controlGravity, ForceMode.Acceleration);
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed ); // a voir
+                if (isJumping)
+                {
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed*stopSpeed);
+                }
+                else
+                {
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
+                }
 
             }
 

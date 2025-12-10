@@ -29,57 +29,60 @@ public class CutoutObject : MonoBehaviour
 
     private void Update()
     {
-        Vector3 cameraCenter = xrOriginCamera.position;
-
-        Vector2 cutoutPos = renderCamera.WorldToViewportPoint(targetObject.position);
-
-        cutoutPos.x = Mathf.Clamp01(cutoutPos.x);
-        cutoutPos.y = Mathf.Clamp01(cutoutPos.y);
-
-        Vector3 offset = targetObject.position - cameraCenter;
-        RaycastHit[] hitObjects = Physics.RaycastAll(cameraCenter, offset.normalized, offset.magnitude, wallMask);
-        List<RaycastHit> allHitObjects = new List<RaycastHit>();
-
-        for (int i = 0; i < hitObjects.Length; ++i)
+        if (targetObject != null)
         {
-            if (!allHitObjects.Contains(hitObjects[i]))
+            Vector3 cameraCenter = xrOriginCamera.position;
+
+            Vector2 cutoutPos = renderCamera.WorldToViewportPoint(targetObject.position);
+
+            cutoutPos.x = Mathf.Clamp01(cutoutPos.x);
+            cutoutPos.y = Mathf.Clamp01(cutoutPos.y);
+
+            Vector3 offset = targetObject.position - cameraCenter;
+            RaycastHit[] hitObjects = Physics.RaycastAll(cameraCenter, offset.normalized, offset.magnitude, wallMask);
+            List<RaycastHit> allHitObjects = new List<RaycastHit>();
+
+            for (int i = 0; i < hitObjects.Length; ++i)
             {
-                allHitObjects.Add(hitObjects[i]);
-            }
-        }
-        for (int j = 0; j < allHitObjects.Count; ++j)
-        {
-            if (hitObjects.Contains<RaycastHit>(allHitObjects[j])) 
-            {
-                Renderer renderer = allHitObjects[j].transform.GetComponent<Renderer>();
-                if (renderer != null)
+                if (!allHitObjects.Contains(hitObjects[i]))
                 {
-                    Material[] materials = renderer.materials;
-
-                    for (int m = 0; m < materials.Length; ++m)
-                    {
-                        materials[m].SetVector("_CutoutPos", cutoutPos);
-                        materials[m].SetFloat("_CutoutSize", 0.2f);
-                        materials[m].SetFloat("_FalloffSize", 0.010f);
-                        materials[m].SetVector("_CharacterPosition", targetObject.position);
-                        materials[m].SetVector("_CameraPosition", (cameraCenter - targetObject.position).normalized);
-                    }
+                    allHitObjects.Add(hitObjects[i]);
                 }
             }
-            else
+            for (int j = 0; j < allHitObjects.Count; ++j)
             {
-                Renderer renderer = allHitObjects[j].transform.GetComponent<Renderer>();
-                if (renderer != null)
+                if (hitObjects.Contains<RaycastHit>(allHitObjects[j]))
                 {
-                    Material[] materials = renderer.materials;
-
-                    for (int m = 0; m < materials.Length; ++m)
+                    Renderer renderer = allHitObjects[j].transform.GetComponent<Renderer>();
+                    if (renderer != null)
                     {
-                        materials[m].SetVector("_CutoutPos", cutoutPos);
-                        materials[m].SetFloat("_CutoutSize", 0f);
-                        materials[m].SetFloat("_FalloffSize", 0f);
-                        materials[m].SetVector("_CharacterPosition", targetObject.position);
-                        materials[m].SetVector("_CameraPosition", (cameraCenter - targetObject.position).normalized);
+                        Material[] materials = renderer.materials;
+
+                        for (int m = 0; m < materials.Length; ++m)
+                        {
+                            materials[m].SetVector("_CutoutPos", cutoutPos);
+                            materials[m].SetFloat("_CutoutSize", 0.2f);
+                            materials[m].SetFloat("_FalloffSize", 0.010f);
+                            materials[m].SetVector("_CharacterPosition", targetObject.position);
+                            materials[m].SetVector("_CameraPosition", (cameraCenter - targetObject.position).normalized);
+                        }
+                    }
+                }
+                else
+                {
+                    Renderer renderer = allHitObjects[j].transform.GetComponent<Renderer>();
+                    if (renderer != null)
+                    {
+                        Material[] materials = renderer.materials;
+
+                        for (int m = 0; m < materials.Length; ++m)
+                        {
+                            materials[m].SetVector("_CutoutPos", cutoutPos);
+                            materials[m].SetFloat("_CutoutSize", 0f);
+                            materials[m].SetFloat("_FalloffSize", 0f);
+                            materials[m].SetVector("_CharacterPosition", targetObject.position);
+                            materials[m].SetVector("_CameraPosition", (cameraCenter - targetObject.position).normalized);
+                        }
                     }
                 }
             }
