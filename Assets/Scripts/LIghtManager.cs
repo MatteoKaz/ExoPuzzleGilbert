@@ -22,10 +22,14 @@ public class LIghtManager : MonoBehaviour
         if (lighting2 != null)
         {
             lum2 = lighting2.GetComponent<Light>();
-            
+
             lum2.intensity = 0f;
         }
-        HUD = GameObject.Find("=== HUD ===");
+        else
+        {
+            lighting2 = lighting;
+        }
+            HUD = GameObject.Find("=== HUD ===");
         if (HUD != null)
         {
             trans = HUD.GetComponent<CanvasGroup>();
@@ -77,7 +81,10 @@ public class LIghtManager : MonoBehaviour
         {
             temps += Time.deltaTime;
             lum.intensity = Mathf.Lerp(0f, valueLight, temps / transitionDuree);
-            lum2.intensity = Mathf.Lerp(0f, 5, temps / transitionDuree);
+            if (lighting2 != null)
+            {
+                lum2.intensity = Mathf.Lerp(0f, 5, temps / transitionDuree);
+            }
             yield return null;
         }
 
@@ -93,7 +100,10 @@ public class LIghtManager : MonoBehaviour
         {
             temps += Time.deltaTime;
             lum.intensity = Mathf.Lerp(valueLight, 0f, temps / transitionDuree);
-            lum2.intensity = Mathf.Lerp(5, 0f, temps / transitionDuree);
+            if (lighting2 != null)
+            {
+                lum2.intensity = Mathf.Lerp(5, 0f, temps / transitionDuree);
+            }
             yield return null;
         }
         yield return new WaitForSeconds(1f);
