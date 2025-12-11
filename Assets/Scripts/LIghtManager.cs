@@ -4,11 +4,13 @@ using UnityEngine;
 public class LIghtManager : MonoBehaviour
 {
     [SerializeField] public GameObject lighting;
+    [SerializeField] public GameObject lighting2;
     [SerializeField] public GameObject HUD;
     [SerializeField] public float transitionDuree = 1f;
     [SerializeField] public float transitionDuree2 = 1.5f;
     [SerializeField] public float valueLight;
     private Light lum;
+    private Light lum2;
     public bool state = false;
     private float aValue = 0f;
     private CanvasGroup trans;
@@ -17,7 +19,17 @@ public class LIghtManager : MonoBehaviour
     {
         lum = lighting.GetComponent<Light>();
         lum.intensity = 0f;
-        HUD = GameObject.Find("=== HUD ===");
+        if (lighting2 != null)
+        {
+            lum2 = lighting2.GetComponent<Light>();
+
+            lum2.intensity = 0f;
+        }
+        else
+        {
+            lighting2 = lighting;
+        }
+            HUD = GameObject.Find("=== HUD ===");
         if (HUD != null)
         {
             trans = HUD.GetComponent<CanvasGroup>();
@@ -25,7 +37,7 @@ public class LIghtManager : MonoBehaviour
         }
         else
         {
-            TurnOn(lighting);
+            TurnOn(lighting,lighting2);
         }
         
         state = lighting.active;
@@ -33,11 +45,12 @@ public class LIghtManager : MonoBehaviour
 
     }
 
-    public void TurnOn(GameObject lighting)
+    public void TurnOn(GameObject lighting, GameObject lighting2)
     {
         if (lighting != null)
         {
             lum = lighting.GetComponent<Light>();
+            lum2 = lighting2.GetComponent<Light>();
             StartCoroutine(IncreaseOpacity());
             state = true;
             lighting.SetActive(true);
@@ -68,6 +81,10 @@ public class LIghtManager : MonoBehaviour
         {
             temps += Time.deltaTime;
             lum.intensity = Mathf.Lerp(0f, valueLight, temps / transitionDuree);
+            if (lighting2 != null)
+            {
+                lum2.intensity = Mathf.Lerp(0f, 5, temps / transitionDuree);
+            }
             yield return null;
         }
 
@@ -83,6 +100,10 @@ public class LIghtManager : MonoBehaviour
         {
             temps += Time.deltaTime;
             lum.intensity = Mathf.Lerp(valueLight, 0f, temps / transitionDuree);
+            if (lighting2 != null)
+            {
+                lum2.intensity = Mathf.Lerp(5, 0f, temps / transitionDuree);
+            }
             yield return null;
         }
         yield return new WaitForSeconds(1f);
@@ -128,6 +149,6 @@ public class LIghtManager : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(0.5f);
-        TurnOn(lighting);
+        TurnOn(lighting, lighting2);
     }
 }
