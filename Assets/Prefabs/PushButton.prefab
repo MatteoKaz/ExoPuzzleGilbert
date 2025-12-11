@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5057880799714785554}
   - component: {fileID: 487373427134277066}
   - component: {fileID: 5712213561630485518}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: PushButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
   m_Button: {fileID: 2226854605992712992}
-  m_PressDistance: 0.03
+  m_PressDistance: 0.05
   m_PressBuffer: 0.01
   m_ButtonOffset: 0.14
   m_ButtonSize: 0.1
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 4912578168472441708}
   - component: {fileID: 5645089978168925364}
   - component: {fileID: 4193368177383742202}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Audio Feedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 2813691137755023134}
   - component: {fileID: 8830186085309059641}
   - component: {fileID: 1572354629171081447}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Visual Feedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3584750196987153732}
   - component: {fileID: 3792602153069835493}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Feedback Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,6 +800,10 @@ PrefabInstance:
     - target: {fileID: 674851275067648953, guid: 8d130a2bb82b07d428572176c162db60, type: 3}
       propertyPath: m_Name
       value: ButtonSon
+      objectReference: {fileID: 0}
+    - target: {fileID: 674851275067648953, guid: 8d130a2bb82b07d428572176c162db60, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3278573441124372121, guid: 8d130a2bb82b07d428572176c162db60, type: 3}
       propertyPath: Loop
@@ -936,6 +940,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7069634194989937786, guid: 8bd9b373b10f465e9c8a7c4a8f8d1f32, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -5275152949246124276, guid: 8bd9b373b10f465e9c8a7c4a8f8d1f32, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: -1740905847569387906, guid: 8bd9b373b10f465e9c8a7c4a8f8d1f32, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -943,6 +955,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8bd9b373b10f465e9c8a7c4a8f8d1f32, type: 3}
       propertyPath: m_Name
       value: PushButton Visuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8bd9b373b10f465e9c8a7c4a8f8d1f32, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9116018657859665327, guid: 8bd9b373b10f465e9c8a7c4a8f8d1f32, type: 3}
       propertyPath: m_CastShadows
