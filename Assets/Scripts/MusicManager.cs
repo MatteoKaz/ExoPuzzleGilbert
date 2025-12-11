@@ -95,13 +95,11 @@ public class MusicManager : MonoBehaviour
             return;
 
         currentSceneName = scene.name;
-        Debug.Log($"[MusicManager] Scène chargée : {scene.name}");
 
         AudioClip clipToPlay = GetMusicForScene(scene.name);
 
         if (clipToPlay != null)
         {
-            Debug.Log($"[MusicManager] Musique demandée pour {scene.name} : {clipToPlay.name}");
             PlayMusic(clipToPlay);
         }
     }
@@ -138,44 +136,27 @@ public class MusicManager : MonoBehaviour
     {
         if (currentSource.clip == newClip && currentSource.isPlaying)
         {
-            Debug.Log($"[MusicManager] {newClip.name} est déjà en cours.");
-            return;
-        }
-
-        AudioClip linkedClip = GetLinkedTrack(newClip);
-
-        if (linkedClip != null && linkedSource.clip == linkedClip && linkedSource.isPlaying)
-        {
-            Debug.Log($"[MusicManager] Transition vers piste liée : {newClip.name} (déjà synchronisée avec {linkedClip.name})");
-
-            if (!isCrossfading)
-            {
-                StartCoroutine(CrossfadeBetweenLinkedTracks(newClip));
-            }
             return;
         }
 
         if (currentLinkedClip != null && currentLinkedClip == newClip && linkedSource.isPlaying)
         {
-            Debug.Log($"[MusicManager] Transition vers la piste liée active : {newClip.name}");
-
             if (!isCrossfading)
             {
-                StartCoroutine(CrossfadeBetweenLinkedTracks(newClip));
+                StartCoroutine(CrossfadeBetweenLinkedTracks());
             }
             return;
         }
 
         if (!currentSource.isPlaying)
         {
-            Debug.Log($"[MusicManager] Démarrage initial : {newClip.name}");
             currentSource.clip = newClip;
             currentSource.volume = 1f;
             currentSource.Play();
 
+            AudioClip linkedClip = GetLinkedTrack(newClip);
             if (linkedClip != null)
             {
-                Debug.Log($"[MusicManager] Démarrage piste liée en silence : {linkedClip.name}");
                 linkedSource.clip = linkedClip;
                 linkedSource.volume = 0f;
                 linkedSource.Play();
@@ -188,8 +169,6 @@ public class MusicManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"[MusicManager] Crossfade classique vers : {newClip.name}");
-
             if (!isCrossfading)
             {
                 StartCoroutine(CrossfadeToClip(newClip));
@@ -197,13 +176,9 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    private IEnumerator CrossfadeBetweenLinkedTracks(AudioClip targetClip)
+    private IEnumerator CrossfadeBetweenLinkedTracks()
     {
         isCrossfading = true;
-        Debug.Log($"[MusicManager] Début crossfade entre pistes liées vers {targetClip.name}");
-
-        bool targetIsMainSource = currentSource.clip == targetClip;
-        bool targetIsLinkedSource = linkedSource.clip == targetClip;
 
         float elapsed = 0f;
 
@@ -212,43 +187,28 @@ public class MusicManager : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / crossfadeDuration;
 
-            if (targetIsLinkedSource)
-            {
-                currentSource.volume = Mathf.Lerp(1f, 0f, t);
-                linkedSource.volume = Mathf.Lerp(0f, 1f, t);
-            }
-            else if (targetIsMainSource)
-            {
-                currentSource.volume = Mathf.Lerp(0f, 1f, t);
-                linkedSource.volume = Mathf.Lerp(1f, 0f, t);
-            }
+            currentSource.volume = Mathf.Lerp(1f, 0f, t);
+            linkedSource.volume = Mathf.Lerp(0f, 1f, t);
 
             yield return null;
         }
 
-        if (targetIsLinkedSource)
-        {
-            currentSource.volume = 0f;
-            linkedSource.volume = 1f;
-            AudioClip temp = currentSource.clip;
-            currentSource.clip = linkedSource.clip;
-            linkedSource.clip = temp;
-            currentLinkedClip = linkedSource.clip;
-        }
-        else if (targetIsMainSource)
-        {
-            currentSource.volume = 1f;
-            linkedSource.volume = 0f;
-        }
+        currentSource.volume = 0f;
+        linkedSource.volume = 1f;
 
-        Debug.Log($"[MusicManager] Fin crossfade. Piste active : {currentSource.clip.name}");
+        AudioSource temp = currentSource;
+        currentSource = linkedSource;
+        linkedSource = temp;
+
+        AudioClip tempClip = currentLinkedClip;
+        currentLinkedClip = linkedSource.clip;
+
         isCrossfading = false;
     }
 
     private IEnumerator CrossfadeToClip(AudioClip newClip)
     {
         isCrossfading = true;
-        Debug.Log($"[MusicManager] Début crossfade classique vers {newClip.name}");
 
         if (linkedSource.isPlaying)
         {
@@ -263,7 +223,6 @@ public class MusicManager : MonoBehaviour
 
         if (newLinkedClip != null)
         {
-            Debug.Log($"[MusicManager] Nouvelle piste liée en silence : {newLinkedClip.name}");
             linkedSource.clip = newLinkedClip;
             linkedSource.volume = 0f;
             linkedSource.Play();
@@ -295,7 +254,6 @@ public class MusicManager : MonoBehaviour
         currentSource = nextSource;
         nextSource = temp;
 
-        Debug.Log($"[MusicManager] Fin crossfade. Piste active : {currentSource.clip.name}");
         isCrossfading = false;
     }
 
