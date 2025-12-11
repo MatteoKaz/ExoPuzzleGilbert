@@ -3520,71 +3520,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
---- !u!1 &901322241
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 901322245}
-  - component: {fileID: 901322248}
-  m_Layer: 0
-  m_Name: GameMusicManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 3a6ae1130d4269d4f876986d96db2227, type: 3}
---- !u!4 &901322245
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901322241}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.682, y: 2.484, z: 2.983569}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &901322248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901322241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b0581220eddb945aec4fa2706d4efd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tracks:
-  - trackName: MusicPrologue
-    audioClip: {fileID: 8300000, guid: 9a299a6607e71684f9ccceeaa67a89f2, type: 3}
-  - trackName: MusicPrologueBoss
-    audioClip: {fileID: 8300000, guid: 3a6ae1130d4269d4f876986d96db2227, type: 3}
-  - trackName: MusicAct1
-    audioClip: {fileID: 8300000, guid: a95eb6bd450429e49bb393f244af8883, type: 3}
-  - trackName: MusicAct1Boss
-    audioClip: {fileID: 8300000, guid: 6f7932c1f18ee0d4a9fdc3ad426bfbb8, type: 3}
-  - trackName: MusicAct2
-    audioClip: {fileID: 8300000, guid: e5532d956b38f0a4ab5646708be76ef4, type: 3}
-  - trackName: MusicAct2Boss
-    audioClip: {fileID: 8300000, guid: dd88c2632c7d5da4087eb67673415e06, type: 3}
-  - trackName: MusicAct3
-    audioClip: {fileID: 8300000, guid: bbd327c0df57e88409329f8e984f5cae, type: 3}
-  - trackName: MusicAct3Boss
-    audioClip: {fileID: 8300000, guid: 5ea544cc63447b640bc31dc9198745f3, type: 3}
-  fadeDuration: 2
 --- !u!1001 &915679169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7150,7 +7085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857a5738bb070a84580699827fab660d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whichNext: 3
+  whichNext: 2
   timeInLevel: -1
   HUD: {fileID: 483321828}
   transitionDuree: 1.5
@@ -7491,8 +7426,6 @@ MonoBehaviour:
   fadeOutDuration: 1.5
   autoTransitionToNextLevel: 1
   delayBeforeTransition: 1
-  triggerMusicSwitch: 0
-  newMusicTrackName: 
 --- !u!1001 &1713086351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9650,5 +9583,4 @@ SceneRoots:
   - {fileID: 750877728}
   - {fileID: 1639819694}
   - {fileID: 1101205233}
-  - {fileID: 901322245}
   - {fileID: 1439265153}
