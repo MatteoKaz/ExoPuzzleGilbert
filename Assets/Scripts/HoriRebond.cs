@@ -32,6 +32,12 @@ public class HoriRebond : MonoBehaviour
         }
     }
 
+    public void SetDeceleration()
+    {
+        decelerationTimer = 0f;
+    }
+
+
     private void FixedUpdate()
     {
         if (useCustomDeceleration && decelerationTimer > 0f)
@@ -47,13 +53,16 @@ public class HoriRebond : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & moreBounceLayers) != 0)
+        if (enabled == true)
         {
-            decelerationTimer = decelerationDuration;
-        }
-        if (((1 << collision.gameObject.layer) & bounceableLayers) != 0)
-        {
-            ApplyBounce(collision);
+            if (((1 << collision.gameObject.layer) & moreBounceLayers) != 0)
+            {
+                decelerationTimer = decelerationDuration;
+            }
+            if (((1 << collision.gameObject.layer) & bounceableLayers) != 0)
+            {
+                ApplyBounce(collision);
+            }
         }
     }
 

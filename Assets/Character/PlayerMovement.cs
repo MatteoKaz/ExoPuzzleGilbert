@@ -96,6 +96,11 @@ public class PlayerMovement : MonoBehaviour
         mask = ~(LayerMask.GetMask("Slope") | LayerMask.GetMask("Traversable"));
     }
 
+    public void NewGravity()
+    {
+        notOnGround = true;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {

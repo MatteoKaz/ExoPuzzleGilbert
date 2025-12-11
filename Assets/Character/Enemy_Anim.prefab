@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 5434092498473843350}
   - component: {fileID: 2027091648408316607}
   - component: {fileID: 7896623334685928699}
-  m_Layer: 0
+  - component: {fileID: 4517731351828866557}
+  m_Layer: 2
   m_Name: Enemy_Anim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,8 +302,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.33, y: 0.91, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.33, y: 1.22, z: 0.2}
+  m_Center: {x: 0, y: 0.08, z: 0}
 --- !u!82 &7896623334685928699
 AudioSource:
   m_ObjectHideFlags: 0
@@ -400,6 +401,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4517731351828866557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542264528478704925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73a83dff9696c14bb8b641e3d85d31b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9118735732904645006
 PrefabInstance:
   m_ObjectHideFlags: 0
