@@ -8058,13 +8058,19 @@ MonoBehaviour:
     targetAnimator: {fileID: 1506315856}
     clip: {fileID: 7400000, guid: f44678c7561d55840adef4e7e398c335, type: 2}
     duration: 0
-    startDelay: 3
-    playInParallel: 1
+    startDelay: 0
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 1506315856}
+    clip: {fileID: 7400000, guid: 741018ed1cd50184ea3e7b30f6a22bd2, type: 2}
+    duration: 2
+    startDelay: 0
+    playInParallel: 0
   - stepName: 
     targetAnimator: {fileID: 1712682450}
     clip: {fileID: 7400000, guid: 85917e385d473e94f8e660d1e07f0dc1, type: 2}
     duration: 2
-    startDelay: 5
+    startDelay: 3
     playInParallel: 0
   - stepName: 
     targetAnimator: {fileID: 1506315856}
@@ -9365,7 +9371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whichNext: 3
-  timeInLevel: 25
+  timeInLevel: 23
   HUD: {fileID: 0}
   transitionDuree: 1.5
 --- !u!4 &1639819694
