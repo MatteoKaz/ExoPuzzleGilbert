@@ -38,6 +38,7 @@ public class BetweenTwoCollision : MonoBehaviour
 
         if (hitTop && hitBottom && !isCrushed && col.collider.CompareTag(cubeTag))
         {
+            Debug.Log(col);
             OnCrush();
         }
     }
@@ -52,7 +53,7 @@ public class BetweenTwoCollision : MonoBehaviour
     {
         if (isCrushed) return;
         isCrushed = true;
-
+        
         Debug.Log("OnCrush: ignore collision with cube");
 
 
