@@ -81,7 +81,7 @@ public class LIghtManager : MonoBehaviour
         {
             temps += Time.deltaTime;
             lum.intensity = Mathf.Lerp(0f, valueLight, temps / transitionDuree);
-            if (lighting2 != null)
+            if (lighting2 != null && lighting2 != lighting)
             {
                 lum2.intensity = Mathf.Lerp(0f, 5, temps / transitionDuree);
             }
@@ -100,7 +100,7 @@ public class LIghtManager : MonoBehaviour
         {
             temps += Time.deltaTime;
             lum.intensity = Mathf.Lerp(valueLight, 0f, temps / transitionDuree);
-            if (lighting2 != null)
+            if (lighting2 != null && lighting2 != lighting)
             {
                 lum2.intensity = Mathf.Lerp(5, 0f, temps / transitionDuree);
             }
