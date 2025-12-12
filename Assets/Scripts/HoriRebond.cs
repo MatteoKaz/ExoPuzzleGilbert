@@ -48,7 +48,6 @@ public class HoriRebond : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(rb.linearVelocity);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -117,7 +116,7 @@ public class HoriRebond : MonoBehaviour
         if (debugMode)
         {
             Debug.DrawRay(transform.position, bounceDirection * 2f, Color.magenta, 1f);
-            Debug.Log($"Other Collider : {collision.gameObject.name} vitesse : {horizontalVelocity.magnitude:F2}, direction: {bounceDirection}, nouvelle velocite: {rb.linearVelocity}");
+           // Debug.Log($"Other Collider : {collision.gameObject.name} vitesse : {horizontalVelocity.magnitude:F2}, direction: {bounceDirection}, nouvelle velocite: {rb.linearVelocity}");
         }
     }
 
