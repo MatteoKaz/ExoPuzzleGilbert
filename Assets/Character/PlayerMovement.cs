@@ -197,9 +197,10 @@ public class PlayerMovement : MonoBehaviour
                 if(notOnGround ==false)
                 {
                     //La suite est a mettre dans le build final.
-                   // speed = speedOriginal;
+                    // speed = speedOriginal;
                     //Debug.Log(speedOriginal);
-                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed*stopSpeed); 
+                    float oldVelo = rb.linearVelocity.z - speed * stopSpeed;
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, oldVelo + speed*stopSpeed); 
                     Offsetvalue = 0.08f;
                     StepClimb();
                     rb.useGravity = false;
