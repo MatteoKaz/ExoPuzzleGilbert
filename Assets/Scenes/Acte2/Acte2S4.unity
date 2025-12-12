@@ -4394,6 +4394,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   directionBas: 0
   magnetismSound: {fileID: 8300000, guid: 3dad88a525190da4b9b869f2c8486cc1, type: 3}
+  minVolume: 0.3
+  maxVolume: 1
 --- !u!1001 &760792725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7433,6 +7435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lighting: {fileID: 963853388}
+  lighting2: {fileID: 0}
   HUD: {fileID: 0}
   transitionDuree: 1.5
   transitionDuree2: 1.5
@@ -11108,6 +11111,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
+--- !u!1001 &1756624170
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3766280785156169179, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_Radius
+      value: 1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.181402
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.611
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.367
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5880307206748664274, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.041
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783112454032002121, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_Name
+      value: ZoneAntiCollision (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523254998488655784, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
+      propertyPath: m_Range
+      value: 1.4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
 --- !u!1 &1796835550
 GameObject:
   m_ObjectHideFlags: 0
@@ -13126,6 +13198,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   directionBas: 0
   magnetismSound: {fileID: 8300000, guid: 3dad88a525190da4b9b869f2c8486cc1, type: 3}
+  minVolume: 0.3
+  maxVolume: 1
 --- !u!1001 &2141077697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13398,3 +13472,4 @@ SceneRoots:
   - {fileID: 129016619}
   - {fileID: 1315149027}
   - {fileID: 1028962602}
+  - {fileID: 1756624170}
