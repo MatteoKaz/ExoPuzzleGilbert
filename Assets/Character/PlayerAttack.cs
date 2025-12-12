@@ -107,7 +107,7 @@ public class PlayerAttack : MonoBehaviour
             if (EnnemyHit != null && EnnemyHit.clip != null)
                 EnnemyHit.PlayOneShot(EnnemyHit.clip, masterVolume * ennemyHitVolume);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
 
             PlayRandomEnemyHitCry();
 
