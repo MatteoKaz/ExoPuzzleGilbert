@@ -21,6 +21,9 @@ public class Vent : MonoBehaviour
     [SerializeField] private float windVolume = 0.5f;
     private Vector3 pointSortie = Vector3.zero;
 
+    [SerializeField] private SpriteRenderer ventSpriteRenderer;
+    private float maxSpriteSize = 5.12f;
+
 
     void Start()
     {
@@ -44,7 +47,11 @@ public class Vent : MonoBehaviour
             direct = new Vector3(0f, -1f, 0f);
             directPush = new Vector3(0f, -1f, 0f);
         }
-        
+        if (ventSpriteRenderer == null)
+        {
+            ventSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
         SetupWindSound();
     }
     
@@ -82,10 +89,12 @@ public class Vent : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(direct), out hit, ventDistance))
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(direct) * hit.distance, Color.yellow);
+                Debug.DrawRay(transform.position, transform.TransformDirection(direct) * hit.distance, Color.red);
+
 
                 if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
                 {
+                    UpdateVentSpriteSize(hit.distance);
                     movePlayer = hit.transform.gameObject.GetComponent<PlayerMovement>();
                     rb = hit.transform.gameObject.GetComponent<Rigidbody>();
                     rb.AddForce(directPush * vitesseDePoussee, ForceMode.VelocityChange);
@@ -96,6 +105,7 @@ public class Vent : MonoBehaviour
                     //Vector3 center = hit.transform.TransformPoint(hit.center);
                     Vector3 center = new Vector3(transform.position.x, hit.transform.position.y, hit.transform.position.z);
                     Vector3 impact = hit.point;
+                    float distance1 = hit.distance;
                     Vector3 betweenImpact = impact - center;
                     
                     if (direction == 1 || direction == 3)
@@ -128,6 +138,7 @@ public class Vent : MonoBehaviour
 
                         if (Physics.Raycast(pointSortie, transform.TransformDirection(direct), out hit, newDistance))
                         {
+                            UpdateVentSpriteSize(hit.distance+sphereHeight+distance1);
                             Debug.DrawRay(pointSortie, transform.TransformDirection(direct) * hit.distance, Color.red);
                             if (hit.transform.gameObject.GetComponent<PlayerMovement>() != null)
                             {
@@ -139,6 +150,7 @@ public class Vent : MonoBehaviour
                         }
                         else
                         {
+                            UpdateVentSpriteSize(ventDistance);
                             Debug.DrawRay(pointSortie, transform.TransformDirection(direct) * newDistance, Color.magenta);
                         }
                     }
@@ -146,6 +158,7 @@ public class Vent : MonoBehaviour
                 }
                 else
                 {
+                    UpdateVentSpriteSize(hit.distance);
                     if (direction == 1 || direction == 3)
                     {
                         if (movePlayer != null)
@@ -160,6 +173,7 @@ public class Vent : MonoBehaviour
 
             else
             {
+                UpdateVentSpriteSize(ventDistance);
                 Debug.DrawRay(transform.position, transform.TransformDirection(direct) * ventDistance, Color.white);
 
                 if (direction == 1 || direction == 3)
@@ -173,5 +187,16 @@ public class Vent : MonoBehaviour
                 }
             }
         }
+
     }
+    private void UpdateVentSpriteSize(float distance)
+    {
+        if (ventSpriteRenderer != null)
+        {
+            Vector2 newSize = ventSpriteRenderer.size;
+            newSize.x = distance / ventSpriteRenderer.transform.localScale.z;
+            ventSpriteRenderer.size = newSize;
+        }
+    }
+
 }
