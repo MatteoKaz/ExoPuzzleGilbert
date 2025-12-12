@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     public float stepHeight = 0.3f;      // hauteur des petits rebords
     public float stepLow = 0.3f;
     public float stepSmooth = 0.05f;     // puissance du step-up (vertical)
-    public float stepCheckDistance = 0.4f; // rayon de détection devant
+    public float stepCheckDistance = 0.4f; // rayon de dï¿½tection devant
     public float stepCooldown = 0.1f;        // time between two steps
 
     private float stepTimer = 0f;
@@ -81,8 +81,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump Control")]
     public bool isJumping = false;
-    public float jumpGravityMultiplier = 2f; // Gravité pendant le saut
+    public float jumpGravityMultiplier = 2f; // Gravitï¿½ pendant le saut
     private Collider[] groundCheckColliders = new Collider[5];
+    private float oldVelo = 0;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -94,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat("Speed", -speed);
         starterAxisX = transform.position.x;
         mask = ~(LayerMask.GetMask("Slope") | LayerMask.GetMask("Traversable"));
+        float oldVelo = rb.linearVelocity.z - speed * stopSpeed;
     }
 
     public void NewGravity()
@@ -171,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
                         v.z = horiz.z;*/
                     }
                     Offsetvalue = -0.028f;
-                    // 4. CLAMP VITESSE VERTICALE (évite de voler)
+                    // 4. CLAMP VITESSE VERTICALE (ï¿½vite de voler)
                    /* if (v.y > maxVerticalSpeed)
                         v.y = maxVerticalSpeed;
 
@@ -199,8 +201,9 @@ public class PlayerMovement : MonoBehaviour
                     //La suite est a mettre dans le build final.
                     // speed = speedOriginal;
                     //Debug.Log(speedOriginal);
-                    float oldVelo = rb.linearVelocity.z - speed * stopSpeed;
+                    
                     rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, oldVelo + speed*stopSpeed); 
+                    oldVelo = rb.linearVelocity.z - speed * stopSpeed;
                     Offsetvalue = 0.08f;
                     StepClimb();
                     rb.useGravity = false;
@@ -238,7 +241,7 @@ public class PlayerMovement : MonoBehaviour
                     rb.AddForce(Physics.gravity * gravityValue * controlGravity, ForceMode.Acceleration);
                     rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
                 }
-                // NOUVEAU : Appliquer aussi la gravité quand en train de sauter
+                // NOUVEAU : Appliquer aussi la gravitï¿½ quand en train de sauter
                 else if (isJumping && notOnGround == false)
                 {
                     rb.useGravity = false;
@@ -258,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 if (notOnGround == false)
                 {
-                    // 4. CLAMP VITESSE VERTICALE (évite de voler)
+                    // 4. CLAMP VITESSE VERTICALE (ï¿½vite de voler)
                   /*  if (v.y > maxVerticalSpeed)
                         v.y = maxVerticalSpeed;*/
 
@@ -620,9 +623,9 @@ IEnumerator ResetJumpAfterLanding()
             yield return new WaitForFixedUpdate();
         }
 
-        // Une fois au sol, réinitialiser le flag
+        // Une fois au sol, rï¿½initialiser le flag
         isJumping = false;
-        Debug.Log("Atterrissage détecté");
+        Debug.Log("Atterrissage dï¿½tectï¿½");
     }
 
     /*
