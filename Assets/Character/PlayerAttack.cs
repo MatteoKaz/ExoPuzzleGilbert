@@ -46,6 +46,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float reaction1Volume = 1f;
     [SerializeField] private float reaction2Volume = 1f;
     [SerializeField] private float enemyCryVolume = 1f;
+    [SerializeField] private float enemyCryVolumeAct1 = 1f;
+    [SerializeField] private float enemyCryVolumeAct2 = 1f;
+    [SerializeField] private float enemyCryVolumeAct3 = 1f;
 
     private AudioSource audioSource;
 
@@ -94,6 +97,21 @@ public class PlayerAttack : MonoBehaviour
     public void SetEnemyCryVolume(float volume)
     {
         enemyCryVolume = volume;
+    }
+
+    public void SetEnemyCryVolumeAct1(float volume)
+    {
+        enemyCryVolumeAct1 = volume;
+    }
+
+    public void SetEnemyCryVolumeAct2(float volume)
+    {
+        enemyCryVolumeAct2 = volume;
+    }
+
+    public void SetEnemyCryVolumeAct3(float volume)
+    {
+        enemyCryVolumeAct3 = volume;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -146,29 +164,34 @@ public class PlayerAttack : MonoBehaviour
 
         string currentSceneName = SceneManager.GetActiveScene().name;
         AudioClip[] cryClips;
+        float actVolume;
 
         if (currentSceneName.StartsWith("Acte1"))
         {
             cryClips = new AudioClip[] { enemyHitCryAct1_1, enemyHitCryAct1_2, enemyHitCryAct1_3 };
+            actVolume = enemyCryVolumeAct1;
         }
         else if (currentSceneName.StartsWith("Acte2"))
         {
             cryClips = new AudioClip[] { enemyHitCryAct2_1, enemyHitCryAct2_2, enemyHitCryAct2_3 };
+            actVolume = enemyCryVolumeAct2;
         }
         else if (currentSceneName.StartsWith("Acte3"))
         {
             cryClips = new AudioClip[] { enemyHitCryAct3_1, enemyHitCryAct3_2, enemyHitCryAct3_3 };
+            actVolume = enemyCryVolumeAct3;
         }
         else
         {
             cryClips = new AudioClip[] { enemyHitCry1, enemyHitCry2, enemyHitCry3 };
+            actVolume = enemyCryVolume;
         }
 
         AudioClip selectedClip = cryClips[Random.Range(0, cryClips.Length)];
 
         if (selectedClip != null)
         {
-            enemyCryAudioSource.PlayOneShot(selectedClip, masterVolume * enemyCryVolume);
+            enemyCryAudioSource.PlayOneShot(selectedClip, masterVolume * actVolume);
         }
     }
 }
