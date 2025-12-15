@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 7619274153500239624}
   - component: {fileID: 1420978646385799975}
   - component: {fileID: 6506030101267134862}
+  - component: {fileID: 4384911194901889911}
   m_Layer: 0
   m_Name: "PropsAimant\xE9"
   m_TagString: Untagged
@@ -190,7 +191,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1096
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -207,7 +208,7 @@ Rigidbody:
   m_GameObject: {fileID: 6269349807951460157}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.65
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -224,7 +225,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 114
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &6506030101267134862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,5 +236,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7eb80f905e89c3844855d75719513662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4384911194901889911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269349807951460157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2d328620a66384093ef07921381561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

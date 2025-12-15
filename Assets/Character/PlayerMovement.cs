@@ -486,15 +486,18 @@ public class PlayerMovement : MonoBehaviour
                             {
                                 if (notOnGround == false)
                                 {
-                                    Vector3 dir = new Vector3(0, 0.75f, -0.15f*-speed);
-                                    Debug.Log("je poussette step");
-                                    rb.AddForce(dir * stepSmooth, ForceMode.Impulse);
-                                    stepTimer = stepCooldown;
+                                    if (hitLowInfo.transform.GetComponent<NoAffectByRaycastDetect>() == null)
+                                    {
+                                        Vector3 dir = new Vector3(0, 0.75f, -0.15f * -speed);
+                                        Debug.Log("je poussette step");
+                                        rb.AddForce(dir * stepSmooth, ForceMode.Impulse);
+                                        stepTimer = stepCooldown;
 
-                                    // NOUVEAU : Activer le flag de saut
-                                    isJumping = true;
-                                    StartCoroutine(ResetJumpAfterLanding());
-
+                                        // NOUVEAU : Activer le flag de saut
+                                        isJumping = true;
+                                        StartCoroutine(ResetJumpAfterLanding());
+                                    }
+                                    
                                     return;
                                 }
                             }
