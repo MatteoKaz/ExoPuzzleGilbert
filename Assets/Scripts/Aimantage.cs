@@ -64,6 +64,10 @@ public class Aimantage : MonoBehaviour
                         rb.useGravity = false;
                         rb.AddForce(-directionAimant * vitesseDePoussee, ForceMode.VelocityChange);
                     }
+                    else
+                    {
+                        hit.transform.GetComponent<PlayerMovement>().controlGravity = 0.78f;
+                    }
                 }
                 else if (hit.transform.gameObject.GetComponent<Traversable>())
                 {
@@ -119,6 +123,7 @@ public class Aimantage : MonoBehaviour
                                 rb.useGravity = false;
                                 rb.AddForce(-directionAimant * vitesseDePoussee, ForceMode.VelocityChange);
                             }
+                           
                         }
                         else
                         {
