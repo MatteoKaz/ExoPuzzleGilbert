@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
@@ -16,10 +17,26 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private AudioSource Reaction1;
     [SerializeField] private AudioSource Reaction2;
 
-    [Header("Enemy Hit Cry Sounds")]
+    [Header("Enemy Hit Cry Sounds - Default (Prologue/Boss)")]
     [SerializeField] private AudioClip enemyHitCry1;
     [SerializeField] private AudioClip enemyHitCry2;
     [SerializeField] private AudioClip enemyHitCry3;
+
+    [Header("Enemy Hit Cry Sounds - Act1")]
+    [SerializeField] private AudioClip enemyHitCryAct1_1;
+    [SerializeField] private AudioClip enemyHitCryAct1_2;
+    [SerializeField] private AudioClip enemyHitCryAct1_3;
+
+    [Header("Enemy Hit Cry Sounds - Act2")]
+    [SerializeField] private AudioClip enemyHitCryAct2_1;
+    [SerializeField] private AudioClip enemyHitCryAct2_2;
+    [SerializeField] private AudioClip enemyHitCryAct2_3;
+
+    [Header("Enemy Hit Cry Sounds - Act3")]
+    [SerializeField] private AudioClip enemyHitCryAct3_1;
+    [SerializeField] private AudioClip enemyHitCryAct3_2;
+    [SerializeField] private AudioClip enemyHitCryAct3_3;
+
     [SerializeField] private AudioSource enemyCryAudioSource;
 
     [Header("Volume Settings")]
@@ -127,7 +144,26 @@ public class PlayerAttack : MonoBehaviour
     {
         if (enemyCryAudioSource == null) return;
 
-        AudioClip[] cryClips = { enemyHitCry1, enemyHitCry2, enemyHitCry3 };
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        AudioClip[] cryClips;
+
+        if (currentSceneName.StartsWith("Acte1"))
+        {
+            cryClips = new AudioClip[] { enemyHitCryAct1_1, enemyHitCryAct1_2, enemyHitCryAct1_3 };
+        }
+        else if (currentSceneName.StartsWith("Acte2"))
+        {
+            cryClips = new AudioClip[] { enemyHitCryAct2_1, enemyHitCryAct2_2, enemyHitCryAct2_3 };
+        }
+        else if (currentSceneName.StartsWith("Acte3"))
+        {
+            cryClips = new AudioClip[] { enemyHitCryAct3_1, enemyHitCryAct3_2, enemyHitCryAct3_3 };
+        }
+        else
+        {
+            cryClips = new AudioClip[] { enemyHitCry1, enemyHitCry2, enemyHitCry3 };
+        }
+
         AudioClip selectedClip = cryClips[Random.Range(0, cryClips.Length)];
 
         if (selectedClip != null)

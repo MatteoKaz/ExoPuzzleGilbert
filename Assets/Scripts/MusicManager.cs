@@ -96,6 +96,12 @@ public class MusicManager : MonoBehaviour
 
         currentSceneName = scene.name;
 
+        if (scene.name == "Menu")
+        {
+            StopMusic();
+            return;
+        }
+
         AudioClip clipToPlay = GetMusicForScene(scene.name);
 
         if (clipToPlay != null)
