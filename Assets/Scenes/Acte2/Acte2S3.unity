@@ -10406,6 +10406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minClamp: -0.894
   maxClamp: 0.694
+  forcePoussee: 1
 --- !u!54 &974696152
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18343,7 +18344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.469
+      value: 1.461
       objectReference: {fileID: 0}
     - target: {fileID: 5024503935712097161, guid: 6790f1b4059ff704ea4cabd8c728aaba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23775,7 +23776,9 @@ PrefabInstance:
       propertyPath: gravityValue
       value: 0.78
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2320289408375971222, guid: 8a57458e35f14114797d27169a713374, type: 3}
+    - {fileID: 7103583659173199499, guid: 8a57458e35f14114797d27169a713374, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
