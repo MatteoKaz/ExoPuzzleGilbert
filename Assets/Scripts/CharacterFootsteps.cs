@@ -24,22 +24,21 @@ public class CharacterFootsteps : MonoBehaviour
     [SerializeField] private float footstepVolumeAct3 = 1f;
     [SerializeField] private float footstepVolumePrologue = 1f;
 
-    private AudioSource audioSource;
+    private AudioSource dedicatedAudioSource;
     private PlayerMovement playerMovement;
     private Rigidbody rb;
     private float stepTimer = 0f;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        GameObject footstepObject = new GameObject("FootstepAudioSource");
+        footstepObject.transform.SetParent(transform);
+        footstepObject.transform.localPosition = Vector3.zero;
 
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-
-        audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 1f;
+        dedicatedAudioSource = footstepObject.AddComponent<AudioSource>();
+        dedicatedAudioSource.playOnAwake = false;
+        dedicatedAudioSource.spatialBlend = 1f;
+        dedicatedAudioSource.loop = false;
 
         playerMovement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody>();
@@ -60,6 +59,11 @@ public class CharacterFootsteps : MonoBehaviour
         else
         {
             stepTimer = 0f;
+
+            if (dedicatedAudioSource != null && dedicatedAudioSource.isPlaying)
+            {
+                dedicatedAudioSource.Stop();
+            }
         }
     }
 
@@ -80,6 +84,8 @@ public class CharacterFootsteps : MonoBehaviour
 
     private void PlayFootstep()
     {
+        if (dedicatedAudioSource.isPlaying) return;
+
         string currentSceneName = SceneManager.GetActiveScene().name;
         AudioClip selectedClip = null;
         float volumeMultiplier = footstepVolume;
@@ -114,9 +120,9 @@ public class CharacterFootsteps : MonoBehaviour
             volumeMultiplier *= footstepVolumePrologue;
         }
 
-        if (selectedClip != null && audioSource != null)
+        if (selectedClip != null && dedicatedAudioSource != null)
         {
-            audioSource.PlayOneShot(selectedClip, volumeMultiplier);
+            dedicatedAudioSource.PlayOneShot(selectedClip, volumeMultiplier);
         }
     }
 
