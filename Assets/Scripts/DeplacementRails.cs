@@ -11,11 +11,13 @@ public class DeplacementRails : MonoBehaviour
     public float forcePoussee = 1;
     Rigidbody rb;
     Transform rail;
+    private RigidbodyConstraints baseConstrain;
 
     private void Start()
     { 
         rb = GetComponent<Rigidbody>();
         rail = transform.parent;
+        baseConstrain = rb.constraints;
     }
     void FixedUpdate()
     {
@@ -50,10 +52,11 @@ public class DeplacementRails : MonoBehaviour
             }
             else if (listColl.Count <= 0)
             {
-             //   rb.isKinematic = false;
-                rb.constraints = RigidbodyConstraints.FreezePositionX |
+                //   rb.isKinematic = false;
+                rb.constraints = baseConstrain;
+                    /*RigidbodyConstraints.FreezePositionX |
                  RigidbodyConstraints.FreezePositionY |
-                 RigidbodyConstraints.FreezeRotation;
+                 RigidbodyConstraints.FreezeRotation;*/
 
                 gameObject.layer = LayerMask.NameToLayer("Aimant");
             }
@@ -68,10 +71,11 @@ public class DeplacementRails : MonoBehaviour
             listColl.Remove(collision);
             if (listColl.Count <= 0)
             {
-             //   rb.isKinematic = false;
-                rb.constraints = RigidbodyConstraints.FreezePositionX |
+                //   rb.isKinematic = false;
+                rb.constraints = baseConstrain;
+                    /*RigidbodyConstraints.FreezePositionX |
                  RigidbodyConstraints.FreezePositionY |
-                 RigidbodyConstraints.FreezeRotation;
+                 RigidbodyConstraints.FreezeRotation;*/
 
                 gameObject.layer = LayerMask.NameToLayer("Aimant");
             }
@@ -80,10 +84,11 @@ public class DeplacementRails : MonoBehaviour
         {
             if (listColl.Count <= 0)
             {
-             //   rb.isKinematic = false;
-                rb.constraints = RigidbodyConstraints.FreezePositionX |
+                //   rb.isKinematic = false;
+                rb.constraints = baseConstrain;
+                    /*RigidbodyConstraints.FreezePositionX |
                  RigidbodyConstraints.FreezePositionY |
-                 RigidbodyConstraints.FreezeRotation;
+                 RigidbodyConstraints.FreezeRotation;*/
 
                 gameObject.layer = LayerMask.NameToLayer("Aimant");
             }
