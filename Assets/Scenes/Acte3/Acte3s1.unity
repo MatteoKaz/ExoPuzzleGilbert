@@ -1604,6 +1604,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 747768146}
+    - target: {fileID: 6724925999564369400, guid: a1298f080f0a64b4698f48359302d005, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1460931077}
+    - target: {fileID: 6724925999564369400, guid: a1298f080f0a64b4698f48359302d005, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DisparitionAide
+      objectReference: {fileID: 0}
     - target: {fileID: 6912722129212882494, guid: a1298f080f0a64b4698f48359302d005, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -9672,6 +9680,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2320349841214263943, guid: caacf32a22d2c874386f846aea339cb4, type: 3}
   m_PrefabInstance: {fileID: 1460931075}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1460931077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3818359742300672126, guid: caacf32a22d2c874386f846aea339cb4, type: 3}
+  m_PrefabInstance: {fileID: 1460931075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197e5db8d2166ba40a2f8ab1efdb5e9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1465705156
 GameObject:
   m_ObjectHideFlags: 0
