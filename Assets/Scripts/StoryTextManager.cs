@@ -24,11 +24,28 @@ public class StoryTextManager : MonoBehaviour
     [Header("Transition Settings")]
     [SerializeField] private bool autoTransitionToNextLevel = true;
     [SerializeField] private float delayBeforeTransition = 1f;
+    [SerializeField] private bool _bPlaySound = false;
+    [SerializeField] private float soundVolume = 1f;
+    [SerializeField] private string whichMoment = "else";
+    private AudioSource audioToPlay;
 
     private TransitionEntracte transitionManager;
 
     void Start()
     {
+        if (whichMoment == "1")
+        {
+            whichMoment = firstText;
+        }
+        else if (whichMoment == "2")
+        {
+            whichMoment = secondText;
+        }
+        else if (whichMoment == "3")
+        {
+            whichMoment = thirdText;
+        }
+
         if (storyText == null)
         {
             storyText = GetComponent<TextMeshProUGUI>();
@@ -37,6 +54,8 @@ public class StoryTextManager : MonoBehaviour
         transitionManager = FindFirstObjectByType<TransitionEntracte>();
 
         StartCoroutine(DisplayStorySequence());
+
+        
     }
 
     private IEnumerator DisplayStorySequence()
@@ -52,6 +71,16 @@ public class StoryTextManager : MonoBehaviour
 
         if (autoTransitionToNextLevel && transitionManager != null)
         {
+            if (_bPlaySound && whichMoment == "else")
+            {
+
+                audioToPlay = GetComponent<AudioSource>();
+                if (audioToPlay != null)
+                {
+                    audioToPlay.volume = soundVolume;
+                    audioToPlay.Play();
+                }
+            }
             yield return new WaitForSeconds(delayBeforeTransition);
             transitionManager.Fondeur();
         }
@@ -61,11 +90,24 @@ public class StoryTextManager : MonoBehaviour
     {
         storyText.text = text;
 
-        yield return StartCoroutine(FadeIn());
+
+            yield return StartCoroutine(FadeIn());
 
         yield return new WaitForSeconds(displayDuration);
 
+        if (_bPlaySound && text == whichMoment)
+        {
+            audioToPlay = GetComponent<AudioSource>();
+            if (audioToPlay != null)
+            {
+                audioToPlay.volume = soundVolume;
+                audioToPlay.Play();
+            }
+        }
+
         yield return StartCoroutine(FadeOut());
+
+        
     }
 
     private IEnumerator FadeIn()
