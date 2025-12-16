@@ -109,7 +109,7 @@ public class Death : MonoBehaviour
         {
             _PM.rb.constraints = RigidbodyConstraints.None;
             Character.transform.position = RespawnLoc;
-            Character.layer = LayerMask.NameToLayer("ShadowPlayerWithoutCube");
+            Character.layer = LayerMask.NameToLayer("ShadowPlayer");
 
             _PM.rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX;
         }
