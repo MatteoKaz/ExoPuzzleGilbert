@@ -405,6 +405,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.GetComponent<Traversable>())
         {
+            other.gameObject.GetComponent<Traversable>().PlaySoundMur(0.2f);
             gameObject.layer = LayerMask.NameToLayer("ShadowPlayerTraversable");
         }
 
@@ -431,6 +432,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.GetComponent<Traversable>())
         {
+            other.gameObject.GetComponent<Traversable>().PlaySoundMur(0.2f);
             gameObject.layer = LayerMask.NameToLayer("ShadowPlayer");
         }
 
