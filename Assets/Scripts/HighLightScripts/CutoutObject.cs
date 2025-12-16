@@ -17,6 +17,8 @@ public class CutoutObject : MonoBehaviour
 
     private Camera renderCamera;
 
+    private List<Material> affectedMaterials = new List<Material>();
+
     private void Awake()
     {
         renderCamera = GetComponent<Camera>();
@@ -40,53 +42,55 @@ public class CutoutObject : MonoBehaviour
 
             Vector3 offset = targetObject.position - cameraCenter;
             RaycastHit[] hitObjects = Physics.RaycastAll(cameraCenter, offset.normalized, offset.magnitude, wallMask);
-            List<RaycastHit> allHitObjects = new List<RaycastHit>();
+
+            List<Material> currentFrameMaterials = new List<Material>();
 
             for (int i = 0; i < hitObjects.Length; ++i)
             {
-                if (!allHitObjects.Contains(hitObjects[i]))
+                Renderer renderer = hitObjects[i].transform.GetComponent<Renderer>();
+                if (renderer != null)
                 {
-                    allHitObjects.Add(hitObjects[i]);
+                    Material[] materials = renderer.materials;
+
+                    for (int m = 0; m < materials.Length; ++m)
+                    {
+                        materials[m].SetVector("_CutoutPos", cutoutPos);
+                        materials[m].SetFloat("_CutoutSize", 0.2f);
+                        materials[m].SetFloat("_FalloffSize", 0.010f);
+                        materials[m].SetVector("_CharacterPosition", targetObject.position);
+                        materials[m].SetVector("_CameraPosition", (cameraCenter - targetObject.position).normalized);
+
+                        if (!currentFrameMaterials.Contains(materials[m]))
+                        {
+                            currentFrameMaterials.Add(materials[m]);
+                        }
+                    }
                 }
             }
-            for (int j = 0; j < allHitObjects.Count; ++j)
+
+            for (int i = affectedMaterials.Count - 1; i >= 0; i--)
             {
-                if (hitObjects.Contains<RaycastHit>(allHitObjects[j]))
+                if (affectedMaterials[i] != null && !currentFrameMaterials.Contains(affectedMaterials[i]))
                 {
-                    Renderer renderer = allHitObjects[j].transform.GetComponent<Renderer>();
-                    if (renderer != null)
-                    {
-                        Material[] materials = renderer.materials;
-
-                        for (int m = 0; m < materials.Length; ++m)
-                        {
-                            materials[m].SetVector("_CutoutPos", cutoutPos);
-                            materials[m].SetFloat("_CutoutSize", 0.2f);
-                            materials[m].SetFloat("_FalloffSize", 0.010f);
-                            materials[m].SetVector("_CharacterPosition", targetObject.position);
-                            materials[m].SetVector("_CameraPosition", (cameraCenter - targetObject.position).normalized);
-                        }
-                    }
-                }
-                else
-                {
-                    Renderer renderer = allHitObjects[j].transform.GetComponent<Renderer>();
-                    if (renderer != null)
-                    {
-                        Material[] materials = renderer.materials;
-
-                        for (int m = 0; m < materials.Length; ++m)
-                        {
-                            materials[m].SetVector("_CutoutPos", cutoutPos);
-                            materials[m].SetFloat("_CutoutSize", 0f);
-                            materials[m].SetFloat("_FalloffSize", 0f);
-                            materials[m].SetVector("_CharacterPosition", targetObject.position);
-                            materials[m].SetVector("_CameraPosition", (cameraCenter - targetObject.position).normalized);
-                        }
-                    }
+                    affectedMaterials[i].SetFloat("_CutoutSize", 0f);
+                    affectedMaterials[i].SetFloat("_FalloffSize", 0f);
+                    affectedMaterials.RemoveAt(i);
                 }
             }
+
+            affectedMaterials = currentFrameMaterials;
         }
-        
+        else
+        {
+            for (int i = 0; i < affectedMaterials.Count; i++)
+            {
+                if (affectedMaterials[i] != null)
+                {
+                    affectedMaterials[i].SetFloat("_CutoutSize", 0f);
+                    affectedMaterials[i].SetFloat("_FalloffSize", 0f);
+                }
+            }
+            affectedMaterials.Clear();
+        }
     }
 }
