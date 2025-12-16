@@ -3687,6 +3687,7 @@ GameObject:
   - component: {fileID: 925194813}
   - component: {fileID: 925194812}
   - component: {fileID: 925194811}
+  - component: {fileID: 925194815}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3783,6 +3784,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &925194815
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925194810}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 408b13defb215224e929e6d3e0808892, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &928602587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5828,13 +5851,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318216853}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.70952106, z: -0, w: 0.7046843}
-  m_LocalPosition: {x: -0.982, y: -0.719, z: 1.56}
+  m_LocalRotation: {x: -0, y: 0.65665936, z: -0, w: -0.75418735}
+  m_LocalPosition: {x: -0.982, y: -0.78, z: 1.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1421192140}
-  m_LocalEulerAnglesHint: {x: 0, y: 90.392, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 277.909, z: 0}
 --- !u!1001 &1341209900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6203,44 +6226,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationSequence:
   - stepName: 
-    targetAnimator: {fileID: 0}
-    clip: {fileID: 0}
-    duration: 0
+    targetAnimator: {fileID: 1318216854}
+    clip: {fileID: 7400000, guid: fe39d35095ee0ab4aaec2081a15a956f, type: 2}
+    duration: 0.4
     startDelay: 0
     playInParallel: 0
   - stepName: 
     targetAnimator: {fileID: 0}
     clip: {fileID: 7400000, guid: 3a2b9e35dbf59f54faaba1b46c56b901, type: 2}
-    duration: 1
+    duration: 0.5
     startDelay: 0
     playInParallel: 0
   - stepName: 
-    targetAnimator: {fileID: 0}
-    clip: {fileID: 7400000, guid: 829ef1f6e2a43eb4f8569a8c566be2fb, type: 2}
-    duration: 1
+    targetAnimator: {fileID: 1470602566}
+    clip: {fileID: 7400000, guid: f7be018c58f06b241b5cd1792018d0a0, type: 2}
+    duration: 0.5
     startDelay: 0
     playInParallel: 0
   - stepName: 
-    targetAnimator: {fileID: 0}
-    clip: {fileID: 7400000, guid: 85917e385d473e94f8e660d1e07f0dc1, type: 2}
-    duration: 1
+    targetAnimator: {fileID: 1470602566}
+    clip: {fileID: 7400000, guid: fefa7f6423410d748bc938bae97e4349, type: 2}
+    duration: 0.5
     startDelay: 0
     playInParallel: 0
   - stepName: 
-    targetAnimator: {fileID: 0}
-    clip: {fileID: 7400000, guid: 585270c34ba0e4243a38e86e9621b39a, type: 2}
-    duration: 0
+    targetAnimator: {fileID: 1318216854}
+    clip: {fileID: 7400000, guid: 4ecf507b80936864d8baa5a197b7afc2, type: 2}
+    duration: 0.3
     startDelay: 0
     playInParallel: 0
   - stepName: 
-    targetAnimator: {fileID: 0}
-    clip: {fileID: 7400000, guid: cac40f5fea718d44dabb701705ce1afb, type: 2}
-    duration: 0
+    targetAnimator: {fileID: 1318216854}
+    clip: {fileID: 7400000, guid: 98410b6815798da40a21e7640bb93bf1, type: 2}
+    duration: 0.7
     startDelay: 0
     playInParallel: 0
   - stepName: 
-    targetAnimator: {fileID: 0}
-    clip: {fileID: 0}
+    targetAnimator: {fileID: 1318216854}
+    clip: {fileID: 7400000, guid: d3812e8df38d1fe4da8a2b8c6b4dff04, type: 2}
     duration: 0
     startDelay: 0
     playInParallel: 0
