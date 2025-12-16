@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip SwordSound;
-    [SerializeField] private AudioSource EnnemyHit;
+    [SerializeField] private AudioClip EnnemyHit;
     [SerializeField] private AudioSource Reaction1;
     [SerializeField] private AudioSource Reaction2;
 

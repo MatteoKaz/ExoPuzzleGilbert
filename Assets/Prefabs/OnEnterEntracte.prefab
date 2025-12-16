@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8431524958630336573}
   - component: {fileID: 7621684835105475127}
+  - component: {fileID: 4586498790190430121}
   m_Layer: 0
   m_Name: OnEnterEntracte
   m_TagString: Untagged
@@ -129,3 +130,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4586498790190430121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183116114531723751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d0d33dc823614498563c4240e03da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loopStartPercent: 0.2
+  loopEndPercent: 0.9

@@ -3470,11 +3470,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 85.859, z: 0}
---- !u!82 &466434573 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1748659937689749839, guid: 1ce8365c6fbf4c747b3672e4951cef9f, type: 3}
-  m_PrefabInstance: {fileID: 885869169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &481489939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db783be8da5f9074f9433ec8a4313b54, type: 3}
@@ -13855,11 +13850,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9014f6209f316e74ab16ba7a77903ce9, type: 3}
   m_PrefabInstance: {fileID: 1756922296}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &1770789693 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 7129092736114176544, guid: 9201609ad6f5d6e4ea244b6e5579e27c, type: 3}
-  m_PrefabInstance: {fileID: 1407574555}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1773084018
 GameObject:
   m_ObjectHideFlags: 0
@@ -15014,11 +15004,6 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
 --- !u!82 &2013557976 stripped
 AudioSource:
-  m_CorrespondingSourceObject: {fileID: 7896623334685928699, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
-  m_PrefabInstance: {fileID: 2013557975}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &2013557977 stripped
-AudioSource:
   m_CorrespondingSourceObject: {fileID: 6049342528372530967, guid: 4391c45ceec8d384eaa151fc63fdec80, type: 3}
   m_PrefabInstance: {fileID: 2013557975}
   m_PrefabAsset: {fileID: 0}
@@ -16154,18 +16139,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
       propertyPath: EnnemyHit
-      value: 
-      objectReference: {fileID: 2013557977}
-    - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: Reaction1
-      value: 
-      objectReference: {fileID: 466434573}
-    - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: Reaction2
-      value: 
-      objectReference: {fileID: 1770789693}
-    - target: {fileID: 7716116992965790234, guid: 8a57458e35f14114797d27169a713374, type: 3}
-      propertyPath: enemyCryAudioSource
       value: 
       objectReference: {fileID: 2013557976}
     m_RemovedComponents: []
