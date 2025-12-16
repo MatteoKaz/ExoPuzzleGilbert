@@ -8,15 +8,19 @@ public class PorteOuverture : MonoBehaviour
     private Vector3 hautePosition;
     public float vitesseDePositionnement = 1f;
     private Coroutine moveRoutine;
+    private AudioSource audioPorte;
 
     void Start()
     {
+        audioPorte = GetComponent<AudioSource>();
+        audioPorte.volume = 0.05f;
         hautePosition = new Vector3(transform.localPosition.x, hauteur, transform.localPosition.z);
         clef.keyGetted.AddListener(() => OuvrirPorte());
     }
 
     public void OuvrirPorte()
     {
+        audioPorte.Play();
         if (moveRoutine != null)
         {
             StopCoroutine(moveRoutine);
