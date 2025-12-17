@@ -24,9 +24,13 @@ public class StoryTextManager : MonoBehaviour
     [Header("Transition Settings")]
     [SerializeField] private bool autoTransitionToNextLevel = true;
     [SerializeField] private float delayBeforeTransition = 1f;
+    
     [SerializeField] private bool _bPlaySound = false;
+    [SerializeField] private bool _bPlayEvent = false;
     [SerializeField] private float soundVolume = 1f;
     [SerializeField] private string whichMoment = "else";
+    [SerializeField] private ReduceMaterialOpacity eventCalled;
+    [SerializeField] private float delayOpacity = 5f;
     private AudioSource audioToPlay;
 
     private TransitionEntracte transitionManager;
@@ -69,6 +73,11 @@ public class StoryTextManager : MonoBehaviour
             yield return StartCoroutine(ShowTextWithFade(thirdText, thirdTextDuration));
         }
 
+        if (_bPlayEvent && eventCalled != null)
+        {
+            eventCalled.RecuteurOpacite(fadeInDuration);
+        }
+
         if (autoTransitionToNextLevel && transitionManager != null)
         {
             if (_bPlaySound && whichMoment == "else")
@@ -81,9 +90,10 @@ public class StoryTextManager : MonoBehaviour
                     audioToPlay.Play();
                 }
             }
-            yield return new WaitForSeconds(delayBeforeTransition);
+            yield return new WaitForSeconds(delayOpacity);
             transitionManager.Fondeur();
         }
+        
     }
 
     private IEnumerator ShowTextWithFade(string text, float displayDuration)
