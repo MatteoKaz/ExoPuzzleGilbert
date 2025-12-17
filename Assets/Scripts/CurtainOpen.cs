@@ -36,6 +36,8 @@ public class CurtainOpen : MonoBehaviour
             yield return new WaitForSeconds(1f);
             _open = true;
             curtainAnim.SetBool("Launch", true);
+            yield return new WaitForSeconds(0.1f);
+            curtainAnim.SetBool("Launch", false);
         }
         
     }
