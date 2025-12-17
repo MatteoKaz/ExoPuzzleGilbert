@@ -18515,7 +18515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyText: {fileID: 1702091986}
   firstText: "Cr\xE9dits"
-  secondText: --- Game Design --- \n Aaron Linares \n Mael Compin \n Matteo Kazandjian
+  secondText: --- Game Design --- \n Ilana Linares \n Mael Compin \n Matteo Kazandjian
     \n Benjamin Martinez Filio
   thirdText: "--- 3D & 2D Artists --- \\n Ori Brandi - L\xE9a Erba - Mahyane Elharar
     \u2013 Gabriel Colagrande \u2013 Yannis Ventaillat \u2013 Corentin Carriere \u2013
@@ -18529,8 +18529,11 @@ MonoBehaviour:
   autoTransitionToNextLevel: 1
   delayBeforeTransition: 3
   _bPlaySound: 1
+  _bPlayEvent: 0
   soundVolume: 0.2
   whichMoment: 1
+  eventCalled: {fileID: 0}
+  delayOpacity: 5
 --- !u!82 &1702091989
 AudioSource:
   m_ObjectHideFlags: 0
