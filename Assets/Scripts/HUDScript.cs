@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class HUDScript : MonoBehaviour
 {
@@ -29,6 +30,17 @@ public class HUDScript : MonoBehaviour
             transform.rotation = trackCamera.transform.rotation;
             vector = trackCamera.transform.position;
             transform.position = vector * 1.01f;
+        }
+        else
+        {
+            trackCamera = GameObject.Find("Main Camera");
+            Debug.Log(trackCamera);
+            if (trackCamera != null)
+            {
+                transform.rotation = trackCamera.transform.rotation;
+                vector = trackCamera.transform.position;
+                transform.position = vector * 1.01f;
+            }
         }
     }
 }
