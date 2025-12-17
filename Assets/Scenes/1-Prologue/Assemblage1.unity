@@ -3951,6 +3951,10 @@ PrefabInstance:
       propertyPath: startPoint
       value: 
       objectReference: {fileID: 1759647842}
+    - target: {fileID: 4267870540592000631, guid: 3cffcb597211b854b88524e61dade1a6, type: 3}
+      propertyPath: secondEndPoint
+      value: 
+      objectReference: {fileID: 676990993374391281}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13679,9 +13683,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 218777689}
     - target: {fileID: 487373427134277066, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+      propertyPath: m_OnPress.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 487373427134277066, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+      propertyPath: m_OnPress.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 487373427134277066, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
       propertyPath: m_OnPress.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 177807939}
+    - target: {fileID: 487373427134277066, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+      propertyPath: m_OnPress.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1516351257}
+    - target: {fileID: 487373427134277066, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+      propertyPath: m_OnPress.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 487373427134277066, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+      propertyPath: m_OnPress.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: DisparitionTotale
+      objectReference: {fileID: 0}
+    - target: {fileID: 487373427134277066, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+      propertyPath: m_OnPress.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: OnApproachChest, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 487373427134277066, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+      propertyPath: m_OnPress.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2307869605773600625, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
       propertyPath: m_Name
       value: PushButton
@@ -13731,6 +13763,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+--- !u!4 &676990993374391281 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5057880799714785554, guid: 3fc14dc3a77de334ca670a3478ce75f6, type: 3}
+  m_PrefabInstance: {fileID: 676990993374391280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &977510575014003058
 PrefabInstance:
   m_ObjectHideFlags: 0
