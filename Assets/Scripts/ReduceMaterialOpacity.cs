@@ -32,7 +32,7 @@ public class ReduceMaterialOpacity : MonoBehaviour
         while (elapsed < fadeInDuration)
         {
             elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(trans, 0.1f, elapsed / fadeInDuration);
+            float alpha = Mathf.Lerp(trans, 0.2f, elapsed / fadeInDuration);
             GetComponent<MeshRenderer>().material.color = new Color(rouge, vert, bleu, alpha);
             yield return null;
         }
