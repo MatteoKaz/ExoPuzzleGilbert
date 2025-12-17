@@ -402,6 +402,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.GetComponent<HereNoCollision>())
         {
             gameObject.layer = LayerMask.NameToLayer("ShadowPlayerWithoutCube");
+            groundLayer = LayerMask.GetMask("Default", "Traversable");
         }
         if (other.gameObject.GetComponent<Traversable>())
         {
@@ -429,6 +430,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.GetComponent<HereNoCollision>())
         {
             gameObject.layer = LayerMask.NameToLayer("ShadowPlayer");
+            groundLayer = LayerMask.GetMask("Default", "Traversable", "Cube", "Slope");
         }
         if (other.gameObject.GetComponent<Traversable>())
         {
