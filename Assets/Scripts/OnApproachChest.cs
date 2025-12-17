@@ -23,12 +23,26 @@ public class OnApproachChest : MonoBehaviour
             }
         }
         VFX = FindFirstObjectByType<VFXScript>().gameObject;
+        if (VFX != null && VFX.GetComponent<VFXScript>().secondEndPoint != null && VFX.GetComponent<VFXScript>().secondEndPoint != VFX.GetComponent<VFXScript>().endPoint)
+        {
+            VFX.GetComponent<VFXScript>().endPoint = VFX.GetComponent<VFXScript>().secondEndPoint;
+        }
+      /*  else if (VFX != null)
+        {
+            Destroy(VFX);
+            Destroy(this);
+        }*/
+            
+        //OpenChest();
+    }
+
+    public void DisparitionTotale()
+    {
         if (VFX != null)
         {
             Destroy(VFX);
+            Destroy(this);
         }
-        Destroy(this);
-        //OpenChest();
     }
 
 

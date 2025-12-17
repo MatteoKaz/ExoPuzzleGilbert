@@ -6,6 +6,7 @@ public class VFXScript : MonoBehaviour
     public Transform startPoint;
     public Vector3 width;
     public Transform endPoint;
+    public Transform secondEndPoint;
 
     [Header("Line Settings")]
     public LineRenderer lineRenderer;
