@@ -6773,7 +6773,7 @@ Transform:
   m_GameObject: {fileID: 1318216853}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7034099, z: -0, w: 0.7107845}
-  m_LocalPosition: {x: -0.97, y: -0.755, z: 2.1}
+  m_LocalPosition: {x: -0.974, y: -0.755, z: 2.154}
   m_LocalScale: {x: 0.86447, y: 0.86447, z: 0.86447}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7149,12 +7149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationSequence:
   - stepName: 
-    targetAnimator: {fileID: 1470602566}
-    clip: {fileID: 7400000, guid: f7be018c58f06b241b5cd1792018d0a0, type: 2}
-    duration: 1
-    startDelay: 0
-    playInParallel: 0
-  - stepName: 
     targetAnimator: {fileID: 1318216854}
     clip: {fileID: 7400000, guid: fe39d35095ee0ab4aaec2081a15a956f, type: 2}
     duration: 0.5
@@ -7169,9 +7163,15 @@ MonoBehaviour:
   - stepName: 
     targetAnimator: {fileID: 1470602566}
     clip: {fileID: 7400000, guid: 75a9be24fb5819249892163892a01f45, type: 2}
-    duration: 2
+    duration: 1.5
     startDelay: 0
-    playInParallel: 1
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 1470602566}
+    clip: {fileID: 7400000, guid: f7be018c58f06b241b5cd1792018d0a0, type: 2}
+    duration: 1
+    startDelay: 0
+    playInParallel: 0
   - stepName: 
     targetAnimator: {fileID: 1470602566}
     clip: {fileID: 7400000, guid: fefa7f6423410d748bc938bae97e4349, type: 2}
@@ -7182,13 +7182,13 @@ MonoBehaviour:
     targetAnimator: {fileID: 1318216854}
     clip: {fileID: 7400000, guid: 4ecf507b80936864d8baa5a197b7afc2, type: 2}
     duration: 0.4
-    startDelay: 0.3
+    startDelay: 0.5
     playInParallel: 0
   - stepName: 
     targetAnimator: {fileID: 1470602566}
     clip: {fileID: 7400000, guid: 28921b05029b72644a0b40389ab8ad86, type: 2}
-    duration: 1
-    startDelay: 0
+    duration: 0.5
+    startDelay: 1
     playInParallel: 0
   - stepName: 
     targetAnimator: {fileID: 1318216854}
@@ -7222,12 +7222,6 @@ MonoBehaviour:
     playInParallel: 0
   - stepName: 
     targetAnimator: {fileID: 1470602566}
-    clip: {fileID: 7400000, guid: 3de386b5712617b4ca308fe8c7ef332d, type: 2}
-    duration: 5
-    startDelay: 1
-    playInParallel: 0
-  - stepName: 
-    targetAnimator: {fileID: 1470602566}
     clip: {fileID: 7400000, guid: aa539c733e3af304eb4efef0f27067f7, type: 2}
     duration: 0.5
     startDelay: 0
@@ -7255,6 +7249,12 @@ MonoBehaviour:
     clip: {fileID: 7400000, guid: 1373162c2d79efb4b866248b13245750, type: 2}
     duration: 2
     startDelay: 1
+    playInParallel: 0
+  - stepName: 
+    targetAnimator: {fileID: 1318216854}
+    clip: {fileID: 7400000, guid: b3facc6a3af009c418b0436133518716, type: 2}
+    duration: 0.4
+    startDelay: 0
     playInParallel: 0
   - stepName: 
     targetAnimator: {fileID: 1470602566}
@@ -7669,8 +7669,8 @@ Transform:
   m_GameObject: {fileID: 1470602565}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.6917684, z: -0, w: -0.7221195}
-  m_LocalPosition: {x: -0.93, y: 2.47, z: -1.98}
-  m_LocalScale: {x: 0.9883531, y: 0.988353, z: 0.9883531}
+  m_LocalPosition: {x: -0.94, y: 2.35, z: -1.93}
+  m_LocalScale: {x: 0.9403584, y: 0.94035834, z: 0.9403584}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1300776123}
@@ -8721,7 +8721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whichNext: 40
-  timeInLevel: 13
+  timeInLevel: 10
   HUD: {fileID: 0}
   transitionDuree: 1.5
 --- !u!4 &1639819694
