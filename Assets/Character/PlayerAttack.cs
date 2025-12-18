@@ -45,10 +45,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float ennemyHitVolume = 1f;
     [SerializeField] private float reaction1Volume = 1f;
     [SerializeField] private float reaction2Volume = 1f;
-    [SerializeField] private float enemyCryVolume = 1f;
-    [SerializeField] private float enemyCryVolumeAct1 = 1f;
-    [SerializeField] private float enemyCryVolumeAct2 = 1f;
-    [SerializeField] private float enemyCryVolumeAct3 = 1f;
+    [SerializeField] private float enemyCryVolume = 0.5f;
+    [SerializeField] private float enemyCryVolumeAct1 = 0.5f;
+    [SerializeField] private float enemyCryVolumeAct2 = 0.5f;
+    [SerializeField] private float enemyCryVolumeAct3 = 0.5f;
 
     private AudioSource audioSource;
 
