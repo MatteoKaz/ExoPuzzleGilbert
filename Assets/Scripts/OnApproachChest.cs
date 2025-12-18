@@ -27,6 +27,11 @@ public class OnApproachChest : MonoBehaviour
         {
             VFX.GetComponent<VFXScript>().endPoint = VFX.GetComponent<VFXScript>().secondEndPoint;
         }
+        else if (VFX != null && VFX.GetComponent<VFXScript>().secondEndPoint == null)
+        {
+            Destroy(VFX);
+            Destroy(this);
+        }
       /*  else if (VFX != null)
         {
             Destroy(VFX);
