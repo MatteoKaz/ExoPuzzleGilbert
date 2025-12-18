@@ -7481,6 +7481,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7208043657071455365, guid: ea157c3124e56854c8d8c12c261c9c69, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7208043657071455365, guid: ea157c3124e56854c8d8c12c261c9c69, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 27d5f928974104f4cb5b8770c9e475ac, type: 2}
@@ -12593,6 +12597,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 214596671459112098, guid: 3b9abe69b6d7bf54582e21eba1d95538, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2854594257727451223}
+    - target: {fileID: 214596671459112098, guid: 3b9abe69b6d7bf54582e21eba1d95538, type: 3}
       propertyPath: _playerAttack
       value: 
       objectReference: {fileID: 1023995074}
@@ -12602,7 +12610,7 @@ PrefabInstance:
       objectReference: {fileID: 1999701009}
     - target: {fileID: 3562908130185846384, guid: 3b9abe69b6d7bf54582e21eba1d95538, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.15
+      value: 18.96
       objectReference: {fileID: 0}
     - target: {fileID: 3562908130185846384, guid: 3b9abe69b6d7bf54582e21eba1d95538, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26054,8 +26062,7 @@ PrefabInstance:
       propertyPath: gravityValue
       value: 0.78
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1468574141256497910, guid: 8a57458e35f14114797d27169a713374, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
