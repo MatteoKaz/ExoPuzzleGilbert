@@ -24,6 +24,8 @@ public class CurtainOpen : MonoBehaviour
 
 
     }
+     
+
     private void Awake()
     {
 
@@ -32,8 +34,8 @@ public class CurtainOpen : MonoBehaviour
     {
         if (_open == false )
         {
-            Debug.Log("JNJNFNJD");
-            yield return new WaitForSeconds(1f);
+           
+            yield return new WaitForSeconds(0.8f);
             _open = true;
             curtainAnim.SetBool("Launch", true);
             yield return new WaitForSeconds(0.1f);
